@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flyer Oficial Octubre — Rolo's (Editable 1080x1080)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Plus+Jakarta+Sans:wght@600;700;800;900&family=Righteous&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --terracotta: #9C3826;
+      --terracotta-dark: #6E2214;
+      --espresso: #261712;
+      --mustard: #E89C25;
+      --mustard-light: #F7C154;
+      --cream-bg: #F7EBD5;
+      --cream-light: #FFF9ED;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #1a1412;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+      color: var(--espresso);
+    }
+
+    .toolbar {
+      background: #2d221e;
+      color: var(--cream-light);
+      padding: 0.85rem 1.5rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+      border: 2px solid var(--mustard);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    }
+
+    .toolbar span {
+      font-weight: 700;
+      color: var(--mustard-light);
+    }
+
+    /* Canvas cuadrado 1080x1080 escalable */
+    .flyer-canvas {
+      width: 1000px;
+      height: 1000px;
+      background-color: var(--cream-bg);
+      background-image: 
+        radial-gradient(rgba(156, 56, 38, 0.07) 1.5px, transparent 1.5px),
+        radial-gradient(circle at 50% 35%, rgba(255, 253, 245, 0.9) 0%, rgba(240, 222, 192, 0.85) 100%);
+      background-size: 16px 16px, 100% 100%;
+      position: relative;
+      overflow: hidden;
+      border: 6px solid var(--espresso);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.65);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px 0 32px;
+    }
+
+    /* Marco interior estilo póster vintage 70s */
+    .flyer-canvas::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 2.5px dashed rgba(38, 23, 18, 0.25);
+      border-radius: 18px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* 1. CABECERA LOGO ARQUEADO */
+    .header-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 4px 0 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .header-logo img {
+      height: 145px;
+      width: auto;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      filter: drop-shadow(0 4px 0 rgba(38, 23, 18, 0.18));
+    }
+
+    /* 2. CINTA NARANJA DE LANZAMIENTO */
+    .promo-ribbon {
+      background: linear-gradient(90deg, #C84B24 0%, #DF6328 50%, #C84B24 100%);
+      border-top: 4px solid var(--espresso);
+      border-bottom: 4px solid var(--espresso);
+      padding: 13px 24px;
+      text-align: center;
+      box-shadow: 0 5px 0 var(--espresso);
+      position: relative;
+      z-index: 3;
+    }
+
+    .promo-ribbon h2 {
+      font-family: 'Bowlby One SC', cursive;
+      font-size: 1.72rem;
+      color: var(--cream-light);
+      letter-spacing: 1px;
+      text-shadow: 3px 3px 0 var(--espresso);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    /* 3. TABLA DE 3 PRECIOS */
+    .pricing-container {
+      margin: 22px 48px 10px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .pricing-box {
+      background: linear-gradient(180deg, var(--mustard-light) 0%, var(--mustard) 100%);
+      border: 4px solid var(--espresso);
+      border-radius: 22px;
+      box-shadow: 8px 8px 0 var(--espresso);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 18px 12px;
+      position: relative;
+    }
+
+    .price-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 12px;
+      position: relative;
+    }
+
+    .price-col:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 10%;
+      height: 80%;
+      width: 3px;
+      background: var(--espresso);
+      border-radius: 2px;
+      opacity: 0.45;
+    }
+
+    .qty-label {
+      font-family: 'Bowlby One SC', cursive;
+      font-size: 2.05rem;
+      color: var(--cream-light);
+      text-shadow: 
+        -2px -2px 0 var(--espresso),
+         2px -2px 0 var(--espresso),
+        -2px  2px 0 var(--espresso),
+         3px  3px 0 var(--espresso);
+      line-height: 1.05;
+      margin-bottom: 4px;
+    }
+
+    .main-price {
+      font-family: 'Bowlby One SC', cursive;
+      font-size: 3.15rem;
+      color: var(--terracotta-dark);
+      background: var(--cream-light);
+      padding: 2px 18px;
+      border-radius: 14px;
+      border: 3px solid var(--espresso);
+      box-shadow: 4px 4px 0 var(--espresso);
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+    }
+
+    .old-prices-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .old-price {
+      font-family: 'Bowlby One SC', cursive;
+      font-size: 1.95rem;
+      color: #7A2E21;
+      position: relative;
+      display: inline-block;
+      margin: 0 auto;
+    }
+
+    .old-price::after {
+      content: "";
+      position: absolute;
+      left: -6%;
+      right: -6%;
+      top: 50%;
+      height: 5px;
+      background: #D92323;
+      border: 1px solid var(--espresso);
+      transform: rotate(-8deg);
+      border-radius: 4px;
+    }
+
+    /* 4. SABORES */
+    .flavors-banner {
+      text-align: center;
+      margin: 6px 56px 10px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .flavor-hero {
+      font-family: 'Bowlby One SC', cursive;
+      font-size: 2.15rem;
+      color: var(--terracotta);
+      text-shadow: 2px 2px 0 var(--cream-light), 4px 4px 0 rgba(38,23,18,0.18);
+      letter-spacing: 0.5px;
+      line-height: 1.15;
+    }
+
+    .flavor-upcoming {
+      display: inline-block;
+      margin-top: 6px;
+      background: var(--cream-light);
+      border: 3px solid var(--espresso);
+      box-shadow: 4px 4px 0 var(--espresso);
+      padding: 6px 20px;
+      border-radius: 999px;
+      font-weight: 900;
+      font-size: 1.28rem;
+      color: var(--espresso);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .flavor-upcoming strong {
+      color: var(--terracotta);
+    }
+
+    /* 5. BLOQUE TOMA DE PEDIDOS Y MASCOTA */
+    .schedule-and-mascot {
+      position: relative;
+      margin: 8px 48px 6px;
+      display: flex;
+      align-items: center;
+      z-index: 3;
+    }
+
+    .schedule-card {
+      width: 74%;
+      background: #4A2518;
+      border: 4px solid var(--espresso);
+      border-radius: 24px;
+      box-shadow: 8px 8px 0 var(--espresso);
+      padding: 24px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--cream-light);
+    }
+
+    .schedule-col h3 {
+      font-family: 'Bowlby One SC', cursive;
+      font-size: 2.05rem;
+      color: var(--mustard-light);
+      text-shadow: 3px 3px 0 var(--espresso);
+      line-height: 1.1;
+      margin-bottom: 6px;
+      font-weight: 400;
+    }
+
+    .schedule-col p {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--cream-light);
+      text-shadow: 2px 2px 0 var(--espresso);
+    }
+
+    .schedule-arrow {
+      font-size: 3.4rem;
+      color: var(--mustard-light);
+      text-shadow: 3px 3px 0 var(--espresso);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    /* Mascota Rolo completa y sin recortes */
+    .mascot-wrapper {
+      position: absolute;
+      right: -12px;
+      bottom: -95px;
+      width: 310px;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .mascot-bubble {
+      background: #FFFFFF;
+      border: 3.5px solid var(--espresso);
+      border-radius: 26px;
+      padding: 10px 10px 6px;
+      box-shadow: 7px 7px 0 var(--espresso);
+      transform: rotate(-2deg);
+    }
+
+    .mascot-bubble img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 18px;
+    }
+
+    /* 6. CIERRE SLOGAN */
+    .footer-slogan {
+      text-align: left;
+      padding: 8px 56px 6px;
+      width: 75%;
+      position: relative;
+      z-index: 3;
+    }
+
+    .footer-slogan p {
+      font-size: 1.58rem;
+      font-weight: 800;
+      color: var(--espresso);
+      margin-bottom: 4px;
+    }
+
+    .footer-slogan h1 {
+      font-family: 'Bowlby One SC', cursive;
+      font-size: 3.1rem;
+      color: var(--terracotta);
+      text-shadow: 
+        -2px -2px 0 var(--espresso),
+         2px -2px 0 var(--espresso),
+        -2px  2px 0 var(--espresso),
+         4px  4px 0 var(--espresso);
+      letter-spacing: 1px;
+      line-height: 1.05;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toolbar">
+    <span>✨ Editor en Vivo:</span> Hacé clic en cualquier texto o fecha del flyer para editarlo antes de capturar pantalla.
+  </div>
+
+  <div class="flyer-canvas" contenteditable="true" spellcheck="false">
+    <!-- 1. Logo original arqueado -->
+    <div class="header-logo">
+      <img src="assets/img/titulo_rolos.jpg" alt="ROLO'S">
+    </div>
+
+    <!-- 2. Cinta de lanzamiento -->
+    <div class="promo-ribbon">
+      <h2>🔥 EL PRECIO DE LANZAMIENTO SE MANTIENE POR TODO OCTUBRE 🔥</h2>
+    </div>
+
+    <!-- 3. Precios en 3 columnas -->
+    <div class="pricing-container">
+      <div class="pricing-box">
+        <div class="price-col">
+          <div class="qty-label">1 Rolo =</div>
+          <div class="main-price">$5.000</div>
+        </div>
+        <div class="price-col">
+          <div class="qty-label">3 Rolos =</div>
+          <div class="main-price">$13.500</div>
+        </div>
+        <div class="price-col">
+          <div class="qty-label">5 Rolos =</div>
+          <div class="main-price">$21.000</div>
+        </div>
+      </div>
+
+      <div class="old-prices-row">
+        <div><span class="old-price">$6.000</span></div>
+        <div><span class="old-price">$16.500</span></div>
+        <div><span class="old-price">$25.000</span></div>
+      </div>
+    </div>
+
+    <!-- 4. Sabores -->
+    <div class="flavors-banner">
+      <div class="flavor-hero">ROLO’S = CARNE AHUMADA Y QUESO</div>
+      <div class="flavor-upcoming">
+        🍗 PRÓXIMAMENTE = <strong>POLLO A LA MOSTAZA CON VERDEO</strong>
+      </div>
+    </div>
+
+    <!-- 5. Toma de pedidos + Mascota -->
+    <div class="schedule-and-mascot">
+      <div class="schedule-card">
+        <div class="schedule-col">
+          <h3>Toma de Pedidos:</h3>
+          <p>• Martes 20 y Miércoles 21</p>
+        </div>
+        <div class="schedule-arrow">➔</div>
+        <div class="schedule-col">
+          <h3>Entrega:</h3>
+          <p>Viernes 23</p>
+        </div>
+      </div>
+
+      <div class="mascot-wrapper">
+        <div class="mascot-bubble">
+          <img src="assets/img/rolo_clasico.jpg" alt="Mascota Rolo">
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Slogan inferior -->
+    <div class="footer-slogan">
+      <p>Cocinar o descansar: el debate ya no existe.</p>
+      <h1>¡ROLO’S QUE RESUELVE!</h1>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rolo's — Carne Ahumada &amp; Pollo a la Mostaza | Comida Casera al Paso</title>
+  <meta name="description" content="340 gramos reales de sabor casero: Rolo Clásico de Carne Ahumada y Rolo Pollo a la Mostaza con Verdeo. Pedí tu pack semanal en Santa Fe.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/img/logo_mascot.jpg">
+
+  <!-- Google Fonts: Anton (Bitesized Condensed), Bowlby One SC (70s), Pacifico (Script), Plus Jakarta Sans (Neo-Brutalism UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bowlby+One+SC&family=Pacifico&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. BITESIZED RETRO DINER WINDOW HERO
+       ======================================================================== -->
+  <div class="diner-window-frame">
+    <div class="top-promo-strip">
+      <span>🔥 OCTUBRE CONGELADO</span> 1 Rolo $5.000 · 3 Rolos $13.500 · 5 Rolos $21.000 | Toma de pedidos: Martes y Miércoles ➔ Entrega: Viernes
+    </div>
+
+    <header class="diner-navbar">
+      <ul class="diner-nav-group">
+        <li><a href="#carta-diner">La Carta</a></li>
+        <li><a href="#como-calentar">En 3 Minutos</a></li>
+      </ul>
+
+      <a href="#" class="diner-brand-logo">
+        <img src="assets/img/rolo_clasico.jpg" alt="Rolo's Mascota">
+        <span class="diner-brand-text">rolo's</span>
+      </a>
+
+      <ul class="diner-nav-group">
+        <li><a href="#galeria-retro">Flyers 70s</a></li>
+        <li><a href="#carta-diner" class="nav-cta-pill">Armar mi Pack</a></li>
+      </ul>
+    </header>
+
+    <section class="diner-hero-stage">
+      <div class="diner-sun-circle" aria-hidden="true"></div>
+
+      <svg class="sparkle-star sparkle-left" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+        <path d="M32 0 C34 24 40 30 64 32 C40 34 34 40 32 64 C30 40 24 34 0 32 C24 30 30 24 32 0 Z"/>
+      </svg>
+
+      <svg class="sparkle-star sparkle-right" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+        <path d="M32 0 C34 24 40 30 64 32 C40 34 34 40 32 64 C30 40 24 34 0 32 C24 30 30 24 32 0 Z"/>
+      </svg>
+
+      <div class="hero-kicker-pill">
+        👑 340g Reales · Cero Platos · Carne Ahumada &amp; Pollo a la Mostaza
+      </div>
+
+      <h1 class="bitesized-headline">
+        ALMUERZOS SERVIDOS EN<br>
+        BOCADOS CASEROS,<br>
+        CONTUNDENTES Y AL PASO.
+      </h1>
+
+      <p class="hero-subcopy">
+        Cocinar o descansar: el debate ya no existe. Elegí entre nuestro clásico de Carne Ahumada o Pollo a la Mostaza con Verdeo, stockeá tu freezer y resolvé tu semana en 3 minutos.
+      </p>
+
+      <div class="hero-action-row">
+        <button type="button" class="nb-btn nb-btn-yellow" id="btnHeroStartOrder">
+          <i class="fas fa-utensils"></i> Armar mi Pedido Ahora
+        </button>
+        <a href="#galeria-retro" class="nb-btn nb-btn-cyan">
+          <i class="fas fa-images"></i> Ver Flyers Retro 70s
+        </a>
+      </div>
+    </section>
+
+    <!-- Friso geométrico abstracto retro 70s -->
+    <div class="diner-abstract-frieze" aria-hidden="true">
+      <div class="frieze-checker"></div>
+      <div class="frieze-geo-band">
+        <span class="geo-pill geo-mustard"></span>
+        <span class="geo-dot geo-cream"></span>
+        <span class="geo-block geo-green"></span>
+        <span class="geo-dot geo-lime"></span>
+        <span class="geo-pill geo-cream"></span>
+        <span class="geo-dot geo-mustard"></span>
+        <span class="geo-block geo-cyan"></span>
+        <span class="geo-dot geo-cream"></span>
+        <span class="geo-pill geo-mustard"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       2. FLUJO DE COMPRA DESKTOP (>= 768px): CARTA MENU + MOSTRADOR CHECKOUT
+       (La vista de 3 celulares amarillos NO se muestra en Desktop)
+       ======================================================================== -->
+  <section class="bitesized-tile-section desktop-only-flow" id="carta-diner">
+    <div class="desktop-kiosk-grid">
+
+      <!-- COLUMNA IZQUIERDA: LA CARTA INTERACTIVA (SOLO 2 SABORES + PACKS) -->
+      <div class="bitesized-menu-sheet">
+        <div class="bitesized-menu-inner">
+          <div class="menu-sheet-topbar">
+            <h2 class="bitesized-menu-header">MENU</h2>
+            <!-- Sticker ubicado limpiamente arriba, jamás pisa precios -->
+            <div class="menu-header-sticker" title="Mascota Rolo del sabor seleccionado">
+              <img src="assets/img/rolo_clasico.jpg" alt="Rolo Clásico Sticker" id="desktopStickerImg">
+            </div>
+          </div>
+
+          <div class="bitesized-script-divider">
+            <span>Armá tu Pedido en 2 Pasos</span>
+          </div>
+
+          <!-- PASO 1: Elegí tu Pack Rápido -->
+          <div class="desktop-step-heading">
+            <span class="step-badge-num">1</span> Elegí un pack rápido (o combiná abajo libremente)
+          </div>
+          <div class="desktop-pack-pills" role="group" aria-label="Packs promocionales">
+            <button type="button" class="pack-pill-btn" data-desktop-pack="1">
+              <span class="pack-pill-tag">Para probar</span>
+              <span class="pack-pill-title">1 ROLO</span>
+              <span class="pack-pill-price"><span class="pack-pill-old">$6.000</span>$5.000</span>
+            </button>
+            <button type="button" class="pack-pill-btn" data-desktop-pack="3">
+              <span class="pack-pill-tag">Ahorrás 10%</span>
+              <span class="pack-pill-title">PACK X 3</span>
+              <span class="pack-pill-price"><span class="pack-pill-old">$16.500</span>$13.500</span>
+            </button>
+            <button type="button" class="pack-pill-btn" data-desktop-pack="5">
+              <span class="pack-pill-tag">⭐ Más elegido</span>
+              <span class="pack-pill-title">PACK X 5</span>
+              <span class="pack-pill-price"><span class="pack-pill-old">$25.000</span>$21.000</span>
+            </button>
+          </div>
+
+          <!-- PASO 2: Combiná los 2 Únicos Sabores de Rolo -->
+          <div class="desktop-step-heading">
+            <span class="step-badge-num">2</span> Combiná cuántos de cada sabor querés
+          </div>
+          <ul class="diner-menu-list">
+            <!-- Sabor 1: Carne Ahumada -->
+            <li class="diner-menu-row active-flavor" data-desktop-flavor="clasico">
+              <div class="diner-menu-line">
+                <img src="assets/img/rolo_clasico.jpg" alt="Rolo de Carne Ahumada" class="diner-row-thumb">
+                <span class="diner-item-name">ROLO CLÁSICO (CARNE AHUMADA)</span>
+                <span class="diner-dots"></span>
+                <span class="diner-item-old-price">$6.000</span>
+                <span class="diner-item-price">$5.000</span>
+              </div>
+              <div class="diner-row-bottom">
+                <span class="diner-item-sub">340g · 60% cerdo magro braseado, 40% cebolla caramelizada, queso cremoso y masa casera.</span>
+                <div class="desktop-stepper" aria-label="Cantidad de Rolo Carne Ahumada">
+                  <button type="button" class="stepper-btn minus" data-step="dec" data-flavor="clasico" aria-label="Quitar uno de Carne">−</button>
+                  <span class="stepper-qty" id="desktopQtyClasico">0</span>
+                  <button type="button" class="stepper-btn" data-step="inc" data-flavor="clasico" aria-label="Sumar uno de Carne">+</button>
+                </div>
+              </div>
+            </li>
+
+            <!-- Sabor 2: Pollo a la Mostaza con Verdeo -->
+            <li class="diner-menu-row" data-desktop-flavor="pollo">
+              <div class="diner-menu-line">
+                <img src="assets/img/rolo_pollo.jpg" alt="Rolo de Pollo a la Mostaza" class="diner-row-thumb">
+                <span class="diner-item-name">POLLO A LA MOSTAZA CON VERDEO</span>
+                <span class="diner-dots"></span>
+                <span class="diner-item-old-price">$6.000</span>
+                <span class="diner-item-price">$5.000</span>
+              </div>
+              <div class="diner-row-bottom">
+                <span class="diner-item-sub">340g · Suprema desmechada en salsa suave de mostaza gourmet, verdeo fresco y muzzarella.</span>
+                <div class="desktop-stepper" aria-label="Cantidad de Rolo Pollo a la Mostaza">
+                  <button type="button" class="stepper-btn minus" data-step="dec" data-flavor="pollo" aria-label="Quitar uno de Pollo">−</button>
+                  <span class="stepper-qty" id="desktopQtyPollo">0</span>
+                  <button type="button" class="stepper-btn" data-step="inc" data-flavor="pollo" aria-label="Sumar uno de Pollo">+</button>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+          <!-- Aviso Inteligente de Descuento en Vivo -->
+          <div class="desktop-promo-nudge" id="desktopPromoNudge" role="status" aria-live="polite">
+            <i class="fas fa-hand-point-up"></i>
+            <span>Sumá al menos 1 Rolo de Carne o Pollo arriba para preparar tu pedido.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA (STICKY): VISOR DE MASCOTA ROLO + CHECKOUT WHATSAPP -->
+      <aside class="desktop-counter-panel" aria-labelledby="desktopCounterHeading">
+        <div class="desktop-step-heading" id="desktopCounterHeading" style="margin-bottom: 0.65rem;">
+          <span class="step-badge-num">3</span> Tu Rolo en vivo &amp; envío por WhatsApp
+        </div>
+
+        <!-- Visor Dinámico de Mascota -->
+        <div class="counter-mascot-stage">
+          <img src="assets/img/rolo_clasico.jpg" alt="Mascota Rolo Activa" id="desktopShowcaseImg">
+          <div class="counter-flavor-title" id="desktopShowcaseTitle">Rolo Clásico (Carne Ahumada)</div>
+          <div class="mascot-speech-pill" id="desktopShowcaseSpeech">
+            "¡El rey indiscutido con carne ahumada y queso fundente!"
+          </div>
+          <p class="counter-ingredients-text" id="desktopShowcaseIngredients">
+            <strong>340g reales:</strong> 60% cerdo magro braseado + 40% cebolla caramelizada ahumada + 30g queso cremoso en masa casera de 110g.
+          </p>
+        </div>
+
+        <!-- Metodología del Negocio + Countdown del Lote -->
+        <div class="counter-methodology-card">
+          <div class="methodology-header">
+            <span class="methodology-tag"><i class="fas fa-calendar-check" aria-hidden="true"></i> Pedido por Lote</span>
+            <span class="methodology-timer">
+              Cierra: <strong class="counter-countdown-digits" id="desktopCountdownText">02d : 10h : 06m</strong>
+            </span>
+          </div>
+          <div class="methodology-grid">
+            <div class="methodology-step">
+              <strong>1. Reservás tu lugar</strong>
+              <span>Martes 20 y Miérc. 21</span>
+              <small>Tomamos reservas hasta el cierre para cocinar sin sobrestock.</small>
+            </div>
+            <div class="methodology-step">
+              <strong>2. Día de entrega</strong>
+              <span>Viernes 23 en Santa Fe</span>
+              <small>Recibís tus rolos frescos y envasados, listos para calentar en 3 min.</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resumen Ticket -->
+        <div class="counter-ticket-summary">
+          <div>
+            <strong style="font-size: 0.88rem; display: block;" id="desktopTicketTitle">SIN ROLO SELECCIONADO</strong>
+            <span class="ticket-items-text" id="desktopTicketItems">Elegí al menos 1 Rolo</span>
+          </div>
+          <div class="ticket-price-box">
+            <span class="ticket-old-price" id="desktopTicketOld">$0</span>
+            <span class="ticket-final-price" id="desktopTicketFinal">$0</span>
+          </div>
+        </div>
+
+        <!-- Formulario Accesible Desktop Checkout -->
+        <form id="desktopOrderForm" novalidate aria-labelledby="desktopCounterHeading">
+          <div class="nb-field">
+            <label for="dClientName">Tu Nombre y Apellido <span aria-hidden="true">*</span></label>
+            <input type="text" id="dClientName" name="client_name" class="nb-input" placeholder="Ej: Lucas Gómez" autocomplete="name" enterkeyhint="next" required>
+            <span class="nb-field-error" id="dNameError" aria-live="polite"></span>
+          </div>
+
+          <div class="nb-field">
+            <label for="dClientZone">Zona / Entrega en Santa Fe</label>
+            <select id="dClientZone" name="client_zone" class="nb-input">
+              <option value="Facultades (Junín y Pje. San Martín / UNL / UTN)">Facultades (Junín y Pje. San Martín)</option>
+              <option value="Shopping / Peatonal San Martín">Shopping / Peatonal San Martín</option>
+              <option value="Bulevar Gálvez / Pellegrini">Bulevar Gálvez / Pellegrini</option>
+              <option value="Envío a Domicilio Viernes 23">Envío a Domicilio (Viernes 23)</option>
+            </select>
+          </div>
+
+          <div class="nb-field">
+            <label for="dClientAddress">Dirección o Local (Opcional)</label>
+            <input type="text" id="dClientAddress" name="client_address" class="nb-input" placeholder="Ej: San Jerónimo 2400 / Local 12" autocomplete="street-address" enterkeyhint="done">
+          </div>
+
+          <fieldset class="nb-fieldset">
+            <legend>Medio de Pago</legend>
+            <div class="nb-radio-group">
+              <label class="nb-radio-option">
+                <input type="radio" name="d_payment" value="Transferencia / Alias" checked> Transferencia / Alias
+              </label>
+              <label class="nb-radio-option">
+                <input type="radio" name="d_payment" value="Efectivo al recibir"> Efectivo al recibir
+              </label>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="nb-btn nb-btn-yellow" id="dSubmitBtn" style="width: 100%; font-size: 0.98rem;">
+            <i class="fab fa-whatsapp" style="font-size: 1.25rem;"></i>
+            <span id="dSubmitLabel">ENVIAR PEDIDO ($0)</span>
+          </button>
+          <p id="dFormStatus" role="status" aria-live="polite" style="font-size: 0.78rem; font-weight: 800; color: var(--diner-green); text-align: center; margin-top: 0.45rem;"></p>
+        </form>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       3. APP MOBILE-FIRST (@sepidy — SOLO VISIBLE EN MOBILE < 768px)
+       ======================================================================== -->
+  <section class="sepidy-app-section mobile-only-app" id="app-neobrutalista">
+    <div class="sepidy-mobile-shell">
+
+      <!-- PANTALLA 1 COMBINADA: SABORES + CONTADORES + DESCUENTOS + CHECKOUT -->
+      <article class="sepidy-phone-frame" id="phoneScreenCatalog" data-screen="catalog">
+        <div>
+          <div class="sepidy-profile-bar">
+            <div class="sepidy-profile-left">
+              <img src="assets/img/rolo_clasico.jpg" alt="Rolo Avatar" class="sepidy-avatar" id="mHeaderAvatar1">
+              <div class="sepidy-user-meta">
+                <h3>Rolo's Santa Fe</h3>
+                <span class="sepidy-handle-pill" id="mCartBadgeHandle">0 Rolo(s) cargados</span>
+                <p>1x $5.000 · 3x $13.500 · 5x $21.000</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.35rem;">
+              <button type="button" class="sepidy-edit-dot" id="mFocusSearchBtn" aria-label="Buscar sabor">
+                <i class="fas fa-search"></i>
+              </button>
+              <button type="button" class="sepidy-edit-dot" id="mBtnClearCart" aria-label="Reiniciar orden" style="background: #FFF;">
+                <i class="fas fa-redo-alt"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="sepidy-inner-sheet">
+            <search>
+              <div class="sepidy-search-box">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <label for="mSearchInput" class="visually-hidden">Buscar sabor</label>
+                <input type="search" id="mSearchInput" placeholder="Buscar Carne o Pollo..." autocorrect="off" spellcheck="false">
+              </div>
+            </search>
+
+            <!-- Tabs Accesibles con focusgroup="tablist nomemory" -->
+            <div class="sepidy-tabs-row" focusgroup="tablist nomemory" aria-label="Filtrar sabores de Rolo">
+              <button type="button" class="sepidy-tab-btn" id="tab-all" aria-selected="true" focusgroupstart data-m-filter="all">TODOS (2)</button>
+              <button type="button" class="sepidy-tab-btn" id="tab-clasico" aria-selected="false" data-m-filter="clasico">CARNE</button>
+              <button type="button" class="sepidy-tab-btn" id="tab-pollo" aria-selected="false" data-m-filter="pollo">POLLO</button>
+            </div>
+
+            <div role="tabpanel" id="mCatalogPanel" aria-labelledby="tab-all">
+              <!-- Tarjeta 1: Carne Ahumada -->
+              <div class="sepidy-challenge-item" data-m-card="clasico">
+                <div class="sepidy-item-title">[1/2] · Rolo Clásico Ahumado</div>
+                <div class="sepidy-difficulty-row">
+                  <span>Saciedad &amp; Sabor</span>
+                  <span class="nb-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                </div>
+                <div class="sepidy-mini-author">
+                  <img src="assets/img/rolo_clasico.jpg" alt="Rolo Clásico">
+                  <div class="sepidy-user-meta">
+                    <h3>Carne Ahumada y Queso</h3>
+                    <span class="sepidy-handle-pill">@rolo.clasico</span>
+                  </div>
+                </div>
+                <div class="sepidy-stats-row">
+                  <span>Peso: 340g Reales</span>
+                  <span>60% Cerdo / 40% Cebolla</span>
+                </div>
+                <div class="sepidy-dates-row">
+                  <span>1 Rolo: <strong>$5.000</strong></span>
+                  <span>Pack x5: <strong>$4.200 c/u</strong></span>
+                </div>
+                <div class="sepidy-dual-btns">
+                  <button type="button" class="sepidy-action-btn cyan m-btn-preview" data-flavor="clasico">VER ROLO</button>
+                  <div class="m-inline-stepper" aria-label="Cantidad de Carne Ahumada">
+                    <button type="button" class="m-step-btn" data-m-step="dec" data-flavor="clasico" aria-label="Quitar uno de Carne Ahumada">−</button>
+                    <span class="m-step-qty" id="mCardQtyClasico">0</span>
+                    <button type="button" class="m-step-btn plus" data-m-step="inc" data-flavor="clasico" aria-label="Sumar uno de Carne Ahumada">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Tarjeta 2: Pollo a la Mostaza con Verdeo -->
+              <div class="sepidy-challenge-item" data-m-card="pollo">
+                <div class="sepidy-item-title">[2/2] · Pollo a la Mostaza</div>
+                <div class="sepidy-difficulty-row">
+                  <span>Nuevo Sabor con Verdeo</span>
+                  <span class="nb-stars" aria-label="5 de 5 estrellas">★★★★★</span>
+                </div>
+                <div class="sepidy-mini-author">
+                  <img src="assets/img/rolo_pollo.jpg" alt="Rolo Pollo a la Mostaza">
+                  <div class="sepidy-user-meta">
+                    <h3>Pollo, Mostaza y Verdeo</h3>
+                    <span class="sepidy-handle-pill">@rolo.pollo</span>
+                  </div>
+                </div>
+                <div class="sepidy-stats-row">
+                  <span>Peso: 340g Reales</span>
+                  <span>Suprema + Muzzarella</span>
+                </div>
+                <div class="sepidy-dates-row">
+                  <span>1 Rolo: <strong>$5.000</strong></span>
+                  <span>Pack x5: <strong>$4.200 c/u</strong></span>
+                </div>
+                <div class="sepidy-dual-btns">
+                  <button type="button" class="sepidy-action-btn cyan m-btn-preview" data-flavor="pollo">VER ROLO</button>
+                  <div class="m-inline-stepper" aria-label="Cantidad de Pollo a la Mostaza">
+                    <button type="button" class="m-step-btn" data-m-step="dec" data-flavor="pollo" aria-label="Quitar uno de Pollo">−</button>
+                    <span class="m-step-qty" id="mCardQtyPollo">0</span>
+                    <button type="button" class="m-step-btn plus" data-m-step="inc" data-flavor="pollo" aria-label="Sumar uno de Pollo">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Barra dinámica de ahorro hacia Pack x3 / x5 -->
+          <div class="sepidy-invite-banner" id="mPromoUpsellBanner" aria-live="polite">
+            <p id="mPromoUpsellText">Sumá tu primer Rolo o armá un <strong>Pack x3 ($13.500)</strong>.</p>
+            <button type="button" class="sepidy-action-btn yellow" id="mBtnQuickUpsell">
+              +1 ROLO
+            </button>
+          </div>
+
+          <!-- BLOQUE INTEGRADO: TOTAL + METODOLOGÍA + FORMULARIO CHECKOUT -->
+          <div class="sepidy-inner-sheet" id="mobileCheckoutSection" style="margin-bottom: 0;">
+            <div class="m-total-box">
+              <div>
+                <span class="m-total-label" id="mCartComboLabel">SIN ROLO SELECCIONADO</span>
+                <span class="m-total-items" id="mCartSummaryItems">Elegí al menos 1 Rolo</span>
+                <span class="m-total-old" id="mCartOldTotal">$0</span>
+              </div>
+              <div class="m-total-price" id="mCartFinalTotal">$0</div>
+            </div>
+
+            <div class="m-methodology-strip">
+              <span><strong>1. Reservás:</strong> Mar 20 y Mié 21</span>
+              <span><strong>2. Recibís:</strong> Vie 23</span>
+            </div>
+
+            <form id="mobileOrderForm" novalidate aria-label="Finalizar pedido en móvil">
+              <div class="nb-field">
+                <label for="mClientName">Tu Nombre <span aria-hidden="true">*</span></label>
+                <input type="text" id="mClientName" name="m_client_name" class="nb-input" placeholder="Ej: Lucas Gómez" autocomplete="name" enterkeyhint="next" required>
+                <span class="nb-field-error" id="mNameError" aria-live="polite"></span>
+              </div>
+
+              <div class="nb-field">
+                <label for="mClientZone">Entrega en Santa Fe</label>
+                <select id="mClientZone" name="m_client_zone" class="nb-input">
+                  <option value="Facultades (Junín y Pje. San Martín / UNL / UTN)">Facultades (Junín y Pje. San Martín)</option>
+                  <option value="Shopping / Peatonal San Martín">Shopping / Peatonal San Martín</option>
+                  <option value="Bulevar Gálvez / Pellegrini">Bulevar Gálvez / Pellegrini</option>
+                  <option value="Envío a Domicilio Viernes 23">Envío a Domicilio (Viernes 23)</option>
+                </select>
+              </div>
+
+              <div class="nb-field">
+                <label for="mClientAddress">Dirección / Referencia (Opcional)</label>
+                <input type="text" id="mClientAddress" name="m_client_address" class="nb-input" placeholder="Ej: San Jerónimo 2400" autocomplete="street-address" enterkeyhint="done">
+              </div>
+
+              <fieldset class="nb-fieldset">
+                <legend>Medio de Pago</legend>
+                <div class="nb-radio-group">
+                  <label class="nb-radio-option">
+                    <input type="radio" name="m_payment" value="Transferencia / Alias" checked> Transferencia
+                  </label>
+                  <label class="nb-radio-option">
+                    <input type="radio" name="m_payment" value="Efectivo al recibir"> Efectivo
+                  </label>
+                </div>
+              </fieldset>
+
+              <button type="submit" class="nb-btn nb-btn-yellow" id="mSubmitBtn" style="width: 100%; font-size: 0.92rem;">
+                <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i>
+                <span id="mSubmitLabel">ENVIAR POR WHATSAPP ($0)</span>
+              </button>
+              <p id="mFormStatus" role="status" aria-live="polite" style="font-size: 0.76rem; font-weight: 800; color: var(--diner-green); text-align: center; margin-top: 0.4rem;"></p>
+            </form>
+          </div>
+        </div>
+      </article>
+
+      <!-- PANTALLA 2: MASCOTA ROLO EN VIVO + COUNTDOWN DEL LOTE -->
+      <article class="sepidy-phone-frame" id="phoneScreenLote" data-screen="lote" hidden>
+        <div>
+          <div class="sepidy-profile-bar">
+            <div class="sepidy-profile-left">
+              <img src="assets/img/rolo_clasico.jpg" alt="Rolo Activo" class="sepidy-avatar" id="mLiveAvatarTop">
+              <div class="sepidy-user-meta">
+                <h3 id="mLiveHeaderName">Rolo Clásico</h3>
+                <span class="sepidy-handle-pill" id="mLiveHeaderHandle">@rolo.clasico</span>
+                <p>Masa casera 110g + 230g relleno</p>
+              </div>
+            </div>
+            <button type="button" class="sepidy-edit-dot" id="mSwitchFlavorQuick" aria-label="Alternar entre Carne y Pollo">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+          </div>
+
+          <div class="sepidy-inner-sheet">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-bottom: 0.45rem;">
+              <div class="sepidy-item-title">Lote Octubre · Preventa</div>
+              <button type="button" class="m-back-pill" id="mBtnBackToCatalog">← VOLVER AL PEDIDO</button>
+            </div>
+            <div class="sepidy-difficulty-row">
+              <span>Tocá abajo para cambiar entre Carne y Pollo</span>
+            </div>
+
+            <!-- Botón rápido de cambio de personaje -->
+            <div class="sepidy-dual-btns" style="margin-bottom: 0.55rem;">
+              <button type="button" class="sepidy-action-btn yellow m-btn-preview" data-flavor="clasico">🥩 Carne</button>
+              <button type="button" class="sepidy-action-btn cyan m-btn-preview" data-flavor="pollo">🍗 Pollo</button>
+            </div>
+
+            <div class="mascot-live-stage">
+              <img src="assets/img/rolo_clasico.jpg" alt="Mascota Rolo Dinámica" id="mShowcaseImg">
+              <div class="mascot-speech-pill" id="mShowcaseSpeech">
+                "¡El rey indiscutido con carne ahumada y queso fundente!"
+              </div>
+            </div>
+
+            <p style="font-size: 0.78rem; font-weight: 700; color: #333; margin-bottom: 0.45rem;" id="mShowcaseIngredients">
+              <strong>Ingredientes (340g):</strong> 60% cerdo magro braseado + 40% cebolla caramelizada ahumada + 30g queso cremoso.
+            </p>
+
+            <div class="sepidy-stats-row">
+              <span>Pedidos: Martes 20 y Miérc. 21</span>
+              <span>Entrega: Viernes 23</span>
+            </div>
+
+            <div class="sepidy-countdown-grid" aria-label="Tiempo restante para cierre de pedidos">
+              <div class="countdown-unit">
+                <div class="countdown-box" id="cdDays">02</div>
+                <div class="countdown-label">Días</div>
+              </div>
+              <div class="countdown-colon">:</div>
+              <div class="countdown-unit">
+                <div class="countdown-box" id="cdHours">10</div>
+                <div class="countdown-label">Horas</div>
+              </div>
+              <div class="countdown-colon">:</div>
+              <div class="countdown-unit">
+                <div class="countdown-box" id="cdMins">06</div>
+                <div class="countdown-label">Mins</div>
+              </div>
+            </div>
+
+            <button type="button" class="sepidy-action-btn yellow" id="mBtnAddSelected" style="width: 100%; font-size: 0.85rem;">
+              ¡SUMAR 1 Y VOLVER AL PEDIDO! +
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       4. GUÍA DE REGENERACIÓN EN 3 MINUTOS + GALERÍA DE FLYERS 70s
+       ======================================================================== -->
+  <section class="nb-info-section" id="como-calentar">
+    <div class="container">
+      <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+        <span class="hero-kicker-pill">🧼 CERO PLATOS SUCIOS</span>
+        <h2 class="bitesized-headline" style="font-size: clamp(2.2rem, 5vw, 3.5rem); margin-bottom: 0.5rem;">
+          ABRIR EL FREEZER, 3 MINUTOS DE CALOR Y A DISFRUTAR.
+        </h2>
+        <p style="font-weight: 600;">Su envoltorio térmico de aluminio de 40 cm conserva toda la humedad y te permite comerlo con una mano en la oficina, la facultad o en casa.</p>
+      </div>
+
+      <div class="nb-cards-3col">
+        <div class="nb-feature-card">
+          <span class="nb-step-pill">Método 01 · El Más Crocante</span>
+          <h3>🍳 En Sartén o Plancha</h3>
+          <p>Apoyá tu Rolo envuelto en su aluminio sobre la sartén caliente a fuego medio (3 min por lado). La masa casera saborizada queda dorada y súper crujiente.</p>
+        </div>
+
+        <div class="nb-feature-card">
+          <span class="nb-step-pill">Método 02 · Calor Envolvente</span>
+          <h3>🔥 En Horno o Airfryer</h3>
+          <p>Mandalo directo con su papel aluminio a 180°C durante 6 a 8 minutos. El corazón de queso se funde por completo sin perder una gota de jugosidad.</p>
+        </div>
+
+        <div class="nb-feature-card">
+          <span class="nb-step-pill">Método 03 · Exprés de Oficina</span>
+          <h3>⚡ En Microondas</h3>
+          <p>Retirá el aluminio, envolvelo en servilleta de papel y dale 1 minuto y medio a potencia máxima. ¡Listo para disfrutar en tu descanso de 30 minutos!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="nb-info-section" id="galeria-retro" style="background: var(--diner-cream-light);">
+    <div class="container">
+      <div style="text-align: center; max-width: 720px; margin: 0 auto;">
+        <span class="hero-kicker-pill">🎨 CAMPAÑA GRÁFICA 1970s</span>
+        <h2 class="bitesized-headline" style="font-size: clamp(2.1rem, 4.8vw, 3.3rem); margin-bottom: 0.4rem;">
+          COLECCIÓN DE AFICHES DE ROLO'S
+        </h2>
+        <p style="font-weight: 600;">Tocá cualquier flyer para abrirlo en pantalla completa.</p>
+      </div>
+
+      <div class="flyers-grid-4">
+        <article class="nb-flyer-card" data-flyer-img="assets/img/flyer_octubre_v1_protagonista.jpg" data-flyer-title="Promo Lanzamiento Octubre: ¡Rolo's que Resuelve!">
+          <img src="assets/img/flyer_octubre_v1_protagonista.jpg" alt="Flyer Promo Octubre Rolo's" loading="lazy">
+          <h4>🔥 Promo Oficial Octubre</h4>
+          <p>1x $5.000 · 3x $13.500 · 5x $21.000. Toma de pedidos Martes 20 y Miércoles 21 ➔ Entrega Viernes 23.</p>
+        </article>
+
+        <article class="nb-flyer-card" data-flyer-img="assets/img/flyer_relax.jpg" data-flyer-title="Rolo's Presents: ¡Guardá la Esponja!">
+          <img src="assets/img/flyer_relax.jpg" alt="Flyer Guardá la Esponja" loading="lazy">
+          <h4>🧼 ¡Guardá la Esponja!</h4>
+          <p>Hoy los platos quedan de adorno en la bacha. Tu descanso no se negocia.</p>
+        </article>
+
+        <article class="nb-flyer-card" data-flyer-img="assets/img/flyer_freezer.jpg" data-flyer-title="Saturday Morning Freezer Sensation">
+          <img src="assets/img/flyer_freezer.jpg" alt="Flyer Freezer Sensation" loading="lazy">
+          <h4>❄️ Freezer Sensation</h4>
+          <p>Stockeá tu congelador con los Fast-Packs de Rolo's y olvidate de cocinar.</p>
+        </article>
+
+        <article class="nb-flyer-card" data-flyer-img="assets/img/flyer_delivery.jpg" data-flyer-title="Burrito Blast: Reparto de Viernes y Sábados">
+          <img src="assets/img/flyer_delivery.jpg" alt="Flyer Burrito Blast" loading="lazy">
+          <h4>🛵 Burrito Blast Delivery</h4>
+          <p>Te segundeamos el turno de hoy y el de mañana también en toda Santa Fe.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="diner-footer">
+    <p style="font-family: var(--font-retro); font-size: 1.4rem; margin-bottom: 0.35rem;">ROLO'S QUE RESUELVE</p>
+    <p style="font-size: 0.88rem; opacity: 0.9;">Santa Fe Capital, Argentina · Carne Ahumada &amp; Pollo a la Mostaza con Verdeo · 340g Reales</p>
+  </footer>
+
+  <!-- Barra de Navegación Flotante Mobile-First (Solo visible en < 768px) -->
+  <nav class="mobile-sticky-dock" aria-label="Navegación de la app móvil">
+    <button type="button" class="sepidy-nav-item" data-mobile-tab="catalog" aria-pressed="true">
+      <i class="fas fa-utensils"></i>
+      <span>Pedido</span>
+    </button>
+    <button type="button" class="sepidy-nav-item" data-mobile-tab="lote" aria-pressed="false">
+      <i class="fas fa-clock"></i>
+      <span>Ver Rolo</span>
+    </button>
+    <button type="button" class="sticky-checkout-btn" id="mStickyGoCheckout">
+      <span id="mStickyCheckoutText">CHECKOUT (0) · $0</span>
+      <i class="fas fa-arrow-down" aria-hidden="true"></i>
+    </button>
+  </nav>
+
+  <!-- Modal Lightbox Nativo <dialog closedby="any"> -->
+  <dialog id="flyerDialog" class="nb-dialog" closedby="any" aria-labelledby="dialogTitle">
+    <form method="dialog" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+      <h2 id="dialogTitle" style="font-family: var(--font-condensed); font-size: 1.35rem; text-transform: uppercase;">Flyer Rolo's</h2>
+      <button type="submit" id="dialogCloseBtn" class="sepidy-action-btn yellow" style="padding: 0.3rem 0.7rem;" autofocus>CERRAR ✕</button>
+    </form>
+    <img src="" alt="Flyer Rolo's Ampliado" id="dialogImg" style="width: 100%; border-radius: 14px; border: 2.5px solid var(--nb-black); display: block;">
+  </dialog>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

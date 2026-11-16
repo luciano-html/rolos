@@ -1,0 +1,1747 @@
+/* ==========================================================================
+   ROLO'S — MIX RETRO DINER (Bitesized Desktop) + NEO-BRUTALISMO (@sepidy Mobile)
+   Solo 2 Sabores Reales: Carne Ahumada y Pollo a la Mostaza con Verdeo
+   ========================================================================== */
+
+:root {
+  /* Paleta Bitesized Retro Diner */
+  --diner-cream: #F6EEDB;
+  --diner-cream-light: #FFFDF7;
+  --diner-red: #EA4925;
+  --diner-red-dark: #C83615;
+  --diner-green: #1B432C;
+  --diner-green-dark: #112C1D;
+  --diner-booth-yellow: #F5A618;
+
+  /* Paleta Sepideh Yazdi Neo-Brutalism */
+  --nb-black: #121212;
+  --nb-card-bg: #FAF4EE;
+  --nb-mustard-bg: #FFC700;
+  --nb-yellow-btn: #FFE135;
+  --nb-cyan-btn: #7AD4EB;
+  --nb-lime: #D2F065;
+  --nb-red-accent: #D93829;
+
+  /* Paleta Original Rolo's 70s */
+  --rolo-terracotta: #8B2C1A;
+
+  /* Tipografías */
+  --font-condensed: 'Anton', 'Bowlby One SC', Impact, sans-serif;
+  --font-retro: 'Bowlby One SC', 'Righteous', cursive, sans-serif;
+  --font-script: 'Pacifico', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  /* Bordes y Sombras Neo-Brutalistas (0px blur) */
+  --border-nb: 2.5px solid var(--nb-black);
+  --border-nb-thick: 3.5px solid var(--nb-black);
+  --shadow-nb-sm: 3px 3px 0px var(--nb-black);
+  --shadow-nb: 5px 5px 0px var(--nb-black);
+  --shadow-nb-lg: 8px 8px 0px var(--nb-black);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--diner-cream);
+  color: var(--nb-black);
+  line-height: 1.5;
+  overflow-x: hidden;
+  padding-bottom: 86px; /* Espacio para la barra móvil Neo-Brutalista */
+}
+
+@media (min-width: 768px) {
+  body {
+    padding-bottom: 0;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  clip-path: inset(50%);
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   1. BITESIZED DINER WINDOW HERO SECTION
+   ========================================================================== */
+.diner-window-frame {
+  position: relative;
+  background-color: var(--diner-cream);
+  border-left: 8px solid var(--diner-green);
+  border-right: 8px solid var(--diner-green);
+  border-top: 6px solid var(--diner-green);
+  overflow: hidden;
+  background-image: linear-gradient(
+    125deg,
+    transparent 28%,
+    rgba(255, 253, 247, 0.55) 28%,
+    rgba(255, 253, 247, 0.55) 36%,
+    transparent 36%,
+    transparent 38%,
+    rgba(255, 253, 247, 0.55) 38%,
+    rgba(255, 253, 247, 0.55) 41%,
+    transparent 41%
+  );
+}
+
+.diner-window-frame::before,
+.diner-window-frame::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--diner-green);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.diner-window-frame::before {
+  left: 12px;
+}
+
+.diner-window-frame::after {
+  right: 12px;
+}
+
+.top-promo-strip {
+  background: var(--diner-green);
+  color: var(--diner-cream-light);
+  text-align: center;
+  padding: 0.45rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  border-bottom: 2.5px solid var(--nb-black);
+  position: relative;
+  z-index: 10;
+}
+
+.top-promo-strip span {
+  background: var(--nb-lime);
+  color: var(--nb-black);
+  padding: 0.1rem 0.5rem;
+  border-radius: 6px;
+  margin-right: 0.4rem;
+  font-weight: 900;
+}
+
+.diner-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.15rem 1.75rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+.diner-nav-group {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+@media (min-width: 860px) {
+  .diner-nav-group {
+    display: flex;
+  }
+}
+
+.diner-nav-group a {
+  text-decoration: none;
+  color: var(--diner-green);
+  font-weight: 700;
+  font-size: 0.98rem;
+  transition: color 0.15s ease;
+}
+
+.diner-nav-group a:hover {
+  color: var(--diner-red);
+}
+
+.diner-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  margin: 0 auto;
+}
+
+@media (min-width: 860px) {
+  .diner-brand-logo {
+    margin: 0;
+  }
+}
+
+.diner-brand-logo img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2.5px solid var(--nb-black);
+  box-shadow: 2px 2px 0 var(--nb-black);
+  background: #FFF;
+}
+
+.diner-brand-text {
+  font-family: var(--font-retro);
+  font-size: 1.9rem;
+  color: var(--diner-green);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.nav-cta-pill {
+  background: var(--nb-yellow-btn);
+  color: var(--nb-black) !important;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: 2px solid var(--nb-black);
+  box-shadow: var(--shadow-nb-sm);
+  font-weight: 800 !important;
+}
+
+.nav-cta-pill:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--nb-black);
+}
+
+/* Hero Centerpiece Typography */
+.diner-hero-stage {
+  position: relative;
+  text-align: center;
+  padding: 1.5rem 1.25rem 2.25rem;
+  max-width: 1050px;
+  margin: 0 auto;
+  z-index: 4;
+}
+
+.diner-sun-circle {
+  position: absolute;
+  top: 10px;
+  right: 12%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: rgba(255, 253, 247, 0.85);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.sparkle-star {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  color: var(--diner-booth-yellow);
+  pointer-events: none;
+  animation: pulseSparkle 3s ease-in-out infinite alternate;
+}
+
+.sparkle-left {
+  top: 8%;
+  left: 8%;
+}
+
+.sparkle-right {
+  bottom: 18%;
+  right: 7%;
+}
+
+@keyframes pulseSparkle {
+  0% { transform: scale(0.9) rotate(0deg); }
+  100% { transform: scale(1.12) rotate(12deg); }
+}
+
+.hero-kicker-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--nb-lime);
+  border: 2px solid var(--nb-black);
+  box-shadow: var(--shadow-nb-sm);
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.bitesized-headline {
+  font-family: var(--font-condensed);
+  font-size: clamp(2.4rem, 7.2vw, 5.4rem);
+  line-height: 0.96;
+  color: var(--diner-red);
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  margin-bottom: 1rem;
+}
+
+.hero-subcopy {
+  max-width: 640px;
+  margin: 0 auto 1.45rem;
+  font-size: clamp(0.96rem, 2vw, 1.15rem);
+  font-weight: 600;
+  color: var(--diner-green-dark);
+}
+
+.hero-action-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.nb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.8rem 1.5rem;
+  min-height: 48px;
+  border-radius: 12px;
+  border: var(--border-nb);
+  box-shadow: var(--shadow-nb);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+  color: var(--nb-black);
+}
+
+.nb-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--nb-black);
+}
+
+.nb-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px var(--nb-black);
+}
+
+.nb-btn-yellow {
+  background-color: var(--nb-yellow-btn);
+}
+
+.nb-btn-cyan {
+  background-color: var(--nb-cyan-btn);
+}
+
+.nb-btn-lime {
+  background-color: var(--nb-lime);
+}
+
+/* Friso geométrico abstracto retro 70s */
+.diner-abstract-frieze {
+  position: relative;
+  z-index: 6;
+  width: 100%;
+  margin-top: 1.5rem;
+  border-top: 4px solid var(--diner-green);
+  background: var(--diner-red);
+  overflow: hidden;
+}
+
+.frieze-checker {
+  height: 14px;
+  width: 100%;
+  background-image: conic-gradient(
+    var(--diner-cream-light) 90deg,
+    var(--diner-green) 90deg 180deg,
+    var(--diner-cream-light) 180deg 270deg,
+    var(--diner-green) 270deg
+  );
+  background-size: 14px 14px;
+  border-bottom: 3px solid var(--diner-green);
+}
+
+.frieze-geo-band {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  padding: 0.9rem 1.5rem;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 18px,
+    rgba(27, 67, 44, 0.14) 18px,
+    rgba(27, 67, 44, 0.14) 22px
+  );
+}
+
+.frieze-geo-band span {
+  display: block;
+  flex-shrink: 0;
+  border: 3px solid var(--nb-black);
+  box-shadow: 3px 3px 0 var(--nb-black);
+}
+
+.geo-pill {
+  width: 72px;
+  height: 22px;
+  border-radius: 999px;
+}
+
+.geo-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+.geo-block {
+  width: 44px;
+  height: 22px;
+  border-radius: 6px;
+}
+
+.geo-mustard { background: var(--diner-booth-yellow); }
+.geo-cream { background: var(--diner-cream-light); }
+.geo-green { background: var(--diner-green); }
+.geo-lime { background: var(--nb-lime); }
+.geo-cyan { background: var(--nb-cyan-btn); }
+
+/* ==========================================================================
+   VISIBILIDAD ESTRICTA: MOBILE (< 768px) VS DESKTOP (>= 768px)
+   ========================================================================== */
+.desktop-only-flow {
+  display: none;
+}
+
+.mobile-only-app {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .desktop-only-flow {
+    display: block;
+  }
+
+  .mobile-only-app {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   2. DESKTOP FLOW (>= 768px): CARTA BITESIZED + MOSTRADOR CHECKOUT EN 2 COLS
+   ========================================================================== */
+.bitesized-tile-section {
+  background-color: var(--diner-red);
+  background-image:
+    linear-gradient(to right, var(--diner-green-dark) 2px, transparent 2px),
+    linear-gradient(to bottom, var(--diner-green-dark) 2px, transparent 2px);
+  background-size: 56px 56px;
+  padding: 3.75rem 1.25rem;
+  border-top: var(--border-nb-thick);
+  border-bottom: var(--border-nb-thick);
+  position: relative;
+}
+
+.desktop-kiosk-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.22fr 0.78fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .desktop-kiosk-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Columna Izquierda: Hoja MENU Estilo Bitesized */
+.bitesized-menu-sheet {
+  background: var(--diner-cream-light);
+  padding: 14px;
+  border: 4px solid var(--nb-black);
+  box-shadow: 12px 12px 0px var(--nb-black);
+  position: relative;
+}
+
+.bitesized-menu-inner {
+  border: 2.5px solid var(--diner-red);
+  padding: 2rem 2rem 2.25rem;
+  position: relative;
+}
+
+.menu-sheet-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.bitesized-menu-header {
+  font-family: var(--font-condensed);
+  font-size: clamp(4rem, 7vw, 6.2rem);
+  line-height: 0.88;
+  color: var(--diner-red);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Sticker troquelado reubicado arriba a la derecha (nunca pisa los precios) */
+.menu-header-sticker {
+  width: 112px;
+  height: 112px;
+  background: #FFF;
+  border: 3px solid var(--diner-green);
+  border-radius: 50%;
+  box-shadow: 4px 4px 0 var(--nb-black);
+  padding: 6px;
+  flex-shrink: 0;
+  transform: rotate(5deg);
+  transition: transform 0.2s ease;
+}
+
+.menu-header-sticker:hover {
+  transform: rotate(0deg) scale(1.06);
+}
+
+.menu-header-sticker img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.bitesized-script-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0.6rem 0 1.5rem;
+}
+
+.bitesized-script-divider::before,
+.bitesized-script-divider::after {
+  content: "";
+  flex: 1;
+  height: 2.5px;
+  background: var(--diner-green);
+}
+
+.bitesized-script-divider span {
+  font-family: var(--font-script);
+  font-size: 1.55rem;
+  color: var(--diner-green);
+  padding: 0 0.4rem;
+}
+
+.desktop-step-heading {
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--diner-green-dark);
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.step-badge-num {
+  background: var(--nb-black);
+  color: var(--nb-yellow-btn);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+}
+
+/* Paso 1: Selector Rápido de Pack */
+.desktop-pack-pills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.pack-pill-btn {
+  background: var(--nb-card-bg);
+  border: 2.5px solid var(--nb-black);
+  border-radius: 14px;
+  padding: 0.75rem 0.65rem;
+  box-shadow: 3px 3px 0 var(--nb-black);
+  cursor: pointer;
+  text-align: center;
+  font-family: inherit;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+  position: relative;
+}
+
+.pack-pill-btn:hover {
+  transform: translate(1.5px, 1.5px);
+  box-shadow: 1.5px 1.5px 0 var(--nb-black);
+}
+
+.pack-pill-btn.active {
+  background: var(--nb-yellow-btn);
+}
+
+.pack-pill-tag {
+  display: inline-block;
+  background: var(--nb-lime);
+  border: 1.5px solid var(--nb-black);
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.08rem 0.45rem;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.pack-pill-title {
+  display: block;
+  font-family: var(--font-condensed);
+  font-size: 1.25rem;
+  color: var(--nb-black);
+  line-height: 1.1;
+}
+
+.pack-pill-price {
+  display: block;
+  font-weight: 900;
+  font-size: 0.92rem;
+  color: var(--diner-red-dark);
+  margin-top: 0.15rem;
+}
+
+.pack-pill-old {
+  font-size: 0.76rem;
+  color: #666;
+  text-decoration: line-through;
+  font-weight: 700;
+  margin-right: 0.25rem;
+}
+
+/* Paso 2: Filas de Sabores con Puntos Conductores y Stepper [- qty +] */
+.diner-menu-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.diner-menu-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.85rem 0.95rem;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.diner-menu-row:hover,
+.diner-menu-row.active-flavor {
+  background-color: rgba(255, 225, 53, 0.18);
+  border-color: var(--nb-black);
+}
+
+.diner-menu-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.diner-row-thumb {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--nb-black);
+  object-fit: contain;
+  background: #FFF;
+  flex-shrink: 0;
+}
+
+.diner-item-name {
+  font-family: var(--font-condensed);
+  font-size: clamp(1.35rem, 2.3vw, 1.85rem);
+  color: var(--diner-red);
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: 0.4px;
+}
+
+.diner-dots {
+  flex: 1;
+  border-bottom: 3px dotted var(--diner-red);
+  margin: 0 0.35rem;
+  position: relative;
+  top: 2px;
+  min-width: 24px;
+}
+
+.diner-item-old-price {
+  font-size: 0.85rem;
+  color: #777;
+  text-decoration: line-through;
+  font-weight: 800;
+}
+
+.diner-item-price {
+  font-family: var(--font-condensed);
+  font-size: 1.65rem;
+  color: var(--diner-green);
+}
+
+.diner-row-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-left: 60px;
+}
+
+.diner-item-sub {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--diner-green-dark);
+}
+
+/* Stepper Neo-Brutalista [- qty +] */
+.desktop-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #FFF;
+  border: 2.5px solid var(--nb-black);
+  border-radius: 999px;
+  padding: 0.2rem 0.35rem;
+  box-shadow: 2.5px 2.5px 0 var(--nb-black);
+  flex-shrink: 0;
+}
+
+.stepper-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--nb-black);
+  background: var(--nb-yellow-btn);
+  color: var(--nb-black);
+  font-weight: 900;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease;
+}
+
+.stepper-btn.minus {
+  background: var(--nb-card-bg);
+}
+
+.stepper-btn:hover {
+  transform: scale(1.06);
+}
+
+.stepper-qty {
+  font-family: var(--font-condensed);
+  font-size: 1.35rem;
+  min-width: 28px;
+  text-align: center;
+  color: var(--nb-black);
+}
+
+/* Aviso Inteligente de Descuento */
+.desktop-promo-nudge {
+  margin-top: 1.5rem;
+  background: var(--nb-lime);
+  border: 2.5px solid var(--nb-black);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  box-shadow: 4px 4px 0 var(--nb-black);
+  font-size: 0.9rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+/* Columna Derecha: Mostrador Sticky de Rolo + Checkout Directo */
+.desktop-counter-panel {
+  position: sticky;
+  top: 20px;
+  background: var(--nb-card-bg);
+  border: 4px solid var(--nb-black);
+  border-radius: 26px;
+  box-shadow: 10px 10px 0 var(--nb-black);
+  padding: 1.35rem;
+}
+
+.counter-mascot-stage {
+  background: #FFF;
+  border: 2.5px solid var(--nb-black);
+  border-radius: 18px;
+  padding: 0.9rem;
+  text-align: center;
+  box-shadow: 4px 4px 0 var(--nb-black);
+  margin-bottom: 1rem;
+}
+
+.counter-mascot-stage img {
+  width: 155px;
+  height: 155px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 0.5rem;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+}
+
+.counter-mascot-stage img.switching {
+  transform: scale(0.84) rotate(-5deg);
+  opacity: 0.4;
+}
+
+.counter-flavor-title {
+  font-family: var(--font-condensed);
+  font-size: 1.5rem;
+  color: var(--diner-red);
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.mascot-speech-pill {
+  background: var(--nb-yellow-btn);
+  border: 2px solid var(--nb-black);
+  border-radius: 10px;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-top: 0.4rem;
+  display: inline-block;
+  box-shadow: 2px 2px 0 var(--nb-black);
+}
+
+.counter-ingredients-text {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #444;
+  margin-top: 0.55rem;
+  line-height: 1.35;
+}
+
+/* Metodología por Lote + Countdown en Mostrador Desktop */
+.counter-methodology-card {
+  background: #FFF;
+  border: 2px solid var(--nb-black);
+  border-radius: 14px;
+  padding: 0.7rem 0.85rem;
+  margin-bottom: 1rem;
+  box-shadow: 2.5px 2.5px 0 var(--nb-black);
+}
+
+.methodology-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.55rem;
+  border-bottom: 1.5px dashed var(--nb-black);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.methodology-tag {
+  background: var(--nb-lime);
+  border: 1.5px solid var(--nb-black);
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.methodology-timer {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+}
+
+.counter-countdown-digits {
+  font-family: var(--font-condensed);
+  font-size: 1.05rem;
+  color: var(--nb-red-accent);
+  letter-spacing: 0.5px;
+}
+
+.methodology-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+
+.methodology-step {
+  background: var(--diner-cream-light);
+  border: 1.5px solid var(--nb-black);
+  border-radius: 10px;
+  padding: 0.45rem 0.55rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.methodology-step strong {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: var(--diner-green);
+}
+
+.methodology-step span {
+  font-size: 0.78rem;
+  font-weight: 900;
+  color: var(--nb-black);
+}
+
+.methodology-step small {
+  font-size: 0.69rem;
+  font-weight: 600;
+  line-height: 1.28;
+  color: #444;
+}
+
+/* Ticket Resumen & Formulario en Desktop */
+.counter-ticket-summary {
+  background: var(--nb-yellow-btn);
+  border: 2.5px solid var(--nb-black);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  box-shadow: 3.5px 3.5px 0 var(--nb-black);
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ticket-items-text {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #222;
+}
+
+.ticket-price-box {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.ticket-old-price {
+  font-size: 0.78rem;
+  color: #555;
+  text-decoration: line-through;
+  font-weight: 800;
+  display: block;
+}
+
+.ticket-final-price {
+  font-family: var(--font-condensed);
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--nb-black);
+}
+
+/* ==========================================================================
+   3. MOBILE-FIRST APP (@sepidy — SOLO VISIBLE EN < 768px)
+   ========================================================================== */
+.sepidy-app-section {
+  background-color: var(--nb-mustard-bg);
+  background-image: radial-gradient(var(--nb-black) 1.75px, transparent 1.75px);
+  background-size: 22px 22px;
+  border-top: var(--border-nb-thick);
+  border-bottom: var(--border-nb-thick);
+  padding: 1.5rem 0.75rem 2.25rem;
+  position: relative;
+}
+
+.sepidy-mobile-shell {
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.sepidy-phone-frame {
+  background: var(--nb-card-bg);
+  border: 3.5px solid var(--nb-black);
+  border-radius: 28px;
+  box-shadow: 6px 6px 0px var(--nb-black);
+  padding: 1rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 620px;
+  position: relative;
+}
+
+.sepidy-phone-frame[hidden] {
+  display: none;
+}
+
+.sepidy-profile-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.sepidy-profile-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.sepidy-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--nb-black);
+  object-fit: cover;
+  background: #FFF;
+  flex-shrink: 0;
+}
+
+.sepidy-user-meta h3 {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--nb-black);
+  line-height: 1.15;
+}
+
+.sepidy-handle-pill {
+  display: inline-block;
+  background: var(--nb-lime);
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--nb-black);
+  margin: 0.1rem 0;
+}
+
+.sepidy-user-meta p {
+  font-size: 0.72rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.sepidy-edit-dot {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--nb-cyan-btn);
+  border: 2px solid var(--nb-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.sepidy-inner-sheet {
+  border: 2px solid var(--nb-black);
+  border-radius: 18px;
+  background: var(--nb-card-bg);
+  box-shadow: 3px 3px 0px var(--nb-black);
+  padding: 0.85rem;
+  margin-bottom: 0.85rem;
+  position: relative;
+  flex-grow: 1;
+}
+
+/* Buscador en Mobile */
+.sepidy-search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2px solid var(--nb-black);
+  border-radius: 10px;
+  padding: 0.45rem 0.75rem;
+  background: #FFFDF9;
+  margin-bottom: 0.75rem;
+}
+
+.sepidy-search-box input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-family: inherit;
+  font-size: max(1rem, 1em);
+  font-weight: 600;
+  color: var(--nb-black);
+}
+
+.sepidy-search-box input:focus {
+  outline: none;
+}
+
+/* Tabs de Filtro en Pantalla 1 (TODOS | CARNE | POLLO) */
+.sepidy-tabs-row {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  border-bottom: 2px solid var(--nb-black);
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.75rem;
+  gap: 0.5rem;
+}
+
+.sepidy-tab-btn {
+  position: relative;
+  flex: none;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #444;
+  cursor: pointer;
+  padding: 0.35rem 0.65rem;
+  border-radius: 8px;
+}
+
+.sepidy-tab-btn[aria-selected="true"] {
+  background: var(--nb-yellow-btn);
+  color: var(--nb-black);
+}
+
+.sepidy-tab-btn[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  border-block-end: 3px solid var(--nb-black);
+}
+
+.sepidy-challenge-item {
+  border-bottom: 2px solid var(--nb-black);
+  padding-bottom: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.sepidy-challenge-item:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.sepidy-item-title {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--nb-black);
+}
+
+.sepidy-difficulty-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.nb-stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--nb-yellow-btn);
+  -webkit-text-stroke: 1.2px var(--nb-black);
+  font-size: 0.9rem;
+}
+
+.sepidy-mini-author {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.sepidy-mini-author img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--nb-black);
+  object-fit: cover;
+  background: #FFF;
+}
+
+.sepidy-stats-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.sepidy-dates-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #555;
+  margin-bottom: 0.65rem;
+}
+
+.sepidy-dates-row strong {
+  color: var(--nb-red-accent);
+}
+
+.sepidy-dual-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+}
+
+.sepidy-action-btn {
+  min-height: 44px;
+  padding: 0.5rem 0.65rem;
+  border: 2px solid var(--nb-black);
+  border-radius: 10px;
+  box-shadow: 2.5px 2.5px 0px var(--nb-black);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: var(--nb-black);
+}
+
+.sepidy-action-btn.yellow {
+  background: var(--nb-yellow-btn);
+}
+
+.sepidy-action-btn.cyan {
+  background: var(--nb-cyan-btn);
+}
+
+/* Countdown en Pantalla 2 Mobile */
+.sepidy-countdown-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  margin: 0.65rem 0 0.75rem;
+}
+
+.countdown-unit {
+  text-align: center;
+}
+
+.countdown-box {
+  width: 56px;
+  height: 54px;
+  background: #FFFDF9;
+  border: 2.5px solid var(--nb-black);
+  border-radius: 10px;
+  box-shadow: 3px 3px 0px var(--nb-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  font-weight: 900;
+  margin-bottom: 0.2rem;
+}
+
+.countdown-label {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--nb-red-accent);
+}
+
+.countdown-colon {
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--nb-red-accent);
+  margin-top: -16px;
+}
+
+.mascot-live-stage {
+  background: #FFFFFF;
+  border: 2px solid var(--nb-black);
+  border-radius: 14px;
+  padding: 0.65rem;
+  margin: 0.5rem 0 0.7rem;
+  text-align: center;
+  box-shadow: 2.5px 2.5px 0 var(--nb-black);
+}
+
+.mascot-live-stage img {
+  width: 155px;
+  height: 155px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+}
+
+.mascot-live-stage img.switching {
+  transform: scale(0.82) rotate(-6deg);
+  opacity: 0.4;
+}
+
+/* Pantalla 3 Mobile: Barra dinámica de ahorro + Filas de Pedido */
+.sepidy-invite-banner {
+  background: var(--nb-lime);
+  border: 2px solid var(--nb-black);
+  border-radius: 14px;
+  padding: 0.65rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  box-shadow: 2.5px 2.5px 0px var(--nb-black);
+}
+
+.sepidy-invite-banner p {
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.sepidy-invite-banner .sepidy-action-btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Contadores inline + Total + Metodología + Sticky Checkout (Mobile Unificado) */
+.m-inline-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFDF9;
+  border: 2px solid var(--nb-black);
+  border-radius: 10px;
+  box-shadow: 2.5px 2.5px 0 var(--nb-black);
+  padding: 2px;
+  min-height: 44px;
+}
+
+.m-step-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1.5px solid var(--nb-black);
+  background: #FFF;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--nb-black);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.m-step-btn.plus {
+  background: var(--nb-yellow-btn);
+}
+
+.m-step-qty {
+  font-family: var(--font-condensed);
+  font-size: 1.25rem;
+  min-width: 24px;
+  text-align: center;
+  color: var(--nb-black);
+}
+
+#mobileCheckoutSection {
+  scroll-margin-top: 16px;
+}
+
+.m-total-box {
+  background: var(--nb-yellow-btn);
+  border: 2px solid var(--nb-black);
+  border-radius: 12px;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0.65rem;
+  box-shadow: 2.5px 2.5px 0 var(--nb-black);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.m-total-label {
+  font-size: 0.72rem;
+  font-weight: 900;
+  display: block;
+}
+
+.m-total-items {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #222;
+  display: block;
+}
+
+.m-total-old {
+  font-size: 0.74rem;
+  text-decoration: line-through;
+  color: #555;
+  font-weight: 800;
+  display: block;
+}
+
+.m-total-price {
+  font-family: var(--font-condensed);
+  font-size: 1.75rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.m-methodology-strip {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  background: var(--diner-cream-light);
+  border: 1.5px solid var(--nb-black);
+  border-radius: 10px;
+  padding: 0.45rem 0.65rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--nb-black);
+}
+
+.m-back-pill {
+  background: var(--nb-lime);
+  border: 2px solid var(--nb-black);
+  border-radius: 999px;
+  padding: 0.25rem 0.65rem;
+  font-family: inherit;
+  font-size: 0.7rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--nb-black);
+  flex-shrink: 0;
+}
+
+/* Barra Inferior Fija Mobile-First con Botón Sticky al Checkout */
+.mobile-sticky-dock {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 20px);
+  max-width: 440px;
+  background: var(--nb-card-bg);
+  border: 3px solid var(--nb-black);
+  border-radius: 999px;
+  box-shadow: 4px 4px 0px var(--nb-black);
+  padding: 0.4rem 0.55rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.35rem;
+  z-index: 999;
+}
+
+@media (min-width: 768px) {
+  .mobile-sticky-dock {
+    display: none;
+  }
+}
+
+.sepidy-nav-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--nb-black);
+  cursor: pointer;
+  padding: 0.25rem 0.55rem;
+  z-index: 1;
+  background: none;
+  border: none;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+
+.sepidy-nav-item i {
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
+
+.sepidy-nav-item[aria-pressed="true"]::before {
+  content: "";
+  position: absolute;
+  inset: 2px -2px;
+  background: var(--nb-lime);
+  border-radius: 40% 60% 55% 45% / 60% 45% 55% 40%;
+  transform: rotate(-3deg);
+  z-index: -1;
+}
+
+.sticky-checkout-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: var(--nb-yellow-btn);
+  border: 2px solid var(--nb-black);
+  border-radius: 999px;
+  box-shadow: 2.5px 2.5px 0 var(--nb-black);
+  padding: 0.55rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 900;
+  color: var(--nb-black);
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.sticky-checkout-btn:active {
+  transform: translate(1.5px, 1.5px);
+  box-shadow: 1px 1px 0 var(--nb-black);
+}
+
+/* ==========================================================================
+   4. FORMULARIO ACCESIBLE COMPARTIDO (MOBILE & DESKTOP)
+   ========================================================================== */
+.nb-field {
+  margin-block-end: 0.85rem;
+}
+
+.nb-field label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.nb-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid var(--nb-black);
+  border-radius: 10px;
+  background: #FFF;
+  font: inherit;
+  font-size: max(1rem, 1em);
+  font-weight: 600;
+  box-shadow: 2.5px 2.5px 0 var(--nb-black);
+}
+
+.nb-input:focus-visible {
+  outline: 3px solid var(--diner-red);
+  outline-offset: 2px;
+}
+
+.nb-input:user-invalid,
+.nb-input[aria-invalid="true"] {
+  border-color: var(--nb-red-accent);
+  background: #FFF5F5;
+}
+
+.nb-field-error {
+  color: var(--nb-red-accent);
+  font-size: 0.76rem;
+  font-weight: 800;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.nb-fieldset {
+  border: 2px solid var(--nb-black);
+  border-radius: 12px;
+  padding: 0.6rem 0.75rem;
+  margin-block-end: 0.9rem;
+  background: #FFF;
+}
+
+.nb-fieldset legend {
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 0 0.4rem;
+}
+
+.nb-radio-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nb-radio-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.nb-radio-option input[type="radio"] {
+  accent-color: var(--diner-red);
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================================================
+   5. SECCIONES INFORMATIVAS (3 MINUTOS + FLYERS 70s) & DIALOG
+   ========================================================================== */
+.nb-info-section {
+  padding: 3.75rem 0;
+  background: var(--diner-cream);
+  border-bottom: var(--border-nb-thick);
+}
+
+.nb-cards-3col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.nb-feature-card {
+  background: var(--nb-card-bg);
+  border: var(--border-nb-thick);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-nb);
+}
+
+.nb-step-pill {
+  display: inline-block;
+  background: var(--nb-yellow-btn);
+  border: 2px solid var(--nb-black);
+  box-shadow: 2px 2px 0 var(--nb-black);
+  font-weight: 900;
+  font-size: 0.78rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.nb-feature-card h3 {
+  font-family: var(--font-condensed);
+  font-size: 1.55rem;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.flyers-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.nb-flyer-card {
+  background: #FFF;
+  border: var(--border-nb-thick);
+  border-radius: 20px;
+  padding: 0.85rem;
+  box-shadow: var(--shadow-nb);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nb-flyer-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-nb-lg);
+}
+
+.nb-flyer-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid var(--nb-black);
+  margin-bottom: 0.65rem;
+  display: block;
+}
+
+.nb-flyer-card h4 {
+  font-family: var(--font-condensed);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.nb-flyer-card p {
+  font-size: 0.82rem;
+  color: #444;
+  font-weight: 600;
+}
+
+/* Native HTML <dialog> para Lightbox de Flyers */
+dialog.nb-dialog {
+  margin: auto;
+  border: var(--border-nb-thick);
+  border-radius: 24px;
+  background: var(--nb-card-bg);
+  box-shadow: 10px 10px 0px var(--nb-black);
+  padding: 1.25rem;
+  max-width: 580px;
+  width: calc(100% - 2rem);
+}
+
+dialog.nb-dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog.nb-dialog::backdrop {
+  background: rgba(18, 18, 18, 0.75);
+  backdrop-filter: blur(3px);
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+.diner-footer {
+  background: var(--diner-green-dark);
+  color: var(--diner-cream);
+  padding: 2.25rem 1rem;
+  text-align: center;
+  border-top: var(--border-nb-thick);
+}
