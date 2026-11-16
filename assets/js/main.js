@@ -514,7 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const paymentRadio = form.querySelector(`input[name="${paymentName}"]:checked`);
       const payment = paymentRadio ? paymentRadio.value : 'Transferencia / Alias';
 
-      const phone = '5493425000000';
+      const phone = '5493425516258';
       let msg = `¡Hola Rolo's! 🌯 Quiero reservar para el lote de esta semana:\n\n`;
       msg += `👑 *Modalidad:* ${pricing.label}\n`;
       msg += `🌯 *Sabores:* ${itemsList}\n`;
