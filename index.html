@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261115-2">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261117-1">
 </head>
 <body>
 
@@ -32,7 +32,7 @@
 
     <header class="diner-navbar">
       <ul class="diner-nav-group">
-        <li><a href="#carta-diner">La Carta</a></li>
+        <li><a href="#carta-diner" class="js-go-order">La Carta</a></li>
         <li><a href="#como-calentar">En 3 Minutos</a></li>
       </ul>
 
@@ -43,8 +43,12 @@
 
       <ul class="diner-nav-group">
         <li><a href="#galeria-retro">Flyers 70s</a></li>
-        <li><a href="#carta-diner" class="nav-cta-pill">Armar mi Pack</a></li>
+        <li><button type="button" class="nav-cta-pill js-go-order">Pedir Ahora <i class="fas fa-arrow-down" aria-hidden="true"></i></button></li>
       </ul>
+
+      <button type="button" class="nav-cta-pill mobile-nav-cta js-go-order">
+        Pedir <i class="fas fa-arrow-down" aria-hidden="true"></i>
+      </button>
     </header>
 
     <section class="diner-hero-stage">
@@ -59,25 +63,35 @@
       </svg>
 
       <div class="hero-kicker-pill">
-        👑 340g Reales · Cero Platos · Carne Ahumada &amp; Pollo a la Mostaza
+        📍 Santa Fe Capital · Comida Casera por Lote Semanal
       </div>
 
-      <h1 class="bitesized-headline">
-        ALMUERZOS SERVIDOS EN<br>
-        BOCADOS CASEROS,<br>
-        CONTUNDENTES Y AL PASO.
+      <h1 class="bitesized-headline hero-title-compact">
+        ROLLS CASEROS DE 340G,<br>
+        LISTOS EN 3 MINUTOS.
       </h1>
 
-      <p class="hero-subcopy">
-        Cocinar o descansar: el debate ya no existe. Elegí entre nuestro clásico de Carne Ahumada o Pollo a la Mostaza con Verdeo, stockeá tu freezer y resolvé tu semana en 3 minutos.
-      </p>
+      <div class="hero-explainer-box">
+        <p class="hero-brand-copy">
+          <strong>Rolo's</strong> es nuestra cocina artesanal en Santa Fe: hacemos <strong>rolls rellenos contundentes</strong> (110g de masa casera + 230g de relleno cocinado lento con queso) envueltos en aluminio térmico para que guardes en tu freezer y comas bien en cualquier pausa, sin ensuciar un solo plato.
+        </p>
+
+        <ul class="hero-facts-grid" aria-label="Resumen rápido de Rolo's">
+          <li><strong>🌯 2 Sabores:</strong> Carne Ahumada o Pollo a la Mostaza</li>
+          <li><strong>📅 Modalidad:</strong> Reservás Mar/Mié → Entregamos Viernes</li>
+          <li><strong>💰 Packs:</strong> 1x $5.000 · 3x $13.500 · 5x $21.000</li>
+        </ul>
+      </div>
 
       <div class="hero-action-row">
-        <button type="button" class="nb-btn nb-btn-yellow" id="btnHeroStartOrder">
-          <i class="fas fa-utensils"></i> Armar mi Pedido Ahora
+        <button type="button" class="nb-btn nb-btn-cta-hero js-go-order" id="btnHeroStartOrder">
+          <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+          <span>PEDIR MIS ROLOS AHORA</span>
+          <span class="cta-price-tag">Desde $4.200 c/u</span>
+          <i class="fas fa-arrow-down" aria-hidden="true"></i>
         </button>
-        <a href="#galeria-retro" class="nb-btn nb-btn-cyan">
-          <i class="fas fa-images"></i> Ver Flyers Retro 70s
+        <a href="#como-calentar" class="hero-secondary-link">
+          ¿Cómo se calientan en 3 min? ↓
         </a>
       </div>
     </section>
@@ -651,6 +665,6 @@
     <img src="" alt="Flyer Rolo's Ampliado" id="dialogImg" style="width: 100%; border-radius: 14px; border: 2.5px solid var(--nb-black); display: block;">
   </dialog>
 
-  <script src="assets/js/main.js?v=20261115-2"></script>
+  <script src="assets/js/main.js?v=20261117-1"></script>
 </body>
 </html>

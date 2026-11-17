@@ -37,16 +37,21 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // =========================================================================
-  // 2. Botón Hero Inteligente (Desktop vs Mobile)
+  // 2. Botones de "Pedir Ahora" Inteligentes (Desktop vs Mobile)
   // =========================================================================
-  const btnHeroStartOrder = document.getElementById('btnHeroStartOrder');
-  if (btnHeroStartOrder) {
-    btnHeroStartOrder.addEventListener('click', () => {
-      const targetId = window.innerWidth >= 768 ? 'carta-diner' : 'app-neobrutalista';
+  document.querySelectorAll('.js-go-order').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isDesktop = window.innerWidth >= 768;
+      if (!isDesktop) activateMobileScreen('catalog');
+      const targetId = isDesktop ? 'carta-diner' : 'app-neobrutalista';
       const target = document.getElementById(targetId);
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
+      if (target) {
+        const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+        target.scrollIntoView({ behavior, block: 'start' });
+      }
     });
-  }
+  });
 
   // =========================================================================
   // 3. Motor de Precios Oficial de Octubre (1x $5000 | 3x $13500 | 5x $21000)
