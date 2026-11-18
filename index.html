@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261117-6">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261117-8">
 </head>
 <body>
 
@@ -113,25 +113,6 @@
             <i class="fas fa-fire" aria-hidden="true"></i>
             <span>CÓMO CALENTAR</span>
           </a>
-        </div>
-      </div>
-
-      <!-- 3. Información de marca y producto (Bento 2 cols en Desktop, liviano en Mobile) -->
-      <div class="hero-info-bento view-stagger-2" aria-label="Qué es un Rolo y datos del lote">
-        <div class="hero-bento-card hero-bento-story">
-          <span class="hero-bento-tag">¿Qué es un Rolo?</span>
-          <p class="hero-brand-copy">
-            En <strong>Rolo's</strong> cocinamos en Santa Fe rolls artesanales de <strong>340g</strong> (110g de masa casera + 230g de relleno cocinado lento con queso), envueltos en aluminio térmico para guardar en tu freezer y comer bien en cualquier pausa sin ensuciar un solo plato.
-          </p>
-        </div>
-
-        <div class="hero-bento-card hero-bento-facts">
-          <span class="hero-bento-tag">Claves del Lote</span>
-          <ul class="hero-facts-list">
-            <li><strong>🌯 2 Sabores:</strong> Carne Ahumada o Pollo a la Mostaza</li>
-            <li><strong>📅 Modalidad:</strong> Reservás Mar/Mié → Entregamos Viernes</li>
-            <li><strong>💰 Packs:</strong> 1x $5.000 · 3x $13.500 · 5x $21.000</li>
-          </ul>
         </div>
       </div>
     </section>
@@ -691,8 +672,28 @@
 
   <!-- Footer -->
   <footer class="diner-footer">
-    <p style="font-family: var(--font-retro); font-size: 1.4rem; margin-bottom: 0.35rem;">ROLO'S QUE RESUELVE</p>
-    <p style="font-size: 0.88rem; opacity: 0.9;">Santa Fe Capital, Argentina · Carne Ahumada &amp; Pollo a la Mostaza con Verdeo · 340g Reales</p>
+    <div class="footer-grid">
+      <div class="footer-col-story">
+        <span class="footer-heading">¿Qué es un Rolo?</span>
+        <p class="footer-copy">
+          En <strong>Rolo's</strong> cocinamos en Santa Fe rolls artesanales de <strong>340g</strong> (110g de masa casera + 230g de relleno cocinado lento con queso), envueltos en aluminio térmico para guardar en tu freezer y comer bien en cualquier pausa sin ensuciar un solo plato.
+        </p>
+      </div>
+
+      <div class="footer-col-facts">
+        <span class="footer-heading">Claves del Lote</span>
+        <ul class="footer-facts-list">
+          <li><strong>🌯 2 Sabores:</strong> Carne Ahumada o Pollo a la Mostaza</li>
+          <li><strong>📅 Modalidad:</strong> Reservás Mar/Mié → Entregamos Viernes</li>
+          <li><strong>💰 Packs:</strong> 1x $5.000 · 3x $13.500 · 5x $21.000</li>
+        </ul>
+      </div>
+
+      <div class="footer-col-brand">
+        <p class="footer-brand-title">ROLO'S QUE RESUELVE</p>
+        <p class="footer-brand-sub">Santa Fe Capital, Argentina · Carne Ahumada &amp; Pollo a la Mostaza con Verdeo · 340g Reales</p>
+      </div>
+    </div>
   </footer>
 
   <!-- Barra de Navegación Flotante Mobile-First (Solo visible en < 768px y dentro de Vista Menú) -->
