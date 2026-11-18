@@ -411,6 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const dSubmitLabel = document.getElementById('dSubmitLabel');
 
   const mCartBadgeHandle = document.getElementById('mCartBadgeHandle');
+  const mMobilePackPills = document.querySelectorAll('.m-tier-pill[data-mobile-pack]');
   const mCardQtyClasico = document.getElementById('mCardQtyClasico');
   const mCardQtyPollo = document.getElementById('mCardQtyPollo');
   const mPromoUpsellText = document.getElementById('mPromoUpsellText');
@@ -441,6 +442,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     desktopPackPills.forEach(pill => {
       const packSize = parseInt(pill.dataset.desktopPack, 10);
+      pill.classList.toggle('active', packSize === activePackTier);
+    });
+
+    mMobilePackPills.forEach(pill => {
+      const packSize = parseInt(pill.dataset.mobilePack, 10);
       pill.classList.toggle('active', packSize === activePackTier);
     });
 
@@ -475,7 +481,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTextAnimated(mCartOldTotal, `$${pricing.oldPrice.toLocaleString('es-AR')}`);
     setTextAnimated(mCartFinalTotal, `$${pricing.finalPrice.toLocaleString('es-AR')}`);
     setTextAnimated(mSubmitLabel, `ENVIAR POR WHATSAPP ($${pricing.finalPrice.toLocaleString('es-AR')})`);
-    setTextAnimated(mStickyCheckoutText, `CHECKOUT (${totalUnits}) · $${pricing.finalPrice.toLocaleString('es-AR')}`);
+    setTextAnimated(mStickyCheckoutText, `FINALIZAR (${totalUnits}) · $${pricing.finalPrice.toLocaleString('es-AR')}`);
 
     if (mPromoUpsellText && mBtnQuickUpsell) {
       const rem = totalUnits % 5;
@@ -591,63 +597,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // 6. Mobile Buscador + Tabs de Filtro Accesibles (focusgroup + Arrow fallback)
-  // =========================================================================
-  const mSearchInput = document.getElementById('mSearchInput');
-  const mFocusSearchBtn = document.getElementById('mFocusSearchBtn');
-  const mFilterTabs = Array.from(document.querySelectorAll('.sepidy-tab-btn[data-m-filter]'));
-  const mCatalogPanel = document.getElementById('mCatalogPanel');
-  const mFlavorCards = document.querySelectorAll('.sepidy-challenge-item[data-m-card]');
-  let activeMobileFilter = 'all';
-
-  if (mFocusSearchBtn && mSearchInput) {
-    mFocusSearchBtn.addEventListener('click', () => mSearchInput.focus());
-  }
-
-  function applyMobileFilter() {
-    const q = (mSearchInput ? mSearchInput.value : '').toLowerCase().trim();
-    mFlavorCards.forEach(card => {
-      const key = card.dataset.mCard;
-      const f = FLAVORS[key];
-      const matchTab = activeMobileFilter === 'all' || key === activeMobileFilter;
-      const matchSearch = !q || f.name.toLowerCase().includes(q) || f.keywords.includes(q);
-      card.style.display = (matchTab && matchSearch) ? 'block' : 'none';
-    });
-  }
-
-  if (mSearchInput) {
-    mSearchInput.addEventListener('input', applyMobileFilter);
-  }
-
-  function selectMobileFilterTab(selectedTab) {
-    mFilterTabs.forEach(tab => {
-      const isSelected = tab === selectedTab;
-      tab.setAttribute('aria-selected', String(isSelected));
-      tab.toggleAttribute('focusgroupstart', isSelected);
-    });
-    if (mCatalogPanel) {
-      mCatalogPanel.setAttribute('aria-labelledby', selectedTab.id);
-    }
-    activeMobileFilter = selectedTab.dataset.mFilter;
-    selectedTab.scrollIntoView({ block: 'nearest', inline: 'nearest', container: 'nearest' });
-    applyMobileFilter();
-  }
-
-  mFilterTabs.forEach((tab, idx) => {
-    tab.addEventListener('click', () => selectMobileFilterTab(tab));
-    tab.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-        e.preventDefault();
-        const dir = e.key === 'ArrowRight' ? 1 : -1;
-        const nextIdx = (idx + dir + mFilterTabs.length) % mFilterTabs.length;
-        mFilterTabs[nextIdx].focus();
-        selectMobileFilterTab(mFilterTabs[nextIdx]);
-      }
-    });
-  });
-
-  // =========================================================================
-  // 7. Mobile Navegación Inferior + Botón Sticky hacia el Checkout
+  // 6. Mobile Navegación Inferior + Botón Sticky Finalizar Pedido
   // =========================================================================
   const mobileFrames = document.querySelectorAll('.sepidy-phone-frame');
   const mobileDockBtns = document.querySelectorAll('.mobile-sticky-dock [data-mobile-tab]');

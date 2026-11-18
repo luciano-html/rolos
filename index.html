@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261117-11">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261118-1">
 </head>
 <body>
 
@@ -346,66 +346,53 @@
   <section class="sepidy-app-section mobile-only-app" id="app-neobrutalista">
     <div class="sepidy-mobile-shell">
 
-      <!-- PANTALLA 1 COMBINADA: SABORES + CONTADORES + DESCUENTOS + CHECKOUT -->
+      <!-- PANTALLA 1 COMBINADA: PRECIOS POR CANTIDAD + 2 SABORES + TOTAL + ENVÍO -->
       <article class="sepidy-phone-frame" id="phoneScreenCatalog" data-screen="catalog">
         <div>
           <div class="sepidy-profile-bar">
             <div class="sepidy-profile-left">
               <img src="assets/img/rolo_clasico.jpg" alt="Rolo Avatar" class="sepidy-avatar" id="mHeaderAvatar1">
               <div class="sepidy-user-meta">
-                <h3>Rolo's Santa Fe</h3>
+                <h3>Armá tu Pedido</h3>
                 <span class="sepidy-handle-pill" id="mCartBadgeHandle">0 Rolo(s) cargados</span>
-                <p>1x $5.000 · 3x $13.500 · 5x $21.000</p>
               </div>
             </div>
-            <div style="display: flex; gap: 0.35rem;">
-              <button type="button" class="sepidy-edit-dot" id="mFocusSearchBtn" aria-label="Buscar sabor">
-                <i class="fas fa-search"></i>
-              </button>
-              <button type="button" class="sepidy-edit-dot" id="mBtnClearCart" aria-label="Reiniciar orden" style="background: #FFF;">
-                <i class="fas fa-redo-alt"></i>
-              </button>
+            <button type="button" class="sepidy-edit-dot" id="mBtnClearCart" aria-label="Reiniciar orden" style="background: #FFF;">
+              <i class="fas fa-redo-alt"></i>
+            </button>
+          </div>
+
+          <!-- Banner simple de descuentos por cantidad -->
+          <div class="m-discount-banner" aria-label="Descuentos por cantidad">
+            <div class="m-discount-title">Llevando más, pagás menos</div>
+            <div class="m-discount-tiers">
+              <div class="m-tier-pill" data-mobile-pack="1">
+                <span class="m-tier-qty">1 Rolo</span>
+                <strong class="m-tier-price">$5.000</strong>
+              </div>
+              <div class="m-tier-pill" data-mobile-pack="3">
+                <span class="m-tier-qty">Pack x3</span>
+                <strong class="m-tier-price">$13.500</strong>
+                <small>$4.500 c/u</small>
+              </div>
+              <div class="m-tier-pill" data-mobile-pack="5">
+                <span class="m-tier-qty">Pack x5</span>
+                <strong class="m-tier-price">$21.000</strong>
+                <small>$4.200 c/u</small>
+              </div>
             </div>
           </div>
 
           <div class="sepidy-inner-sheet">
-            <search>
-              <div class="sepidy-search-box">
-                <i class="fas fa-search" aria-hidden="true"></i>
-                <label for="mSearchInput" class="visually-hidden">Buscar sabor</label>
-                <input type="search" id="mSearchInput" placeholder="Buscar Carne o Pollo..." autocorrect="off" spellcheck="false">
-              </div>
-            </search>
-
-            <!-- Tabs Accesibles con focusgroup="tablist nomemory" -->
-            <div class="sepidy-tabs-row" focusgroup="tablist nomemory" aria-label="Filtrar sabores de Rolo">
-              <button type="button" class="sepidy-tab-btn" id="tab-all" aria-selected="true" focusgroupstart data-m-filter="all">TODOS (2)</button>
-              <button type="button" class="sepidy-tab-btn" id="tab-clasico" aria-selected="false" data-m-filter="clasico">CARNE</button>
-              <button type="button" class="sepidy-tab-btn" id="tab-pollo" aria-selected="false" data-m-filter="pollo">POLLO</button>
-            </div>
-
-            <div role="tabpanel" id="mCatalogPanel" aria-labelledby="tab-all">
+            <div id="mCatalogPanel">
               <!-- Tarjeta 1: Carne Ahumada -->
               <div class="sepidy-challenge-item" data-m-card="clasico">
-                <div class="sepidy-item-title">[1/2] · Rolo Clásico Ahumado</div>
-                <div class="sepidy-difficulty-row">
-                  <span>Saciedad &amp; Sabor</span>
-                  <span class="nb-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-                </div>
                 <div class="sepidy-mini-author">
                   <img src="assets/img/rolo_clasico.jpg" alt="Rolo Clásico">
                   <div class="sepidy-user-meta">
                     <h3>Carne Ahumada y Queso</h3>
-                    <span class="sepidy-handle-pill">@rolo.clasico</span>
+                    <p>340g · Cerdo braseado, cebolla caramelizada y queso cremoso.</p>
                   </div>
-                </div>
-                <div class="sepidy-stats-row">
-                  <span>Peso: 340g Reales</span>
-                  <span>60% Cerdo / 40% Cebolla</span>
-                </div>
-                <div class="sepidy-dates-row">
-                  <span>1 Rolo: <strong>$5.000</strong></span>
-                  <span>Pack x5: <strong>$4.200 c/u</strong></span>
                 </div>
                 <div class="sepidy-dual-btns">
                   <button type="button" class="sepidy-action-btn cyan m-btn-preview" data-flavor="clasico">VER ROLO</button>
@@ -421,25 +408,12 @@
 
               <!-- Tarjeta 2: Pollo a la Mostaza con Verdeo -->
               <div class="sepidy-challenge-item" data-m-card="pollo">
-                <div class="sepidy-item-title">[2/2] · Pollo a la Mostaza</div>
-                <div class="sepidy-difficulty-row">
-                  <span>Nuevo Sabor con Verdeo</span>
-                  <span class="nb-stars" aria-label="5 de 5 estrellas">★★★★★</span>
-                </div>
                 <div class="sepidy-mini-author">
                   <img src="assets/img/rolo_pollo.jpg" alt="Rolo Pollo a la Mostaza">
                   <div class="sepidy-user-meta">
-                    <h3>Pollo, Mostaza y Verdeo</h3>
-                    <span class="sepidy-handle-pill">@rolo.pollo</span>
+                    <h3>Pollo a la Mostaza con Verdeo</h3>
+                    <p>340g · Suprema desmechada, mostaza suave, verdeo y muzzarella.</p>
                   </div>
-                </div>
-                <div class="sepidy-stats-row">
-                  <span>Peso: 340g Reales</span>
-                  <span>Suprema + Muzzarella</span>
-                </div>
-                <div class="sepidy-dates-row">
-                  <span>1 Rolo: <strong>$5.000</strong></span>
-                  <span>Pack x5: <strong>$4.200 c/u</strong></span>
                 </div>
                 <div class="sepidy-dual-btns">
                   <button type="button" class="sepidy-action-btn cyan m-btn-preview" data-flavor="pollo">VER ROLO</button>
@@ -719,7 +693,7 @@
       <span>Ver Rolo</span>
     </button>
     <button type="button" class="sticky-checkout-btn" id="mStickyGoCheckout">
-      <span id="mStickyCheckoutText">CHECKOUT (0) · $0</span>
+      <span id="mStickyCheckoutText">FINALIZAR (0) · $0</span>
       <i class="fas fa-arrow-down" aria-hidden="true"></i>
     </button>
   </nav>
@@ -733,6 +707,6 @@
     <img src="" alt="Flyer Rolo's Ampliado" id="dialogImg" style="width: 100%; border-radius: 14px; border: 2.5px solid var(--nb-black); display: block;">
   </dialog>
 
-  <script src="assets/js/main.js?v=20261117-11"></script>
+  <script src="assets/js/main.js?v=20261118-1"></script>
 </body>
 </html>
