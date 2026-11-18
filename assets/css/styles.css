@@ -420,8 +420,8 @@ body.is-menu-view {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: var(--nb-yellow-btn);
-  color: var(--nb-black) !important;
+  background: var(--diner-red);
+  color: var(--diner-cream-light) !important;
   padding: 0.5rem 1.05rem;
   border-radius: 999px;
   border: 2.5px solid var(--nb-black);
@@ -431,10 +431,11 @@ body.is-menu-view {
   font-weight: 900 !important;
   text-transform: uppercase;
   cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
 }
 
 .nav-cta-pill:hover {
+  background: var(--diner-red-dark);
   transform: translate(2px, 2px);
   box-shadow: 1px 1px 0 var(--nb-black);
 }
@@ -679,6 +680,15 @@ body.is-menu-view {
 
 .nb-btn-lime {
   background-color: var(--nb-lime);
+}
+
+.nb-btn-red {
+  background-color: var(--diner-red);
+  color: var(--diner-cream-light);
+}
+
+.nb-btn-red:hover {
+  background-color: var(--diner-red-dark);
 }
 
 /* Franja Diner 70s Tipográfica de Cierre */
@@ -1828,7 +1838,7 @@ body.is-menu-view {
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  background: var(--nb-yellow-btn);
+  background: var(--diner-red);
   border: 2px solid var(--nb-black);
   border-radius: 999px;
   box-shadow: 2.5px 2.5px 0 var(--nb-black);
@@ -1836,7 +1846,7 @@ body.is-menu-view {
   font-family: inherit;
   font-size: 0.74rem;
   font-weight: 900;
-  color: var(--nb-black);
+  color: var(--diner-cream-light);
   text-transform: uppercase;
   cursor: pointer;
   white-space: nowrap;
