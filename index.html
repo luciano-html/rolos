@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261117-5">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261117-6">
 </head>
 <body>
 
@@ -84,43 +84,55 @@
         <path d="M32 0 C34 24 40 30 64 32 C40 34 34 40 32 64 C30 40 24 34 0 32 C24 30 30 24 32 0 Z"/>
       </svg>
 
-      <div class="hero-kicker-pill view-stagger-1">
-        📍 Santa Fe Capital · Comida Casera por Lote Semanal
-      </div>
-
-      <h1 class="bitesized-headline hero-title-compact view-stagger-1">
-        ROLLS CASEROS DE 340G,<br>
-        LISTOS EN 3 MINUTOS.
-      </h1>
-
-      <div class="hero-explainer-box view-stagger-2">
-        <p class="hero-brand-copy">
-          <strong>Rolo's</strong> es nuestra cocina artesanal en Santa Fe: hacemos <strong>rolls rellenos contundentes</strong> (110g de masa casera + 230g de relleno cocinado lento con queso) envueltos en aluminio térmico para que guardes en tu freezer y comas bien en cualquier pausa, sin ensuciar un solo plato.
-        </p>
-
-        <ul class="hero-facts-grid" aria-label="Resumen rápido de Rolo's">
-          <li><strong>🌯 2 Sabores:</strong> Carne Ahumada o Pollo a la Mostaza</li>
-          <li><strong>📅 Modalidad:</strong> Reservás Mar/Mié → Entregamos Viernes</li>
-          <li><strong>💰 Packs:</strong> 1x $5.000 · 3x $13.500 · 5x $21.000</li>
-        </ul>
-      </div>
-
-      <div class="hero-action-row view-stagger-2">
-        <div class="hero-cta-pair">
-          <button type="button" class="nb-btn nb-btn-cta-hero" id="btnHeroStartOrder" data-view-target="menu">
-            <i class="fas fa-shopping-bag" aria-hidden="true"></i>
-            <span>IR AL MENÚ Y PEDIR</span>
-            <span class="cta-price-tag">Desde $4.200 c/u</span>
-            <i class="fas fa-arrow-right" aria-hidden="true"></i>
-          </button>
-          <button type="button" class="nb-btn nb-btn-flyers-hero" id="btnHeroGoFlyers" data-view-target="afiches">
-            <i class="fas fa-images" aria-hidden="true"></i>
-            <span>VER AFICHES DE ROLO'S</span>
-          </button>
+      <!-- 1. Encabezado principal -->
+      <div class="hero-head-block view-stagger-1">
+        <div class="hero-kicker-pill">
+          📍 Santa Fe · Cocina por Lote Semanal
         </div>
-        <a href="#como-calentar" class="hero-secondary-link" data-view-target="menu" data-scroll-target="como-calentar">
-          ¿Cómo se calientan en 3 min? (en Menú) →
-        </a>
+        <h1 class="bitesized-headline hero-title-compact">
+          ROLLS CASEROS DE 340G,<br>
+          LISTOS EN 3 MINUTOS.
+        </h1>
+      </div>
+
+      <!-- 2. Botones de acción arriba de la info (máxima prioridad en mobile y desktop) -->
+      <div class="hero-action-row view-stagger-1">
+        <button type="button" class="nb-btn nb-btn-cta-hero" id="btnHeroStartOrder" data-view-target="menu">
+          <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+          <span>IR AL MENÚ Y PEDIR</span>
+          <span class="cta-price-tag">Desde $4.200 c/u</span>
+          <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </button>
+
+        <div class="hero-subactions-pair">
+          <button type="button" class="nb-btn nb-btn-subaction cyan" id="btnHeroGoFlyers" data-view-target="afiches">
+            <i class="fas fa-images" aria-hidden="true"></i>
+            <span>VER AFICHES</span>
+          </button>
+          <a href="#como-calentar" class="nb-btn nb-btn-subaction cream" data-view-target="menu" data-scroll-target="como-calentar">
+            <i class="fas fa-fire" aria-hidden="true"></i>
+            <span>CÓMO CALENTAR</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 3. Información de marca y producto (Bento 2 cols en Desktop, liviano en Mobile) -->
+      <div class="hero-info-bento view-stagger-2" aria-label="Qué es un Rolo y datos del lote">
+        <div class="hero-bento-card hero-bento-story">
+          <span class="hero-bento-tag">¿Qué es un Rolo?</span>
+          <p class="hero-brand-copy">
+            En <strong>Rolo's</strong> cocinamos en Santa Fe rolls artesanales de <strong>340g</strong> (110g de masa casera + 230g de relleno cocinado lento con queso), envueltos en aluminio térmico para guardar en tu freezer y comer bien en cualquier pausa sin ensuciar un solo plato.
+          </p>
+        </div>
+
+        <div class="hero-bento-card hero-bento-facts">
+          <span class="hero-bento-tag">Claves del Lote</span>
+          <ul class="hero-facts-list">
+            <li><strong>🌯 2 Sabores:</strong> Carne Ahumada o Pollo a la Mostaza</li>
+            <li><strong>📅 Modalidad:</strong> Reservás Mar/Mié → Entregamos Viernes</li>
+            <li><strong>💰 Packs:</strong> 1x $5.000 · 3x $13.500 · 5x $21.000</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -708,6 +720,6 @@
     <img src="" alt="Flyer Rolo's Ampliado" id="dialogImg" style="width: 100%; border-radius: 14px; border: 2.5px solid var(--nb-black); display: block;">
   </dialog>
 
-  <script src="assets/js/main.js?v=20261117-5"></script>
+  <script src="assets/js/main.js?v=20261117-6"></script>
 </body>
 </html>

@@ -449,12 +449,18 @@ body.is-menu-view {
   }
 }
 
-/* Hero Centerpiece Typography */
+/* Hero Centerpiece Typography + Distribución Vertical Equitativa */
 .diner-hero-stage {
   position: relative;
   text-align: center;
   width: 100%;
-  padding: 1.2rem clamp(1rem, 3vw, 2.5rem) 1.75rem;
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: clamp(1rem, 2.5vh, 1.85rem);
+  padding: clamp(1rem, 2.5vh, 1.65rem) clamp(1rem, 3vw, 2.5rem);
   z-index: 4;
 }
 
@@ -494,6 +500,13 @@ body.is-menu-view {
   100% { transform: scale(1.12) rotate(12deg); }
 }
 
+.hero-head-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .hero-kicker-pill {
   display: inline-flex;
   align-items: center;
@@ -501,11 +514,11 @@ body.is-menu-view {
   background: var(--nb-lime);
   border: 2px solid var(--nb-black);
   box-shadow: var(--shadow-nb-sm);
-  padding: 0.3rem 0.9rem;
+  padding: 0.28rem 0.85rem;
   border-radius: 999px;
   font-weight: 800;
-  font-size: 0.8rem;
-  margin-bottom: 1rem;
+  font-size: 0.78rem;
+  margin-bottom: 0.65rem;
   text-transform: uppercase;
 }
 
@@ -520,105 +533,70 @@ body.is-menu-view {
 }
 
 .hero-title-compact {
-  font-size: clamp(2.15rem, 5.6vw, 4.25rem);
-  margin-bottom: 0.95rem;
+  font-size: clamp(2.1rem, 5.4vw, 4.15rem);
+  margin-bottom: 0;
 }
 
-.hero-explainer-box {
-  width: 100%;
-  margin: 0 auto 1.35rem;
-  background: var(--diner-cream-light);
-  border: 2.5px solid var(--nb-black);
-  border-radius: 18px;
-  box-shadow: 4px 4px 0 var(--nb-black);
-  padding: 1.1rem clamp(1rem, 3vw, 2rem);
-  text-align: left;
-}
-
-.hero-brand-copy {
-  font-size: clamp(0.92rem, 1.8vw, 1.05rem);
-  font-weight: 600;
-  line-height: 1.48;
-  color: var(--diner-green-dark);
-  margin-bottom: 0.85rem;
-  text-align: center;
-}
-
-.hero-brand-copy strong {
-  color: var(--nb-black);
-  font-weight: 800;
-}
-
-.hero-facts-grid {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 0.55rem;
-}
-
-.hero-facts-grid li {
-  background: var(--diner-cream);
-  border: 1.5px solid var(--nb-black);
-  border-radius: 10px;
-  padding: 0.45rem 0.65rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--nb-black);
-  text-align: center;
-}
-
-.hero-facts-grid li strong {
-  color: var(--diner-green);
-}
-
+/* Botones de Acción (Arriba de la info, foco #1 en mobile) */
 .hero-action-row {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.75rem;
-}
-
-.hero-cta-pair {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.85rem;
-  flex-wrap: wrap;
+  gap: 0.7rem;
 }
 
 .nb-btn-cta-hero {
+  width: 100%;
   background-color: var(--nb-yellow-btn);
   border: 3px solid var(--nb-black);
-  box-shadow: 6px 6px 0 var(--nb-black);
+  box-shadow: 5px 5px 0 var(--nb-black);
   border-radius: 16px;
-  padding: 0.95rem 1.65rem;
-  font-size: clamp(0.98rem, 2.2vw, 1.15rem);
-  min-height: 58px;
-  gap: 0.65rem;
+  padding: 0.95rem 1.25rem;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  min-height: 60px;
+  gap: 0.6rem;
   flex-wrap: wrap;
 }
 
 .nb-btn-cta-hero:hover {
   background-color: #FFD400;
-  transform: translate(3px, 3px);
+  transform: translate(2.5px, 2.5px);
+  box-shadow: 2.5px 2.5px 0 var(--nb-black);
+}
+
+.hero-subactions-pair {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.nb-btn-subaction {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.78rem;
+  border-radius: 12px;
+  border: 2.5px solid var(--nb-black);
   box-shadow: 3px 3px 0 var(--nb-black);
 }
 
-.nb-btn-flyers-hero {
+.nb-btn-subaction.cyan {
   background-color: var(--nb-cyan-btn);
-  border: 2.5px solid var(--nb-black);
-  box-shadow: 4px 4px 0 var(--nb-black);
-  border-radius: 14px;
-  padding: 0.85rem 1.35rem;
-  font-size: 0.94rem;
-  min-height: 54px;
 }
 
-.nb-btn-flyers-hero:hover {
+.nb-btn-subaction.cyan:hover {
   background-color: #63CBE5;
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--nb-black);
+}
+
+.nb-btn-subaction.cream {
+  background-color: var(--diner-cream-light);
+}
+
+.nb-btn-subaction.cream:hover {
+  background-color: var(--nb-lime);
 }
 
 .cta-price-tag {
@@ -626,22 +604,136 @@ body.is-menu-view {
   color: var(--diner-cream-light);
   border: 2px solid var(--nb-black);
   border-radius: 999px;
-  padding: 0.18rem 0.65rem;
-  font-size: 0.76rem;
+  padding: 0.16rem 0.6rem;
+  font-size: 0.74rem;
   font-weight: 900;
   letter-spacing: 0.3px;
 }
 
-.hero-secondary-link {
-  color: var(--diner-green);
-  font-size: 0.88rem;
-  font-weight: 800;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+/* Info Bento (Liviano y sin ruido en Mobile, 2 cols equilibradas en Desktop) */
+.hero-info-bento {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 0.85rem;
+  border-top: 2px dashed rgba(27, 67, 44, 0.25);
+  text-align: left;
 }
 
-.hero-secondary-link:hover {
-  color: var(--diner-red);
+.hero-bento-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.hero-bento-tag {
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--diner-green);
+}
+
+.hero-brand-copy {
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.44;
+  color: var(--diner-green-dark);
+}
+
+.hero-brand-copy strong {
+  color: var(--nb-black);
+  font-weight: 800;
+}
+
+.hero-facts-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--nb-black);
+}
+
+.hero-facts-list strong {
+  color: var(--diner-green);
+}
+
+@media (min-width: 768px) {
+  .hero-action-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  .nb-btn-cta-hero {
+    width: auto;
+    padding: 0.95rem 1.75rem;
+    box-shadow: 6px 6px 0 var(--nb-black);
+  }
+
+  .hero-subactions-pair {
+    width: auto;
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .nb-btn-subaction {
+    width: auto;
+    min-height: 56px;
+    padding: 0.8rem 1.25rem;
+    font-size: 0.88rem;
+    box-shadow: 4px 4px 0 var(--nb-black);
+  }
+
+  .hero-info-bento {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 1.15rem;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .hero-bento-card {
+    background: var(--diner-cream-light);
+    border: 2.5px solid var(--nb-black);
+    border-radius: 18px;
+    box-shadow: 4px 4px 0 var(--nb-black);
+    padding: 1.15rem 1.35rem;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .hero-bento-tag {
+    align-self: flex-start;
+    background: var(--nb-lime);
+    border: 1.5px solid var(--nb-black);
+    border-radius: 999px;
+    padding: 0.16rem 0.65rem;
+    color: var(--nb-black);
+  }
+
+  .hero-brand-copy {
+    font-size: 0.96rem;
+    line-height: 1.5;
+  }
+
+  .hero-facts-list {
+    gap: 0.45rem;
+    font-size: 0.86rem;
+  }
+
+  .hero-facts-list li {
+    border-bottom: 1.5px dashed rgba(18, 18, 18, 0.18);
+    padding-bottom: 0.4rem;
+  }
+
+  .hero-facts-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
 }
 
 .nb-btn {
