@@ -37,20 +37,170 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // =========================================================================
-  // 2. Botones de "Pedir Ahora" Inteligentes (Desktop vs Mobile)
+  // 2. Router de Vistas (#inicio | #menu | #afiches) + Cortina La Canaca
   // =========================================================================
-  document.querySelectorAll('.js-go-order').forEach(el => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      const isDesktop = window.innerWidth >= 768;
-      if (!isDesktop) activateMobileScreen('catalog');
-      const targetId = isDesktop ? 'carta-diner' : 'app-neobrutalista';
-      const target = document.getElementById(targetId);
-      if (target) {
-        const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-        target.scrollIntoView({ behavior, block: 'start' });
+  const curtainEl = document.getElementById('rolosPageCurtain');
+  const viewSections = Array.from(document.querySelectorAll('.app-view[data-view]'));
+  const viewSubbar = document.getElementById('viewSubbar');
+  const viewSubbarLabel = document.getElementById('viewSubbarLabel');
+  const mobileStickyDock = document.getElementById('mobileStickyDock');
+  const navViewLinks = document.querySelectorAll('.diner-nav-group a[data-view-target], .mobile-header-links a[data-view-target]');
+  let activeView = 'inicio';
+  let isViewTransitioning = false;
+
+  function resolveRouteFromHash(rawHash) {
+    const clean = (rawHash || '').replace(/^#/, '').toLowerCase();
+    if (clean === 'menu' || clean === 'carta-diner' || clean === 'app-neobrutalista') {
+      return { view: 'menu', scrollTarget: null };
+    }
+    if (clean === 'como-calentar') {
+      return { view: 'menu', scrollTarget: 'como-calentar' };
+    }
+    if (clean === 'afiches' || clean === 'galeria-retro') {
+      return { view: 'afiches', scrollTarget: null };
+    }
+    return { view: 'inicio', scrollTarget: null };
+  }
+
+  function waitCurtainAnimation(el, fallbackMs = 700) {
+    return new Promise((resolve) => {
+      if (!el || el.getAnimations().length === 0) {
+        resolve();
+        return;
+      }
+      let settled = false;
+      const done = () => {
+        if (settled) return;
+        settled = true;
+        el.removeEventListener('animationend', onEnd);
+        clearTimeout(timerId);
+        resolve();
+      };
+      const onEnd = (e) => {
+        if (e.target === el) done();
+      };
+      const timerId = setTimeout(done, fallbackMs);
+      el.addEventListener('animationend', onEnd);
+    });
+  }
+
+  function applyViewState(viewName, scrollTargetId = null, animateEntrance = true) {
+    activeView = viewName;
+
+    viewSections.forEach(sec => {
+      const isMatch = sec.dataset.view === viewName;
+      sec.classList.remove('is-animating-in');
+      if (isMatch) {
+        sec.removeAttribute('hidden');
+        if (animateEntrance) {
+          void sec.offsetWidth;
+          sec.classList.add('is-animating-in');
+        }
+      } else {
+        sec.setAttribute('hidden', '');
       }
     });
+
+    document.body.classList.toggle('is-menu-view', viewName === 'menu');
+    if (viewSubbar && viewSubbarLabel) {
+      if (viewName === 'inicio') {
+        viewSubbar.hidden = true;
+      } else {
+        viewSubbar.hidden = false;
+        viewSubbarLabel.textContent = viewName === 'menu'
+          ? 'MENÚ & CÓMO CALENTARLO'
+          : "AFICHES DE ROLO'S";
+      }
+    }
+    if (mobileStickyDock) {
+      mobileStickyDock.hidden = viewName !== 'menu';
+    }
+
+    if (viewName === 'menu') {
+      activateMobileScreen('catalog');
+    }
+
+    navViewLinks.forEach(link => {
+      const target = link.dataset.viewTarget;
+      const isScrollLink = Boolean(link.dataset.scrollTarget);
+      if (target === viewName && !isScrollLink) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+
+    if (scrollTargetId) {
+      const targetEl = document.getElementById(scrollTargetId);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'auto', block: 'start' });
+        return;
+      }
+    }
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  async function navigateToView(targetView, scrollTargetId = null, updateHash = true) {
+    const viewName = ['inicio', 'menu', 'afiches'].includes(targetView) ? targetView : 'inicio';
+
+    if (viewName === activeView) {
+      if (viewName === 'menu') activateMobileScreen('catalog');
+      const targetId = scrollTargetId || (viewName === 'menu' ? (window.innerWidth >= 768 ? 'carta-diner' : 'app-neobrutalista') : null);
+      if (targetId) {
+        document.getElementById(targetId)?.scrollIntoView({ behavior: getScrollBehavior(), block: 'start' });
+      } else {
+        window.scrollTo({ top: 0, behavior: getScrollBehavior() });
+      }
+      return;
+    }
+
+    if (isViewTransitioning) return;
+
+    const targetHash = scrollTargetId ? `#${scrollTargetId}` : `#${viewName}`;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || !curtainEl;
+
+    if (reducedMotion) {
+      if (updateHash) history.pushState(null, '', targetHash);
+      applyViewState(viewName, scrollTargetId, false);
+      document.querySelector(`.app-view[data-view="${viewName}"]`)?.focus({ preventScroll: true });
+      return;
+    }
+
+    isViewTransitioning = true;
+
+    curtainEl.classList.remove('is-entering', 'is-exiting');
+    void curtainEl.offsetWidth;
+    curtainEl.classList.add('is-exiting');
+    await waitCurtainAnimation(curtainEl, 700);
+
+    if (updateHash) {
+      history.pushState(null, '', targetHash);
+    }
+    applyViewState(viewName, scrollTargetId, true);
+
+    curtainEl.classList.remove('is-exiting');
+    void curtainEl.offsetWidth;
+    curtainEl.classList.add('is-entering');
+    await waitCurtainAnimation(curtainEl, 700);
+
+    curtainEl.classList.remove('is-entering');
+    isViewTransitioning = false;
+
+    const focusTarget = (scrollTargetId && document.getElementById(scrollTargetId))
+      || document.querySelector(`.app-view[data-view="${viewName}"]`);
+    focusTarget?.focus({ preventScroll: true });
+  }
+
+  document.querySelectorAll('[data-view-target]').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigateToView(trigger.dataset.viewTarget, trigger.dataset.scrollTarget || null, true);
+    });
+  });
+
+  window.addEventListener('popstate', () => {
+    const { view, scrollTarget } = resolveRouteFromHash(window.location.hash);
+    navigateToView(view, scrollTarget, false);
   });
 
   // =========================================================================
@@ -622,7 +772,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Inicializar estado
+  // Inicializar estado y vista inicial
   selectFlavor('clasico', false);
   renderAll();
+  const initialRoute = resolveRouteFromHash(window.location.hash);
+  applyViewState(initialRoute.view, initialRoute.scrollTarget, true);
 });

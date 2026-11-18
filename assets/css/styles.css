@@ -47,6 +47,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 120px;
   font-size: 16px;
 }
 
@@ -55,21 +56,231 @@ body {
   background-color: var(--diner-cream);
   color: var(--nb-black);
   line-height: 1.5;
-  overflow-x: hidden;
-  padding-bottom: 86px; /* Espacio para la barra móvil Neo-Brutalista */
+  overflow-x: clip;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.is-menu-view {
+  padding-bottom: 86px; /* Espacio para la barra móvil Neo-Brutalista en Menú */
 }
 
 @media (min-width: 768px) {
-  body {
+  body.is-menu-view {
     padding-bottom: 0;
   }
 }
 
+#appViews {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#view-home {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.diner-window-hero {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.app-view[hidden],
+.mobile-sticky-dock[hidden] {
+  display: none !important;
+}
+
+.app-view:focus {
+  outline: none;
+}
+
+/* ==========================================================================
+   0. CORTINA DE TRANSICIÓN FULL-SCREEN (ESTILO LA CANACA) + LOGO ROLO'S
+   ========================================================================== */
+.rolos-page-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  background-color: var(--diner-red);
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.curtain-brand-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  user-select: none;
+}
+
+.curtain-logo-img {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 4px solid var(--nb-black);
+  box-shadow: 5px 5px 0 var(--nb-black);
+  background: #FFF;
+  object-fit: cover;
+}
+
+.curtain-logo-wordmark {
+  font-family: var(--font-retro);
+  font-size: clamp(2.4rem, 7vw, 3.6rem);
+  line-height: 1;
+  color: var(--diner-cream-light);
+  text-shadow: 4px 4px 0 var(--nb-black);
+  letter-spacing: -0.5px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rolos-page-curtain.is-exiting {
+    visibility: visible;
+    pointer-events: all;
+    animation: rolosCurtainFadeInUp 620ms ease both;
+  }
+
+  .rolos-page-curtain.is-entering {
+    visibility: visible;
+    pointer-events: all;
+    animation: rolosCurtainFadeOutDown 620ms ease both;
+  }
+
+  @media (max-width: 767px) {
+    .rolos-page-curtain.is-entering {
+      animation-name: rolosCurtainFadeOutUp;
+    }
+  }
+
+  .app-view.is-animating-in .view-stagger-1 {
+    animation: rolosBounceInUp 0.65s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+  }
+
+  .app-view.is-animating-in .view-stagger-2 {
+    animation: rolosFadeInUp 0.55s ease 140ms both;
+  }
+
+  .app-view.is-animating-in > section,
+  .app-view.is-animating-in > .view-subbar {
+    animation: rolosFadeInUp 0.5s ease both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rolos-page-curtain {
+    display: none;
+  }
+}
+
+@keyframes rolosCurtainFadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes rolosCurtainFadeOutDown {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes rolosCurtainFadeOutUp {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes rolosBounceInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 48px, 0);
+  }
+  65% {
+    opacity: 1;
+    transform: translate3d(0, -8px, 0);
+  }
+  85% {
+    transform: translate3d(0, 3px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes rolosFadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Componente Único Sticky: Header Principal + Sub-barra de Vista Secundaria */
+.site-sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 950;
+  width: 100%;
+  background-color: var(--diner-cream);
+  border-bottom: 3px solid var(--nb-black);
+}
+
+.view-subbar {
+  width: 100%;
+  background: var(--nb-card-bg);
+  border-top: 2px solid var(--nb-black);
+  padding: 0.45rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.view-subbar[hidden] {
+  display: none !important;
+}
+
+.view-subbar-label {
+  font-family: var(--font-condensed);
+  font-size: 1.1rem;
+  letter-spacing: 0.8px;
+  color: var(--diner-green);
+}
+
 .container {
   width: 100%;
-  max-width: 1240px;
+  max-width: none;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 clamp(1rem, 3vw, 2.5rem);
 }
 
 .visually-hidden {
@@ -85,14 +296,12 @@ body {
 }
 
 /* ==========================================================================
-   1. BITESIZED DINER WINDOW HERO SECTION
+   1. BITESIZED DINER WINDOW HEADER & HERO SECTION
    ========================================================================== */
 .diner-window-frame {
   position: relative;
+  width: 100%;
   background-color: var(--diner-cream);
-  border-left: 8px solid var(--diner-green);
-  border-right: 8px solid var(--diner-green);
-  border-top: 6px solid var(--diner-green);
   overflow: hidden;
   background-image: linear-gradient(
     125deg,
@@ -107,57 +316,54 @@ body {
   );
 }
 
-.diner-window-frame::before,
-.diner-window-frame::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background-color: var(--diner-green);
-  z-index: 5;
-  pointer-events: none;
-}
-
-.diner-window-frame::before {
-  left: 12px;
-}
-
-.diner-window-frame::after {
-  right: 12px;
-}
-
-.top-promo-strip {
-  background: var(--diner-green);
-  color: var(--diner-cream-light);
-  text-align: center;
-  padding: 0.45rem 1rem;
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.4px;
-  border-bottom: 2.5px solid var(--nb-black);
-  position: relative;
-  z-index: 10;
-}
-
-.top-promo-strip span {
-  background: var(--nb-lime);
-  color: var(--nb-black);
-  padding: 0.1rem 0.5rem;
-  border-radius: 6px;
-  margin-right: 0.4rem;
-  font-weight: 900;
+.diner-nav-group a[aria-current="page"] {
+  color: var(--diner-red);
+  text-decoration: underline;
+  text-decoration-thickness: 2.5px;
+  text-underline-offset: 4px;
 }
 
 .diner-navbar {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 1.15rem 1.75rem;
-  max-width: 1180px;
-  margin: 0 auto;
+  gap: 0.6rem 1rem;
+  width: 100%;
+  padding: 0.85rem clamp(1rem, 3vw, 2.5rem);
   position: relative;
   z-index: 10;
+}
+
+.mobile-header-links {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.85rem;
+  padding-top: 0.55rem;
+  border-top: 2px dashed rgba(27, 67, 44, 0.25);
+}
+
+.mobile-header-links a {
+  text-decoration: none;
+  color: var(--diner-green);
+  font-weight: 800;
+  font-size: 0.82rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 6px;
+}
+
+.mobile-header-links a[aria-current="page"] {
+  background: var(--nb-lime);
+  color: var(--nb-black);
+  border: 1.5px solid var(--nb-black);
+}
+
+@media (min-width: 860px) {
+  .mobile-header-links {
+    display: none;
+  }
 }
 
 .diner-nav-group {
@@ -247,9 +453,8 @@ body {
 .diner-hero-stage {
   position: relative;
   text-align: center;
-  padding: 0.9rem 1.25rem 1.75rem;
-  max-width: 980px;
-  margin: 0 auto;
+  width: 100%;
+  padding: 1.2rem clamp(1rem, 3vw, 2.5rem) 1.75rem;
   z-index: 4;
 }
 
@@ -320,13 +525,13 @@ body {
 }
 
 .hero-explainer-box {
-  max-width: 780px;
+  width: 100%;
   margin: 0 auto 1.35rem;
   background: var(--diner-cream-light);
   border: 2.5px solid var(--nb-black);
   border-radius: 18px;
   box-shadow: 4px 4px 0 var(--nb-black);
-  padding: 1rem 1.25rem;
+  padding: 1.1rem clamp(1rem, 3vw, 2rem);
   text-align: left;
 }
 
@@ -371,7 +576,15 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.75rem;
+}
+
+.hero-cta-pair {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
 }
 
 .nb-btn-cta-hero {
@@ -390,6 +603,22 @@ body {
   background-color: #FFD400;
   transform: translate(3px, 3px);
   box-shadow: 3px 3px 0 var(--nb-black);
+}
+
+.nb-btn-flyers-hero {
+  background-color: var(--nb-cyan-btn);
+  border: 2.5px solid var(--nb-black);
+  box-shadow: 4px 4px 0 var(--nb-black);
+  border-radius: 14px;
+  padding: 0.85rem 1.35rem;
+  font-size: 0.94rem;
+  min-height: 54px;
+}
+
+.nb-btn-flyers-hero:hover {
+  background-color: #63CBE5;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--nb-black);
 }
 
 .cta-price-tag {
@@ -458,75 +687,46 @@ body {
   background-color: var(--nb-lime);
 }
 
-/* Friso geométrico abstracto retro 70s */
-.diner-abstract-frieze {
+/* Franja Diner 70s Tipográfica de Cierre */
+.diner-hero-ribbon {
   position: relative;
   z-index: 6;
   width: 100%;
-  margin-top: 1.5rem;
+  margin-top: 1.25rem;
   border-top: 4px solid var(--diner-green);
-  background: var(--diner-red);
-  overflow: hidden;
 }
 
-.frieze-checker {
-  height: 14px;
+.ribbon-stripes-70s {
+  height: 12px;
   width: 100%;
-  background-image: conic-gradient(
-    var(--diner-cream-light) 90deg,
-    var(--diner-green) 90deg 180deg,
-    var(--diner-cream-light) 180deg 270deg,
-    var(--diner-green) 270deg
+  background: linear-gradient(
+    to bottom,
+    var(--diner-booth-yellow) 0% 33.3%,
+    var(--diner-cream-light) 33.3% 66.6%,
+    var(--diner-green) 66.6% 100%
   );
-  background-size: 14px 14px;
   border-bottom: 3px solid var(--diner-green);
 }
 
-.frieze-geo-band {
+.ribbon-feature-bar {
+  background: var(--diner-red);
+  color: var(--diner-cream-light);
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 1.1rem;
-  padding: 0.9rem 1.5rem;
-  background-image: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 18px,
-    rgba(27, 67, 44, 0.14) 18px,
-    rgba(27, 67, 44, 0.14) 22px
-  );
+  gap: 0.5rem 1rem;
+  padding: 0.85rem 1.5rem;
+  font-family: var(--font-condensed);
+  font-size: clamp(0.95rem, 2.2vw, 1.25rem);
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
 }
 
-.frieze-geo-band span {
-  display: block;
-  flex-shrink: 0;
-  border: 3px solid var(--nb-black);
-  box-shadow: 3px 3px 0 var(--nb-black);
+.ribbon-star {
+  color: var(--nb-yellow-btn);
+  font-size: 0.9em;
 }
-
-.geo-pill {
-  width: 72px;
-  height: 22px;
-  border-radius: 999px;
-}
-
-.geo-dot {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-}
-
-.geo-block {
-  width: 44px;
-  height: 22px;
-  border-radius: 6px;
-}
-
-.geo-mustard { background: var(--diner-booth-yellow); }
-.geo-cream { background: var(--diner-cream-light); }
-.geo-green { background: var(--diner-green); }
-.geo-lime { background: var(--nb-lime); }
-.geo-cyan { background: var(--nb-cyan-btn); }
 
 /* ==========================================================================
    VISIBILIDAD ESTRICTA: MOBILE (< 768px) VS DESKTOP (>= 768px)
@@ -558,15 +758,15 @@ body {
     linear-gradient(to right, var(--diner-green-dark) 2px, transparent 2px),
     linear-gradient(to bottom, var(--diner-green-dark) 2px, transparent 2px);
   background-size: 56px 56px;
-  padding: 3.75rem 1.25rem;
+  width: 100%;
+  padding: 3rem clamp(1rem, 3vw, 2.5rem);
   border-top: var(--border-nb-thick);
   border-bottom: var(--border-nb-thick);
   position: relative;
 }
 
 .desktop-kiosk-grid {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
   display: grid;
   grid-template-columns: 1.22fr 0.78fr;
   gap: 2rem;
@@ -899,7 +1099,7 @@ body {
 /* Columna Derecha: Mostrador Sticky de Rolo + Checkout Directo */
 .desktop-counter-panel {
   position: sticky;
-  top: 20px;
+  top: 124px;
   background: var(--nb-card-bg);
   border: 4px solid var(--nb-black);
   border-radius: 26px;
@@ -1094,7 +1294,7 @@ body {
 }
 
 .sepidy-mobile-shell {
-  max-width: 440px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -1543,17 +1743,32 @@ body {
   color: var(--nb-black);
 }
 
-.m-back-pill {
-  background: var(--nb-lime);
-  border: 2px solid var(--nb-black);
-  border-radius: 999px;
-  padding: 0.25rem 0.65rem;
+.m-back-bar {
+  width: 100%;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  background: var(--diner-red);
+  color: var(--diner-cream-light);
+  border: 2.5px solid var(--nb-black);
+  border-radius: 14px;
+  padding: 0.6rem 1rem;
+  margin-bottom: 0.85rem;
   font-family: inherit;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   font-weight: 900;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 2px 2px 0 var(--nb-black);
-  flex-shrink: 0;
+  box-shadow: 3.5px 3.5px 0 var(--nb-black);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.m-back-bar:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1.5px 1.5px 0 var(--nb-black);
 }
 
 /* Barra Inferior Fija Mobile-First con Botón Sticky al Checkout */

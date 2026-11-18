@@ -18,39 +18,61 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261117-1">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261117-5">
 </head>
 <body>
 
-  <!-- ========================================================================
-       1. BITESIZED RETRO DINER WINDOW HERO
-       ======================================================================== -->
-  <div class="diner-window-frame">
-    <div class="top-promo-strip">
-      <span>🔥 OCTUBRE CONGELADO</span> 1 Rolo $5.000 · 3 Rolos $13.500 · 5 Rolos $21.000 | Toma de pedidos: Martes y Miércoles ➔ Entrega: Viernes
+  <!-- Cortina de Transición Full-Screen (estilo La Canaca con logo ROLO'S centrado) -->
+  <div class="rolos-page-curtain" id="rolosPageCurtain" aria-hidden="true">
+    <div class="curtain-brand-center">
+      <img src="assets/img/rolo_clasico.jpg" alt="" class="curtain-logo-img">
+      <span class="curtain-logo-wordmark">rolo's</span>
     </div>
+  </div>
 
-    <header class="diner-navbar">
+  <!-- Componente Único Sticky: Header Principal + Sub-header de Vista Secundaria -->
+  <header class="site-sticky-header" id="siteStickyHeader">
+    <nav class="diner-navbar" aria-label="Navegación principal">
       <ul class="diner-nav-group">
-        <li><a href="#carta-diner" class="js-go-order">La Carta</a></li>
-        <li><a href="#como-calentar">En 3 Minutos</a></li>
+        <li><a href="#inicio" data-view-target="inicio" aria-current="page">Inicio</a></li>
+        <li><a href="#menu" data-view-target="menu">Menú</a></li>
+        <li><a href="#como-calentar" data-view-target="menu" data-scroll-target="como-calentar">En 3 Minutos</a></li>
       </ul>
 
-      <a href="#" class="diner-brand-logo">
+      <a href="#inicio" class="diner-brand-logo" data-view-target="inicio">
         <img src="assets/img/rolo_clasico.jpg" alt="Rolo's Mascota">
         <span class="diner-brand-text">rolo's</span>
       </a>
 
       <ul class="diner-nav-group">
-        <li><a href="#galeria-retro">Flyers 70s</a></li>
-        <li><button type="button" class="nav-cta-pill js-go-order">Pedir Ahora <i class="fas fa-arrow-down" aria-hidden="true"></i></button></li>
+        <li><a href="#afiches" data-view-target="afiches">Afiches</a></li>
+        <li><button type="button" class="nav-cta-pill" data-view-target="menu">Pedir Ahora <i class="fas fa-arrow-right" aria-hidden="true"></i></button></li>
       </ul>
 
-      <button type="button" class="nav-cta-pill mobile-nav-cta js-go-order">
-        Pedir <i class="fas fa-arrow-down" aria-hidden="true"></i>
+      <button type="button" class="nav-cta-pill mobile-nav-cta" data-view-target="menu">
+        Pedir <i class="fas fa-arrow-right" aria-hidden="true"></i>
       </button>
-    </header>
 
+      <div class="mobile-header-links" role="navigation" aria-label="Navegación móvil">
+        <a href="#inicio" data-view-target="inicio" aria-current="page">Inicio</a>
+        <a href="#menu" data-view-target="menu">Menú</a>
+        <a href="#como-calentar" data-view-target="menu" data-scroll-target="como-calentar">3 Minutos</a>
+        <a href="#afiches" data-view-target="afiches">Afiches</a>
+      </div>
+    </nav>
+
+    <div class="view-subbar" id="viewSubbar" hidden>
+      <span class="view-subbar-label" id="viewSubbarLabel">MENÚ &amp; CÓMO CALENTARLO</span>
+    </div>
+  </header>
+
+  <main id="appViews">
+
+  <!-- ========================================================================
+       VISTA 1: PRINCIPAL / PORTADA (CONDUCE AL MENÚ Y A LOS AFICHES)
+       ======================================================================== -->
+  <section class="app-view" id="view-home" data-view="inicio" tabindex="-1" aria-label="Inicio de Rolo's">
+  <div class="diner-window-frame diner-window-hero">
     <section class="diner-hero-stage">
       <div class="diner-sun-circle" aria-hidden="true"></div>
 
@@ -62,16 +84,16 @@
         <path d="M32 0 C34 24 40 30 64 32 C40 34 34 40 32 64 C30 40 24 34 0 32 C24 30 30 24 32 0 Z"/>
       </svg>
 
-      <div class="hero-kicker-pill">
+      <div class="hero-kicker-pill view-stagger-1">
         📍 Santa Fe Capital · Comida Casera por Lote Semanal
       </div>
 
-      <h1 class="bitesized-headline hero-title-compact">
+      <h1 class="bitesized-headline hero-title-compact view-stagger-1">
         ROLLS CASEROS DE 340G,<br>
         LISTOS EN 3 MINUTOS.
       </h1>
 
-      <div class="hero-explainer-box">
+      <div class="hero-explainer-box view-stagger-2">
         <p class="hero-brand-copy">
           <strong>Rolo's</strong> es nuestra cocina artesanal en Santa Fe: hacemos <strong>rolls rellenos contundentes</strong> (110g de masa casera + 230g de relleno cocinado lento con queso) envueltos en aluminio térmico para que guardes en tu freezer y comas bien en cualquier pausa, sin ensuciar un solo plato.
         </p>
@@ -83,35 +105,45 @@
         </ul>
       </div>
 
-      <div class="hero-action-row">
-        <button type="button" class="nb-btn nb-btn-cta-hero js-go-order" id="btnHeroStartOrder">
-          <i class="fas fa-shopping-bag" aria-hidden="true"></i>
-          <span>PEDIR MIS ROLOS AHORA</span>
-          <span class="cta-price-tag">Desde $4.200 c/u</span>
-          <i class="fas fa-arrow-down" aria-hidden="true"></i>
-        </button>
-        <a href="#como-calentar" class="hero-secondary-link">
-          ¿Cómo se calientan en 3 min? ↓
+      <div class="hero-action-row view-stagger-2">
+        <div class="hero-cta-pair">
+          <button type="button" class="nb-btn nb-btn-cta-hero" id="btnHeroStartOrder" data-view-target="menu">
+            <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+            <span>IR AL MENÚ Y PEDIR</span>
+            <span class="cta-price-tag">Desde $4.200 c/u</span>
+            <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </button>
+          <button type="button" class="nb-btn nb-btn-flyers-hero" id="btnHeroGoFlyers" data-view-target="afiches">
+            <i class="fas fa-images" aria-hidden="true"></i>
+            <span>VER AFICHES DE ROLO'S</span>
+          </button>
+        </div>
+        <a href="#como-calentar" class="hero-secondary-link" data-view-target="menu" data-scroll-target="como-calentar">
+          ¿Cómo se calientan en 3 min? (en Menú) →
         </a>
       </div>
     </section>
 
-    <!-- Friso geométrico abstracto retro 70s -->
-    <div class="diner-abstract-frieze" aria-hidden="true">
-      <div class="frieze-checker"></div>
-      <div class="frieze-geo-band">
-        <span class="geo-pill geo-mustard"></span>
-        <span class="geo-dot geo-cream"></span>
-        <span class="geo-block geo-green"></span>
-        <span class="geo-dot geo-lime"></span>
-        <span class="geo-pill geo-cream"></span>
-        <span class="geo-dot geo-mustard"></span>
-        <span class="geo-block geo-cyan"></span>
-        <span class="geo-dot geo-cream"></span>
-        <span class="geo-pill geo-mustard"></span>
+    <!-- Franja Diner 70s Tipográfica de Cierre -->
+    <div class="diner-hero-ribbon" aria-hidden="true">
+      <div class="ribbon-stripes-70s"></div>
+      <div class="ribbon-feature-bar">
+        <span>340G REALES</span>
+        <span class="ribbon-star">✦</span>
+        <span>COCINA CASERA SANTA FE</span>
+        <span class="ribbon-star">✦</span>
+        <span>ENVOLTORIO TÉRMICO</span>
+        <span class="ribbon-star">✦</span>
+        <span>PEDIDOS MAR &amp; MIÉ</span>
       </div>
     </div>
   </div>
+  </section>
+
+  <!-- ========================================================================
+       VISTA 2: MENÚ COMPLETO + GUÍA DE COCCIÓN EN 3 MINUTOS (CONTENIDO TAL CUAL)
+       ======================================================================== -->
+  <section class="app-view" id="view-menu" data-view="menu" tabindex="-1" aria-label="Menú y Cómo Cocinar el Rolo" hidden>
 
   <!-- ========================================================================
        2. FLUJO DE COMPRA DESKTOP (>= 768px): CARTA MENU + MOSTRADOR CHECKOUT
@@ -489,6 +521,11 @@
       <!-- PANTALLA 2: MASCOTA ROLO EN VIVO + COUNTDOWN DEL LOTE -->
       <article class="sepidy-phone-frame" id="phoneScreenLote" data-screen="lote" hidden>
         <div>
+          <button type="button" class="m-back-bar" id="mBtnBackToCatalog">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            <span>VOLVER AL PEDIDO</span>
+          </button>
+
           <div class="sepidy-profile-bar">
             <div class="sepidy-profile-left">
               <img src="assets/img/rolo_clasico.jpg" alt="Rolo Activo" class="sepidy-avatar" id="mLiveAvatarTop">
@@ -504,10 +541,7 @@
           </div>
 
           <div class="sepidy-inner-sheet">
-            <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-bottom: 0.45rem;">
-              <div class="sepidy-item-title">Lote Octubre · Preventa</div>
-              <button type="button" class="m-back-pill" id="mBtnBackToCatalog">← VOLVER AL PEDIDO</button>
-            </div>
+            <div class="sepidy-item-title">Lote Octubre · Preventa Semanal</div>
             <div class="sepidy-difficulty-row">
               <span>Tocá abajo para cambiar entre Carne y Pollo</span>
             </div>
@@ -595,6 +629,12 @@
       </div>
     </div>
   </section>
+  </section>
+
+  <!-- ========================================================================
+       VISTA 3: AFICHES DE ROLO'S (GALERÍA DE FLYERS 70s)
+       ======================================================================== -->
+  <section class="app-view" id="view-afiches" data-view="afiches" tabindex="-1" aria-label="Afiches de Rolo's" hidden>
 
   <section class="nb-info-section" id="galeria-retro" style="background: var(--diner-cream-light);">
     <div class="container">
@@ -633,6 +673,9 @@
       </div>
     </div>
   </section>
+  </section>
+
+  </main>
 
   <!-- Footer -->
   <footer class="diner-footer">
@@ -640,8 +683,8 @@
     <p style="font-size: 0.88rem; opacity: 0.9;">Santa Fe Capital, Argentina · Carne Ahumada &amp; Pollo a la Mostaza con Verdeo · 340g Reales</p>
   </footer>
 
-  <!-- Barra de Navegación Flotante Mobile-First (Solo visible en < 768px) -->
-  <nav class="mobile-sticky-dock" aria-label="Navegación de la app móvil">
+  <!-- Barra de Navegación Flotante Mobile-First (Solo visible en < 768px y dentro de Vista Menú) -->
+  <nav class="mobile-sticky-dock" id="mobileStickyDock" aria-label="Navegación de la app móvil" hidden>
     <button type="button" class="sepidy-nav-item" data-mobile-tab="catalog" aria-pressed="true">
       <i class="fas fa-utensils"></i>
       <span>Pedido</span>
@@ -665,6 +708,6 @@
     <img src="" alt="Flyer Rolo's Ampliado" id="dialogImg" style="width: 100%; border-radius: 14px; border: 2.5px solid var(--nb-black); display: block;">
   </dialog>
 
-  <script src="assets/js/main.js?v=20261117-1"></script>
+  <script src="assets/js/main.js?v=20261117-5"></script>
 </body>
 </html>
