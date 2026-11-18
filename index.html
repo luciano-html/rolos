@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261117-10">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261117-11">
 </head>
 <body>
 
@@ -198,10 +198,12 @@
               </div>
               <div class="diner-row-bottom">
                 <span class="diner-item-sub">340g · 60% cerdo magro braseado, 40% cebolla caramelizada, queso cremoso y masa casera.</span>
-                <div class="desktop-stepper" aria-label="Cantidad de Rolo Carne Ahumada">
-                  <button type="button" class="stepper-btn minus" data-step="dec" data-flavor="clasico" aria-label="Quitar uno de Carne">−</button>
-                  <span class="stepper-qty" id="desktopQtyClasico">0</span>
-                  <button type="button" class="stepper-btn" data-step="inc" data-flavor="clasico" aria-label="Sumar uno de Carne">+</button>
+                <div class="counter-float-host" data-counter-host="clasico">
+                  <div class="desktop-stepper" aria-label="Cantidad de Rolo Carne Ahumada">
+                    <button type="button" class="stepper-btn minus" data-step="dec" data-flavor="clasico" aria-label="Quitar uno de Carne">−</button>
+                    <span class="stepper-qty" id="desktopQtyClasico">0</span>
+                    <button type="button" class="stepper-btn" data-step="inc" data-flavor="clasico" aria-label="Sumar uno de Carne">+</button>
+                  </div>
                 </div>
               </div>
             </li>
@@ -217,10 +219,12 @@
               </div>
               <div class="diner-row-bottom">
                 <span class="diner-item-sub">340g · Suprema desmechada en salsa suave de mostaza gourmet, verdeo fresco y muzzarella.</span>
-                <div class="desktop-stepper" aria-label="Cantidad de Rolo Pollo a la Mostaza">
-                  <button type="button" class="stepper-btn minus" data-step="dec" data-flavor="pollo" aria-label="Quitar uno de Pollo">−</button>
-                  <span class="stepper-qty" id="desktopQtyPollo">0</span>
-                  <button type="button" class="stepper-btn" data-step="inc" data-flavor="pollo" aria-label="Sumar uno de Pollo">+</button>
+                <div class="counter-float-host" data-counter-host="pollo">
+                  <div class="desktop-stepper" aria-label="Cantidad de Rolo Pollo a la Mostaza">
+                    <button type="button" class="stepper-btn minus" data-step="dec" data-flavor="pollo" aria-label="Quitar uno de Pollo">−</button>
+                    <span class="stepper-qty" id="desktopQtyPollo">0</span>
+                    <button type="button" class="stepper-btn" data-step="inc" data-flavor="pollo" aria-label="Sumar uno de Pollo">+</button>
+                  </div>
                 </div>
               </div>
             </li>
@@ -405,10 +409,12 @@
                 </div>
                 <div class="sepidy-dual-btns">
                   <button type="button" class="sepidy-action-btn cyan m-btn-preview" data-flavor="clasico">VER ROLO</button>
-                  <div class="m-inline-stepper" aria-label="Cantidad de Carne Ahumada">
-                    <button type="button" class="m-step-btn" data-m-step="dec" data-flavor="clasico" aria-label="Quitar uno de Carne Ahumada">−</button>
-                    <span class="m-step-qty" id="mCardQtyClasico">0</span>
-                    <button type="button" class="m-step-btn plus" data-m-step="inc" data-flavor="clasico" aria-label="Sumar uno de Carne Ahumada">+</button>
+                  <div class="counter-float-host" data-counter-host="clasico">
+                    <div class="m-inline-stepper" aria-label="Cantidad de Carne Ahumada">
+                      <button type="button" class="m-step-btn" data-m-step="dec" data-flavor="clasico" aria-label="Quitar uno de Carne Ahumada">−</button>
+                      <span class="m-step-qty" id="mCardQtyClasico">0</span>
+                      <button type="button" class="m-step-btn plus" data-m-step="inc" data-flavor="clasico" aria-label="Sumar uno de Carne Ahumada">+</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -437,10 +443,12 @@
                 </div>
                 <div class="sepidy-dual-btns">
                   <button type="button" class="sepidy-action-btn cyan m-btn-preview" data-flavor="pollo">VER ROLO</button>
-                  <div class="m-inline-stepper" aria-label="Cantidad de Pollo a la Mostaza">
-                    <button type="button" class="m-step-btn" data-m-step="dec" data-flavor="pollo" aria-label="Quitar uno de Pollo">−</button>
-                    <span class="m-step-qty" id="mCardQtyPollo">0</span>
-                    <button type="button" class="m-step-btn plus" data-m-step="inc" data-flavor="pollo" aria-label="Sumar uno de Pollo">+</button>
+                  <div class="counter-float-host" data-counter-host="pollo">
+                    <div class="m-inline-stepper" aria-label="Cantidad de Pollo a la Mostaza">
+                      <button type="button" class="m-step-btn" data-m-step="dec" data-flavor="pollo" aria-label="Quitar uno de Pollo">−</button>
+                      <span class="m-step-qty" id="mCardQtyPollo">0</span>
+                      <button type="button" class="m-step-btn plus" data-m-step="inc" data-flavor="pollo" aria-label="Sumar uno de Pollo">+</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -725,6 +733,6 @@
     <img src="" alt="Flyer Rolo's Ampliado" id="dialogImg" style="width: 100%; border-radius: 14px; border: 2.5px solid var(--nb-black); display: block;">
   </dialog>
 
-  <script src="assets/js/main.js?v=20261117-10"></script>
+  <script src="assets/js/main.js?v=20261117-11"></script>
 </body>
 </html>

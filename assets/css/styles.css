@@ -1073,8 +1073,28 @@ body.is-menu-view {
   color: var(--diner-green-dark);
 }
 
-/* Stepper Neo-Brutalista [- qty +] */
+/* Stepper Neo-Brutalista [- qty +] + Contenedor de Floating +1 / -1 */
+.counter-float-host {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.sepidy-dual-btns .counter-float-host {
+  display: flex;
+  width: 100%;
+}
+
+.sepidy-dual-btns .m-inline-stepper {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
 .desktop-stepper {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -1084,6 +1104,70 @@ body.is-menu-view {
   padding: 0.2rem 0.35rem;
   box-shadow: 2.5px 2.5px 0 var(--nb-black);
   flex-shrink: 0;
+}
+
+.qty-float-badge {
+  position: absolute;
+  left: 50%;
+  top: 4px;
+  transform: translate3d(-50%, 0, 0);
+  z-index: 1;
+  pointer-events: none;
+  font-family: var(--font-condensed);
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  padding: 0.08rem 0.55rem;
+  border-radius: 999px;
+  border: 2px solid var(--nb-black);
+  box-shadow: 2px 2px 0 var(--nb-black);
+  white-space: nowrap;
+}
+
+.qty-float-badge.is-plus {
+  background: #16A34A;
+  color: #FFF;
+}
+
+.qty-float-badge.is-minus {
+  background: var(--diner-red);
+  color: #FFF;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes rolosCounterFloatUp {
+    0% {
+      opacity: 0;
+      transform: translate3d(-50%, 6px, 0);
+    }
+    24% {
+      opacity: 1;
+      transform: translate3d(-50%, -18px, 0);
+    }
+    100% {
+      opacity: 0;
+      transform: translate3d(-50%, -44px, 0);
+    }
+  }
+
+  .qty-float-badge {
+    animation: rolosCounterFloatUp 680ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes rolosTextPop {
+    from {
+      opacity: 0.32;
+      transform: translate3d(0, 5px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .is-text-popping {
+    animation: rolosTextPop 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
 }
 
 .stepper-btn {

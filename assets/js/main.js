@@ -29,6 +29,43 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   let currentFlavor = 'clasico';
+  let animationsArmed = false;
+
+  function setTextAnimated(el, nextValue, isHtml = false) {
+    if (!el) return;
+    const nextStr = String(nextValue);
+    const prevStr = isHtml ? el.innerHTML : el.textContent;
+    if (prevStr === nextStr) return;
+
+    if (isHtml) {
+      el.innerHTML = nextStr;
+    } else {
+      el.textContent = nextStr;
+    }
+
+    if (!animationsArmed || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    el.classList.remove('is-text-popping');
+    void el.offsetWidth;
+    el.classList.add('is-text-popping');
+    clearTimeout(el._popTimerId);
+    el._popTimerId = setTimeout(() => el.classList.remove('is-text-popping'), 300);
+  }
+
+  function spawnCounterDeltaBadge(flavorKey, delta) {
+    if (!delta || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.querySelectorAll(`.counter-float-host[data-counter-host="${flavorKey}"]`).forEach(host => {
+      if (host.offsetParent === null) return;
+      const badge = document.createElement('span');
+      badge.className = `qty-float-badge ${delta > 0 ? 'is-plus' : 'is-minus'}`;
+      badge.setAttribute('aria-hidden', 'true');
+      badge.textContent = delta > 0 ? '+1' : '-1';
+      host.appendChild(badge);
+      const cleanup = () => badge.remove();
+      badge.addEventListener('animationend', cleanup, { once: true });
+      setTimeout(cleanup, 750);
+    });
+  }
 
   // Estado compartido del carrito (arranca vacío en 0 para que el usuario elija)
   const cart = {
@@ -302,16 +339,14 @@ document.addEventListener('DOMContentLoaded', () => {
           <img src="${FLAVORS.pollo.img}" alt="Rolo Pollo">
         `;
       }
-      if (desktopShowcaseTitle) desktopShowcaseTitle.textContent = 'Carne Ahumada + Pollo a la Mostaza';
-      if (desktopShowcaseSpeech) desktopShowcaseSpeech.textContent = '"¡Combo mixto armado con los dos clásicos de Rolo\'s!"';
-      if (desktopShowcaseIngredients) {
-        desktopShowcaseIngredients.innerHTML = `
+      setTextAnimated(desktopShowcaseTitle, 'Carne Ahumada + Pollo a la Mostaza');
+      setTextAnimated(desktopShowcaseSpeech, '"¡Combo mixto armado con los dos clásicos de Rolo\'s!"');
+      setTextAnimated(desktopShowcaseIngredients, `
           <ul class="counter-ingredients-duo">
             <li><strong>Carne Ahumada (${cart.clasico}×):</strong> ${FLAVORS.clasico.ingredients}</li>
             <li><strong>Pollo Mostaza (${cart.pollo}×):</strong> ${FLAVORS.pollo.ingredients}</li>
           </ul>
-        `;
-      }
+        `, true);
     } else {
       const displayKey = selectedKeys.length === 1 ? selectedKeys[0] : currentFlavor;
       const f = FLAVORS[displayKey];
@@ -329,11 +364,9 @@ document.addEventListener('DOMContentLoaded', () => {
         desktopStickerContainer.classList.remove('is-duo');
         desktopStickerContainer.innerHTML = `<img src="${f.img}" alt="${f.shortName} Sticker" id="desktopStickerImg">`;
       }
-      if (desktopShowcaseTitle) desktopShowcaseTitle.textContent = f.name;
-      if (desktopShowcaseSpeech) desktopShowcaseSpeech.textContent = f.speech;
-      if (desktopShowcaseIngredients) {
-        desktopShowcaseIngredients.innerHTML = `<strong>340g reales:</strong> ${f.ingredients}`;
-      }
+      setTextAnimated(desktopShowcaseTitle, f.name);
+      setTextAnimated(desktopShowcaseSpeech, f.speech);
+      setTextAnimated(desktopShowcaseIngredients, `<strong>340g reales:</strong> ${f.ingredients}`, true);
     }
 
     desktopFlavorRows.forEach(row => {
@@ -354,12 +387,10 @@ document.addEventListener('DOMContentLoaded', () => {
     swapImageSmooth(mShowcaseImg, f.img);
     if (mHeaderAvatar1) mHeaderAvatar1.src = f.img;
     if (mLiveAvatarTop) mLiveAvatarTop.src = f.img;
-    if (mLiveHeaderName) mLiveHeaderName.textContent = f.shortName;
-    if (mLiveHeaderHandle) mLiveHeaderHandle.textContent = f.handle;
-    if (mShowcaseSpeech) mShowcaseSpeech.textContent = f.speech;
-    if (mShowcaseIngredients) {
-      mShowcaseIngredients.innerHTML = `<strong>Ingredientes (340g):</strong> ${f.ingredients}`;
-    }
+    setTextAnimated(mLiveHeaderName, f.shortName);
+    setTextAnimated(mLiveHeaderHandle, f.handle);
+    setTextAnimated(mShowcaseSpeech, f.speech);
+    setTextAnimated(mShowcaseIngredients, `<strong>Ingredientes (340g):</strong> ${f.ingredients}`, true);
 
     if (switchMobileToLote && window.innerWidth < 768) {
       activateMobileScreen('lote');
@@ -398,8 +429,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const itemsText = itemsArr.length ? itemsArr.join(' + ') : 'Elegí al menos 1 Rolo';
 
     // 1) Desktop UI
-    if (desktopQtyClasico) desktopQtyClasico.textContent = cart.clasico || 0;
-    if (desktopQtyPollo) desktopQtyPollo.textContent = cart.pollo || 0;
+    setTextAnimated(desktopQtyClasico, cart.clasico || 0);
+    setTextAnimated(desktopQtyPollo, cart.pollo || 0);
 
     renderDesktopShowcase();
 
@@ -414,52 +445,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (desktopPromoNudge) {
+      let nudgeHtml = '';
       if (totalUnits === 0) {
-        desktopPromoNudge.innerHTML = `<i class="fas fa-hand-point-up"></i><span>Sumá al menos 1 Rolo de Carne o Pollo arriba para preparar tu pedido.</span>`;
+        nudgeHtml = `<i class="fas fa-hand-point-up"></i><span>Sumá al menos 1 Rolo de Carne o Pollo arriba para preparar tu pedido.</span>`;
       } else if (totalUnits === 1 || totalUnits === 2) {
         const missing = 3 - totalUnits;
-        desktopPromoNudge.innerHTML = `<i class="fas fa-tag"></i><span>¡Estás llevando ${totalUnits} Rolo(s)! Sumá <strong>${missing} más</strong> y activás el <strong>Pack x3 a $13.500</strong> ($4.500 c/u).</span>`;
+        nudgeHtml = `<i class="fas fa-tag"></i><span>¡Estás llevando ${totalUnits} Rolo(s)! Sumá <strong>${missing} más</strong> y activás el <strong>Pack x3 a $13.500</strong> ($4.500 c/u).</span>`;
       } else if (totalUnits === 3 || totalUnits === 4) {
         const missing = 5 - totalUnits;
-        desktopPromoNudge.innerHTML = `<i class="fas fa-fire"></i><span>¡Descuento Trío activado! Sumá <strong>${missing} Rolo(s) más</strong> para pasar al <strong>Pack x5 a $21.000</strong> ($4.200 c/u).</span>`;
+        nudgeHtml = `<i class="fas fa-fire"></i><span>¡Descuento Trío activado! Sumá <strong>${missing} Rolo(s) más</strong> para pasar al <strong>Pack x5 a $21.000</strong> ($4.200 c/u).</span>`;
       } else {
-        desktopPromoNudge.innerHTML = `<i class="fas fa-bolt"></i><span>¡${pricing.label} activado! Estás ahorrando <strong>$${pricing.savings.toLocaleString('es-AR')}</strong> con precios de lanzamiento.</span>`;
+        nudgeHtml = `<i class="fas fa-bolt"></i><span>¡${pricing.label} activado! Estás ahorrando <strong>$${pricing.savings.toLocaleString('es-AR')}</strong> con precios de lanzamiento.</span>`;
       }
+      setTextAnimated(desktopPromoNudge, nudgeHtml, true);
     }
 
-    if (desktopTicketTitle) desktopTicketTitle.textContent = pricing.label;
-    if (desktopTicketItems) desktopTicketItems.textContent = itemsText;
-    if (desktopTicketOld) desktopTicketOld.textContent = `$${pricing.oldPrice.toLocaleString('es-AR')}`;
-    if (desktopTicketFinal) desktopTicketFinal.textContent = `$${pricing.finalPrice.toLocaleString('es-AR')}`;
-    if (dSubmitLabel) dSubmitLabel.textContent = `ENVIAR PEDIDO ($${pricing.finalPrice.toLocaleString('es-AR')})`;
+    setTextAnimated(desktopTicketTitle, pricing.label);
+    setTextAnimated(desktopTicketItems, itemsText);
+    setTextAnimated(desktopTicketOld, `$${pricing.oldPrice.toLocaleString('es-AR')}`);
+    setTextAnimated(desktopTicketFinal, `$${pricing.finalPrice.toLocaleString('es-AR')}`);
+    setTextAnimated(dSubmitLabel, `ENVIAR PEDIDO ($${pricing.finalPrice.toLocaleString('es-AR')})`);
 
     // 2) Mobile UI (Vista 1 combinada)
-    if (mCartBadgeHandle) mCartBadgeHandle.textContent = `${totalUnits} Rolo(s) cargados`;
-    if (mCardQtyClasico) mCardQtyClasico.textContent = cart.clasico || 0;
-    if (mCardQtyPollo) mCardQtyPollo.textContent = cart.pollo || 0;
-    if (mCartComboLabel) mCartComboLabel.textContent = pricing.label.toUpperCase();
-    if (mCartSummaryItems) mCartSummaryItems.textContent = itemsText;
-    if (mCartOldTotal) mCartOldTotal.textContent = `$${pricing.oldPrice.toLocaleString('es-AR')}`;
-    if (mCartFinalTotal) mCartFinalTotal.textContent = `$${pricing.finalPrice.toLocaleString('es-AR')}`;
-    if (mSubmitLabel) mSubmitLabel.textContent = `ENVIAR POR WHATSAPP ($${pricing.finalPrice.toLocaleString('es-AR')})`;
-    if (mStickyCheckoutText) mStickyCheckoutText.textContent = `CHECKOUT (${totalUnits}) · $${pricing.finalPrice.toLocaleString('es-AR')}`;
+    setTextAnimated(mCartBadgeHandle, `${totalUnits} Rolo(s) cargados`);
+    setTextAnimated(mCardQtyClasico, cart.clasico || 0);
+    setTextAnimated(mCardQtyPollo, cart.pollo || 0);
+    setTextAnimated(mCartComboLabel, pricing.label.toUpperCase());
+    setTextAnimated(mCartSummaryItems, itemsText);
+    setTextAnimated(mCartOldTotal, `$${pricing.oldPrice.toLocaleString('es-AR')}`);
+    setTextAnimated(mCartFinalTotal, `$${pricing.finalPrice.toLocaleString('es-AR')}`);
+    setTextAnimated(mSubmitLabel, `ENVIAR POR WHATSAPP ($${pricing.finalPrice.toLocaleString('es-AR')})`);
+    setTextAnimated(mStickyCheckoutText, `CHECKOUT (${totalUnits}) · $${pricing.finalPrice.toLocaleString('es-AR')}`);
 
     if (mPromoUpsellText && mBtnQuickUpsell) {
       const rem = totalUnits % 5;
       const targetFlavorName = FLAVORS[currentFlavor].shortName;
       if (totalUnits === 0) {
-        mPromoUpsellText.innerHTML = 'Sumá tu primer Rolo o armá un <strong>Pack x3 ($13.500)</strong>.';
+        setTextAnimated(mPromoUpsellText, 'Sumá tu primer Rolo o armá un <strong>Pack x3 ($13.500)</strong>.', true);
         mBtnQuickUpsell.hidden = false;
         mBtnQuickUpsell.textContent = '+1 ROLO';
         mBtnQuickUpsell.setAttribute('aria-label', `Sumar 1 Rolo de ${targetFlavorName}`);
       } else if (rem === 0) {
-        mPromoUpsellText.innerHTML = `¡<strong>${pricing.label}</strong> activo! Ya ahorrás <strong>$${pricing.savings.toLocaleString('es-AR')}</strong>.`;
+        setTextAnimated(mPromoUpsellText, `¡<strong>${pricing.label}</strong> activo! Ya ahorrás <strong>$${pricing.savings.toLocaleString('es-AR')}</strong>.`, true);
         mBtnQuickUpsell.hidden = true;
       } else if (rem <= 2) {
         const missing = 3 - rem;
         const unitNoun = missing === 1 ? '1 Rolo' : `${missing} Rolos`;
         const goalText = totalUnits < 3 ? 'el Pack x3 ($4.500 c/u)' : 'sumar otro Trío ($13.500)';
-        mPromoUpsellText.innerHTML = `¡Te falta${missing === 1 ? '' : 'n'} <strong>${unitNoun}</strong> para ${goalText}!`;
+        setTextAnimated(mPromoUpsellText, `¡Te falta${missing === 1 ? '' : 'n'} <strong>${unitNoun}</strong> para ${goalText}!`, true);
         mBtnQuickUpsell.hidden = false;
         mBtnQuickUpsell.textContent = '+1 ROLO';
         mBtnQuickUpsell.setAttribute('aria-label', `Sumar 1 Rolo de ${targetFlavorName} hacia el pack`);
@@ -467,7 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const missing = 5 - rem;
         const unitNoun = missing === 1 ? '1 Rolo' : `${missing} Rolos`;
         const nextPack = totalUnits + missing;
-        mPromoUpsellText.innerHTML = `¡Te falta${missing === 1 ? '' : 'n'} <strong>${unitNoun}</strong> para el <strong>Pack x${nextPack} ($4.200 c/u)</strong>!`;
+        setTextAnimated(mPromoUpsellText, `¡Te falta${missing === 1 ? '' : 'n'} <strong>${unitNoun}</strong> para el <strong>Pack x${nextPack} ($4.200 c/u)</strong>!`, true);
         mBtnQuickUpsell.hidden = false;
         mBtnQuickUpsell.textContent = '+1 ROLO';
         mBtnQuickUpsell.setAttribute('aria-label', `Sumar 1 Rolo de ${targetFlavorName} para Pack x${nextPack}`);
@@ -479,6 +512,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const current = cart[flavorKey] || 0;
     const next = Math.max(0, current + delta);
     cart[flavorKey] = next;
+    const actualDelta = next - current;
+    if (actualDelta !== 0) {
+      spawnCounterDeltaBadge(flavorKey, actualDelta);
+    }
     if (delta > 0) selectFlavor(flavorKey, false);
     renderAll();
   }
@@ -777,10 +814,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const h = String(Math.floor((totalMinutes % (60 * 24)) / 60)).padStart(2, '0');
     const m = String(totalMinutes % 60).padStart(2, '0');
 
-    if (cdDays) cdDays.textContent = d;
-    if (cdHours) cdHours.textContent = h;
-    if (cdMins) cdMins.textContent = m;
-    if (desktopCountdownText) desktopCountdownText.textContent = `${d}d : ${h}h : ${m}m`;
+    setTextAnimated(cdDays, d);
+    setTextAnimated(cdHours, h);
+    setTextAnimated(cdMins, m);
+    setTextAnimated(desktopCountdownText, `${d}d : ${h}h : ${m}m`);
   }
 
   updateCountdown();
@@ -821,4 +858,5 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAll();
   const initialRoute = resolveRouteFromHash(window.location.hash);
   applyViewState(initialRoute.view, initialRoute.scrollTarget, true);
+  animationsArmed = true;
 });
