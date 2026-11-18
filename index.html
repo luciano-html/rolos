@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/css/styles.css?v=20261117-9">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261117-10">
 </head>
 <body>
 
@@ -160,26 +160,26 @@
             <span>Armá tu Pedido en 2 Pasos</span>
           </div>
 
-          <!-- PASO 1: Elegí tu Pack Rápido -->
+          <!-- PASO 1: Tramos de Pack (indicador automático) -->
           <div class="desktop-step-heading">
-            <span class="step-badge-num">1</span> Elegí un pack rápido (o combiná abajo libremente)
+            <span class="step-badge-num">1</span> Elegí un pack rápido <span class="step-highlight-pill">(o combiná abajo libremente)</span>
           </div>
-          <div class="desktop-pack-pills" role="group" aria-label="Packs promocionales">
-            <button type="button" class="pack-pill-btn" data-desktop-pack="1">
+          <div class="desktop-pack-pills" aria-label="Tramos de precio por cantidad">
+            <div class="pack-pill-btn is-readonly" data-desktop-pack="1">
               <span class="pack-pill-tag">Para probar</span>
               <span class="pack-pill-title">1 ROLO</span>
               <span class="pack-pill-price"><span class="pack-pill-old">$6.000</span>$5.000</span>
-            </button>
-            <button type="button" class="pack-pill-btn" data-desktop-pack="3">
+            </div>
+            <div class="pack-pill-btn is-readonly" data-desktop-pack="3">
               <span class="pack-pill-tag">Ahorrás 10%</span>
               <span class="pack-pill-title">PACK X 3</span>
               <span class="pack-pill-price"><span class="pack-pill-old">$16.500</span>$13.500</span>
-            </button>
-            <button type="button" class="pack-pill-btn" data-desktop-pack="5">
+            </div>
+            <div class="pack-pill-btn is-readonly" data-desktop-pack="5">
               <span class="pack-pill-tag">⭐ Más elegido</span>
               <span class="pack-pill-title">PACK X 5</span>
               <span class="pack-pill-price"><span class="pack-pill-old">$25.000</span>$21.000</span>
-            </button>
+            </div>
           </div>
 
           <!-- PASO 2: Combiná los 2 Únicos Sabores de Rolo -->
@@ -240,16 +240,20 @@
           <span class="step-badge-num">3</span> Tu Rolo en vivo &amp; envío por WhatsApp
         </div>
 
-        <!-- Visor Dinámico de Mascota -->
+        <!-- Visor Dinámico de Mascota(s) Seleccionada(s) -->
         <div class="counter-mascot-stage">
-          <img src="assets/img/rolo_clasico.jpg" alt="Mascota Rolo Activa" id="desktopShowcaseImg">
+          <div class="counter-mascot-avatars" id="desktopShowcaseAvatars">
+            <div class="counter-avatar-card">
+              <img src="assets/img/rolo_clasico.jpg" alt="Mascota Rolo Clásico" id="desktopShowcaseImg">
+            </div>
+          </div>
           <div class="counter-flavor-title" id="desktopShowcaseTitle">Rolo Clásico (Carne Ahumada)</div>
           <div class="mascot-speech-pill" id="desktopShowcaseSpeech">
             "¡El rey indiscutido con carne ahumada y queso fundente!"
           </div>
-          <p class="counter-ingredients-text" id="desktopShowcaseIngredients">
+          <div class="counter-ingredients-text" id="desktopShowcaseIngredients">
             <strong>340g reales:</strong> 60% cerdo magro braseado + 40% cebolla caramelizada ahumada + 30g queso cremoso en masa casera de 110g.
-          </p>
+          </div>
         </div>
 
         <!-- Metodología del Negocio + Countdown del Lote -->
@@ -552,7 +556,7 @@
               </div>
             </div>
 
-            <p style="font-size: 0.78rem; font-weight: 700; color: #333; margin-bottom: 0.45rem;" id="mShowcaseIngredients">
+            <p style="font-size: 0.9rem; font-weight: 700; color: var(--nb-black); line-height: 1.48; margin-bottom: 0.55rem;" id="mShowcaseIngredients">
               <strong>Ingredientes (340g):</strong> 60% cerdo magro braseado + 40% cebolla caramelizada ahumada + 30g queso cremoso.
             </p>
 
@@ -721,6 +725,6 @@
     <img src="" alt="Flyer Rolo's Ampliado" id="dialogImg" style="width: 100%; border-radius: 14px; border: 2.5px solid var(--nb-black); display: block;">
   </dialog>
 
-  <script src="assets/js/main.js?v=20261117-6"></script>
+  <script src="assets/js/main.js?v=20261117-10"></script>
 </body>
 </html>

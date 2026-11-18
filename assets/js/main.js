@@ -254,8 +254,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // =========================================================================
   // 4. Visor Dinámico de Mascota (Sincronizado Desktop + Mobile)
   // =========================================================================
-  const desktopStickerImg = document.getElementById('desktopStickerImg');
-  const desktopShowcaseImg = document.getElementById('desktopShowcaseImg');
+  const desktopStickerContainer = document.querySelector('.menu-header-sticker');
+  const desktopShowcaseAvatars = document.getElementById('desktopShowcaseAvatars');
   const desktopShowcaseTitle = document.getElementById('desktopShowcaseTitle');
   const desktopShowcaseSpeech = document.getElementById('desktopShowcaseSpeech');
   const desktopShowcaseIngredients = document.getElementById('desktopShowcaseIngredients');
@@ -278,23 +278,77 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 130);
   }
 
+  function renderDesktopShowcase() {
+    const selectedKeys = ['clasico', 'pollo'].filter(k => (cart[k] || 0) > 0);
+    const total = getTotalUnits();
+
+    if (selectedKeys.length === 2) {
+      if (desktopShowcaseAvatars) {
+        desktopShowcaseAvatars.classList.add('is-duo');
+        desktopShowcaseAvatars.innerHTML = selectedKeys.map(k => {
+          const fl = FLAVORS[k];
+          return `
+            <div class="counter-avatar-card">
+              <span class="counter-avatar-qty">×${cart[k]}</span>
+              <img src="${fl.img}" alt="Mascota ${fl.shortName}">
+            </div>
+          `;
+        }).join('');
+      }
+      if (desktopStickerContainer) {
+        desktopStickerContainer.classList.add('is-duo');
+        desktopStickerContainer.innerHTML = `
+          <img src="${FLAVORS.clasico.img}" alt="Rolo Clásico">
+          <img src="${FLAVORS.pollo.img}" alt="Rolo Pollo">
+        `;
+      }
+      if (desktopShowcaseTitle) desktopShowcaseTitle.textContent = 'Carne Ahumada + Pollo a la Mostaza';
+      if (desktopShowcaseSpeech) desktopShowcaseSpeech.textContent = '"¡Combo mixto armado con los dos clásicos de Rolo\'s!"';
+      if (desktopShowcaseIngredients) {
+        desktopShowcaseIngredients.innerHTML = `
+          <ul class="counter-ingredients-duo">
+            <li><strong>Carne Ahumada (${cart.clasico}×):</strong> ${FLAVORS.clasico.ingredients}</li>
+            <li><strong>Pollo Mostaza (${cart.pollo}×):</strong> ${FLAVORS.pollo.ingredients}</li>
+          </ul>
+        `;
+      }
+    } else {
+      const displayKey = selectedKeys.length === 1 ? selectedKeys[0] : currentFlavor;
+      const f = FLAVORS[displayKey];
+      const qty = cart[displayKey] || 0;
+      if (desktopShowcaseAvatars) {
+        desktopShowcaseAvatars.classList.remove('is-duo');
+        desktopShowcaseAvatars.innerHTML = `
+          <div class="counter-avatar-card">
+            ${qty > 0 ? `<span class="counter-avatar-qty">×${qty}</span>` : ''}
+            <img src="${f.img}" alt="Mascota ${f.shortName}">
+          </div>
+        `;
+      }
+      if (desktopStickerContainer) {
+        desktopStickerContainer.classList.remove('is-duo');
+        desktopStickerContainer.innerHTML = `<img src="${f.img}" alt="${f.shortName} Sticker" id="desktopStickerImg">`;
+      }
+      if (desktopShowcaseTitle) desktopShowcaseTitle.textContent = f.name;
+      if (desktopShowcaseSpeech) desktopShowcaseSpeech.textContent = f.speech;
+      if (desktopShowcaseIngredients) {
+        desktopShowcaseIngredients.innerHTML = `<strong>340g reales:</strong> ${f.ingredients}`;
+      }
+    }
+
+    desktopFlavorRows.forEach(row => {
+      const key = row.dataset.desktopFlavor;
+      const isSelected = total > 0 ? (cart[key] || 0) > 0 : key === currentFlavor;
+      row.classList.toggle('active-flavor', isSelected);
+    });
+  }
+
   function selectFlavor(flavorKey, switchMobileToLote = false) {
     const f = FLAVORS[flavorKey];
     if (!f) return;
     currentFlavor = flavorKey;
 
-    // Desktop sync
-    swapImageSmooth(desktopShowcaseImg, f.img);
-    if (desktopStickerImg) desktopStickerImg.src = f.img;
-    if (desktopShowcaseTitle) desktopShowcaseTitle.textContent = f.name;
-    if (desktopShowcaseSpeech) desktopShowcaseSpeech.textContent = f.speech;
-    if (desktopShowcaseIngredients) {
-      desktopShowcaseIngredients.innerHTML = `<strong>340g reales:</strong> ${f.ingredients}`;
-    }
-
-    desktopFlavorRows.forEach(row => {
-      row.classList.toggle('active-flavor', row.dataset.desktopFlavor === flavorKey);
-    });
+    renderDesktopShowcase();
 
     // Mobile sync
     swapImageSmooth(mShowcaseImg, f.img);
@@ -347,9 +401,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (desktopQtyClasico) desktopQtyClasico.textContent = cart.clasico || 0;
     if (desktopQtyPollo) desktopQtyPollo.textContent = cart.pollo || 0;
 
-    desktopPackPills.forEach(btn => {
-      const packSize = parseInt(btn.dataset.desktopPack, 10);
-      btn.classList.toggle('active', totalUnits === packSize);
+    renderDesktopShowcase();
+
+    let activePackTier = 0;
+    if (totalUnits >= 5) activePackTier = 5;
+    else if (totalUnits >= 3) activePackTier = 3;
+    else if (totalUnits >= 1) activePackTier = 1;
+
+    desktopPackPills.forEach(pill => {
+      const packSize = parseInt(pill.dataset.desktopPack, 10);
+      pill.classList.toggle('active', packSize === activePackTier);
     });
 
     if (desktopPromoNudge) {
@@ -422,25 +483,8 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAll();
   }
 
-  // Eventos Desktop: Paso 1 Pack Pills
-  desktopPackPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      const size = parseInt(pill.dataset.desktopPack, 10);
-      if (size === 1) {
-        cart.clasico = 1;
-        cart.pollo = 0;
-      } else if (size === 3) {
-        cart.clasico = 2;
-        cart.pollo = 1;
-      } else {
-        cart.clasico = 3;
-        cart.pollo = 2;
-      }
-      renderAll();
-    });
-  });
-
   // Eventos Desktop: Paso 2 Filas & Steppers [- / +]
+  // (Paso 1 Pack Pills son solo indicadores automáticos por tramo)
   desktopFlavorRows.forEach(row => {
     row.addEventListener('click', (e) => {
       if (e.target.closest('.stepper-btn')) return;
