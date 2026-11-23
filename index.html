@@ -86,7 +86,7 @@
         </p>
       </div>
 
-      <!-- 2. Botones de acción arriba de la info (máxima prioridad en mobile y desktop) -->
+      <!-- 2. Acción única directa al menú -->
       <div class="hero-action-row view-stagger-1">
         <button type="button" class="nb-btn nb-btn-cta-hero" id="btnHeroStartOrder" data-view-target="menu">
           <i class="fas fa-shopping-bag" aria-hidden="true"></i>
@@ -94,17 +94,6 @@
           <span class="cta-price-tag">Desde $5.000 c/u</span>
           <i class="fas fa-arrow-right" aria-hidden="true"></i>
         </button>
-
-        <div class="hero-subactions-pair">
-          <button type="button" class="nb-btn nb-btn-subaction cyan" id="btnHeroGoFlyers" data-view-target="afiches">
-            <i class="fas fa-images" aria-hidden="true"></i>
-            <span>VER AFICHES</span>
-          </button>
-          <a href="#como-calentar" class="nb-btn nb-btn-subaction cream" data-view-target="menu" data-scroll-target="como-calentar">
-            <i class="fas fa-fire" aria-hidden="true"></i>
-            <span>CÓMO CALENTAR</span>
-          </a>
-        </div>
       </div>
     </section>
 
@@ -152,30 +141,9 @@
           </div>
 
           <!-- PASO 1: Tramos de Pack (indicador automático) -->
+          <!-- PASO 1: Combiná los 2 Únicos Sabores de Rolo -->
           <div class="desktop-step-heading">
-            <span class="step-badge-num">1</span> Elegí un pack rápido <span class="step-highlight-pill">(o combiná abajo libremente)</span>
-          </div>
-          <div class="desktop-pack-pills" aria-label="Tramos de precio por cantidad">
-            <div class="pack-pill-btn is-readonly" data-desktop-pack="1">
-              <span class="pack-pill-tag">Precio unidad</span>
-              <span class="pack-pill-title">1 ROLO</span>
-              <span class="pack-pill-price">$6.000</span>
-            </div>
-            <div class="pack-pill-btn is-readonly" data-desktop-pack="3">
-              <span class="pack-pill-tag">Trío · $5.500 c/u</span>
-              <span class="pack-pill-title">PACK X 3</span>
-              <span class="pack-pill-price"><span class="pack-pill-old">$18.000</span>$16.500</span>
-            </div>
-            <div class="pack-pill-btn is-readonly" data-desktop-pack="5">
-              <span class="pack-pill-tag"><i class="fas fa-star" aria-hidden="true"></i> $5.000 c/u</span>
-              <span class="pack-pill-title">PACK X 5</span>
-              <span class="pack-pill-price"><span class="pack-pill-old">$30.000</span>$25.000</span>
-            </div>
-          </div>
-
-          <!-- PASO 2: Combiná los 2 Únicos Sabores de Rolo -->
-          <div class="desktop-step-heading">
-            <span class="step-badge-num">2</span> Combiná cuántos de cada sabor querés
+            <span class="step-badge-num">1</span> Combiná cuántos de cada sabor querés
           </div>
           <ul class="diner-menu-list">
             <!-- Sabor 1: Carne Ahumada -->
@@ -219,6 +187,25 @@
             </li>
           </ul>
 
+          <!-- Tramos de Pack (indicador automático) -->
+          <div class="desktop-pack-pills" aria-label="Tramos de precio por cantidad">
+            <div class="pack-pill-btn is-readonly" data-desktop-pack="1">
+              <span class="pack-pill-tag">Precio unidad</span>
+              <span class="pack-pill-title">1 ROLO</span>
+              <span class="pack-pill-price">$6.000</span>
+            </div>
+            <div class="pack-pill-btn is-readonly" data-desktop-pack="3">
+              <span class="pack-pill-tag">Trío · $5.500 c/u</span>
+              <span class="pack-pill-title">PACK X 3</span>
+              <span class="pack-pill-price"><span class="pack-pill-old">$18.000</span>$16.500</span>
+            </div>
+            <div class="pack-pill-btn is-readonly" data-desktop-pack="5">
+              <span class="pack-pill-tag"><i class="fas fa-star" aria-hidden="true"></i> $5.000 c/u</span>
+              <span class="pack-pill-title">PACK X 5</span>
+              <span class="pack-pill-price"><span class="pack-pill-old">$30.000</span>$25.000</span>
+            </div>
+          </div>
+
           <!-- Aviso Inteligente de Descuento en Vivo -->
           <div class="desktop-promo-nudge" id="desktopPromoNudge" role="status" aria-live="polite">
             <i class="fas fa-hand-point-up"></i>
@@ -230,7 +217,7 @@
       <!-- COLUMNA DERECHA (STICKY): VISOR DE MASCOTA ROLO + CHECKOUT WHATSAPP -->
       <aside class="desktop-counter-panel" aria-labelledby="desktopCounterHeading">
         <div class="desktop-step-heading" id="desktopCounterHeading" style="margin-bottom: 0.65rem;">
-          <span class="step-badge-num">3</span> Tu Rolo en vivo &amp; envío por WhatsApp
+          <span class="step-badge-num">2</span> Tu Rolo en vivo &amp; envío por WhatsApp
         </div>
 
         <!-- Visor Dinámico de Mascota(s) Seleccionada(s) -->
@@ -354,27 +341,6 @@
               </button>
             </div>
 
-            <!-- Banner simple de descuentos por cantidad -->
-            <div class="m-discount-banner" aria-label="Descuentos por cantidad">
-              <div class="m-discount-title">Llevando más, pagás menos</div>
-              <div class="m-discount-tiers">
-                <div class="m-tier-pill" data-mobile-pack="1">
-                  <span class="m-tier-qty">1 Rolo</span>
-                  <strong class="m-tier-price">$6.000</strong>
-                </div>
-                <div class="m-tier-pill" data-mobile-pack="3">
-                  <span class="m-tier-qty">Pack x3</span>
-                  <strong class="m-tier-price">$16.500</strong>
-                  <small>$5.500 c/u</small>
-                </div>
-                <div class="m-tier-pill" data-mobile-pack="5">
-                  <span class="m-tier-qty">Pack x5</span>
-                  <strong class="m-tier-price">$25.000</strong>
-                  <small>$5.000 c/u</small>
-                </div>
-              </div>
-            </div>
-
             <div class="sepidy-inner-sheet">
               <div id="mCatalogPanel">
                 <!-- Tarjeta 1: Carne Ahumada -->
@@ -417,6 +383,27 @@
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Banner simple de descuentos por cantidad -->
+            <div class="m-discount-banner" aria-label="Descuentos por cantidad">
+              <div class="m-discount-title">Llevando más, pagás menos</div>
+              <div class="m-discount-tiers">
+                <div class="m-tier-pill" data-mobile-pack="1">
+                  <span class="m-tier-qty">1 Rolo</span>
+                  <strong class="m-tier-price">$6.000</strong>
+                </div>
+                <div class="m-tier-pill" data-mobile-pack="3">
+                  <span class="m-tier-qty">Pack x3</span>
+                  <strong class="m-tier-price">$16.500</strong>
+                  <small>$5.500 c/u</small>
+                </div>
+                <div class="m-tier-pill" data-mobile-pack="5">
+                  <span class="m-tier-qty">Pack x5</span>
+                  <strong class="m-tier-price">$25.000</strong>
+                  <small>$5.000 c/u</small>
                 </div>
               </div>
             </div>
