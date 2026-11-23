@@ -71,7 +71,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 28px 0 32px;
+      padding: 20px 0 24px;
     }
 
     /* Marco interior estilo póster vintage 70s */
@@ -96,11 +96,11 @@
     }
 
     .header-logo img {
-      height: 145px;
+      height: 122px;
       width: auto;
       object-fit: contain;
       mix-blend-mode: multiply;
-      filter: drop-shadow(0 4px 0 rgba(38, 23, 18, 0.18));
+      filter: contrast(1.08) brightness(1.03);
     }
 
     /* 2. CINTA NARANJA DE LANZAMIENTO */
@@ -129,7 +129,7 @@
 
     /* 3. TABLA DE 3 PRECIOS */
     .pricing-container {
-      margin: 22px 48px 10px;
+      margin: 14px 48px 6px;
       position: relative;
       z-index: 3;
     }
@@ -168,15 +168,11 @@
 
     .qty-label {
       font-family: 'Bowlby One SC', cursive;
-      font-size: 2.05rem;
-      color: var(--cream-light);
-      text-shadow: 
-        -2px -2px 0 var(--espresso),
-         2px -2px 0 var(--espresso),
-        -2px  2px 0 var(--espresso),
-         3px  3px 0 var(--espresso);
+      font-size: 1.95rem;
+      color: var(--espresso);
+      text-shadow: 0 2px 0 rgba(255, 249, 237, 0.6);
       line-height: 1.05;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .main-price {
@@ -261,28 +257,30 @@
     .schedule-and-mascot {
       position: relative;
       margin: 8px 48px 6px;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 255px;
+      gap: 20px;
       align-items: center;
       z-index: 3;
     }
 
     .schedule-card {
-      width: 74%;
+      width: 100%;
       background: #4A2518;
       border: 4px solid var(--espresso);
       border-radius: 24px;
       box-shadow: 8px 8px 0 var(--espresso);
-      padding: 24px 30px;
+      padding: 22px 26px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 14px;
       color: var(--cream-light);
     }
 
     .schedule-col h3 {
       font-family: 'Bowlby One SC', cursive;
-      font-size: 2.05rem;
+      font-size: 1.65rem;
       color: var(--mustard-light);
       text-shadow: 3px 3px 0 var(--espresso);
       line-height: 1.1;
@@ -291,14 +289,15 @@
     }
 
     .schedule-col p {
-      font-size: 1.7rem;
+      font-size: 1.3rem;
       font-weight: 800;
       color: var(--cream-light);
       text-shadow: 2px 2px 0 var(--espresso);
+      white-space: nowrap;
     }
 
     .schedule-arrow {
-      font-size: 3.4rem;
+      font-size: 2.6rem;
       color: var(--mustard-light);
       text-shadow: 3px 3px 0 var(--espresso);
       line-height: 1;
@@ -307,10 +306,8 @@
 
     /* Mascota Rolo completa y sin recortes */
     .mascot-wrapper {
-      position: absolute;
-      right: -12px;
-      bottom: -95px;
-      width: 310px;
+      position: relative;
+      width: 100%;
       z-index: 5;
       pointer-events: none;
     }
@@ -334,8 +331,8 @@
     /* 6. CIERRE SLOGAN */
     .footer-slogan {
       text-align: left;
-      padding: 8px 56px 6px;
-      width: 75%;
+      padding: 6px 48px 4px;
+      width: 100%;
       position: relative;
       z-index: 3;
     }
@@ -349,7 +346,7 @@
 
     .footer-slogan h1 {
       font-family: 'Bowlby One SC', cursive;
-      font-size: 3.1rem;
+      font-size: 2.75rem;
       color: var(--terracotta);
       text-shadow: 
         -2px -2px 0 var(--espresso),
@@ -364,7 +361,7 @@
 <body>
 
   <div class="toolbar">
-    <span>✨ Editor en Vivo:</span> Hacé clic en cualquier texto o fecha del flyer para editarlo antes de capturar pantalla.
+    <span>Editor en Vivo:</span> Hacé clic en cualquier texto o fecha del flyer para editarlo antes de capturar pantalla.
   </div>
 
   <div class="flyer-canvas" contenteditable="true" spellcheck="false">
@@ -375,7 +372,7 @@
 
     <!-- 2. Cinta de lanzamiento -->
     <div class="promo-ribbon">
-      <h2>🔥 EL PRECIO DE LANZAMIENTO SE MANTIENE POR TODO OCTUBRE 🔥</h2>
+      <h2>PACKS SEMANALES CON DESCUENTO POR CANTIDAD</h2>
     </div>
 
     <!-- 3. Precios en 3 columnas -->
@@ -383,22 +380,22 @@
       <div class="pricing-box">
         <div class="price-col">
           <div class="qty-label">1 Rolo =</div>
-          <div class="main-price">$5.000</div>
+          <div class="main-price">$6.000</div>
         </div>
         <div class="price-col">
           <div class="qty-label">3 Rolos =</div>
-          <div class="main-price">$13.500</div>
+          <div class="main-price">$16.500</div>
         </div>
         <div class="price-col">
           <div class="qty-label">5 Rolos =</div>
-          <div class="main-price">$21.000</div>
+          <div class="main-price">$25.000</div>
         </div>
       </div>
 
       <div class="old-prices-row">
-        <div><span class="old-price">$6.000</span></div>
-        <div><span class="old-price">$16.500</span></div>
-        <div><span class="old-price">$25.000</span></div>
+        <div><span style="font-weight: 800; font-size: 1.05rem; color: var(--espresso);">Precio unidad</span></div>
+        <div><span class="old-price">$18.000</span></div>
+        <div><span class="old-price">$30.000</span></div>
       </div>
     </div>
 
@@ -406,7 +403,7 @@
     <div class="flavors-banner">
       <div class="flavor-hero">ROLO’S = CARNE AHUMADA Y QUESO</div>
       <div class="flavor-upcoming">
-        🍗 PRÓXIMAMENTE = <strong>POLLO A LA MOSTAZA CON VERDEO</strong>
+        TAMBIÉN DISPONIBLE = <strong>POLLO A LA MOSTAZA CON VERDEO</strong>
       </div>
     </div>
 

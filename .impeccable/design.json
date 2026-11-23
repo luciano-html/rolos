@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-23T19:10:00-03:00",
+  "title": "Design System: Rolo's",
+  "extensions": {
+    "colorMeta": {
+      "diner-red": {
+        "role": "primary",
+        "displayName": "Rojo Diner Display",
+        "canonical": "#EA4925",
+        "tonalRamp": ["#3B0D04", "#661808", "#94250D", "#BE3215", "#EA4925", "#F37758", "#F9A994", "#FDE0D8"]
+      },
+      "diner-red-text": {
+        "role": "primary",
+        "displayName": "Rojo Diner Accesible",
+        "canonical": "#B82E10",
+        "tonalRamp": ["#330B03", "#5A1506", "#87200A", "#B82E10", "#D94B2A", "#ED7E62", "#F7B4A2", "#FCE3DC"]
+      },
+      "diner-red-dark": {
+        "role": "primary",
+        "displayName": "Rojo Diner Profundo",
+        "canonical": "#9E260C",
+        "tonalRamp": ["#2A0802", "#4E1105", "#761B08", "#9E260C", "#C74325", "#E2765C", "#F2AFA0", "#FBE0DA"]
+      },
+      "diner-green": {
+        "role": "secondary",
+        "displayName": "Verde Diner",
+        "canonical": "#1B432C",
+        "tonalRamp": ["#091810", "#112C1D", "#1B432C", "#2A6343", "#40865F", "#6CAB87", "#A4CEB6", "#DCEEE3"]
+      },
+      "diner-green-dark": {
+        "role": "secondary",
+        "displayName": "Verde Bosque Oscuro",
+        "canonical": "#112C1D",
+        "tonalRamp": ["#07130C", "#112C1D", "#1E4730", "#306949", "#4C8C68", "#76AF8F", "#ABD1BC", "#DFEFE6"]
+      },
+      "diner-cream": {
+        "role": "neutral",
+        "displayName": "Crema Diner",
+        "canonical": "#F6EEDB",
+        "tonalRamp": ["#2E281B", "#524834", "#796C52", "#A39476", "#C9BC9F", "#E3D9C3", "#F6EEDB", "#FCF9F2"]
+      },
+      "diner-cream-light": {
+        "role": "neutral",
+        "displayName": "Crema Clara",
+        "canonical": "#FFFDF7",
+        "tonalRamp": ["#302D24", "#575243", "#807966", "#ABA38F", "#CFC9B8", "#E8E4D8", "#F7F4EC", "#FFFDF7"]
+      },
+      "diner-booth-yellow": {
+        "role": "tertiary",
+        "displayName": "Amarillo Booth",
+        "canonical": "#F5A618",
+        "tonalRamp": ["#3A2402", "#694305", "#9B640A", "#CC8610", "#F5A618", "#F8BE53", "#FBD892", "#FEF0D2"]
+      },
+      "nb-black": {
+        "role": "neutral",
+        "displayName": "Tinta Neo-Brutalista",
+        "canonical": "#121212",
+        "tonalRamp": ["#080808", "#121212", "#2B2B2B", "#4A4A4A", "#6E6E6E", "#999999", "#CCCCCC", "#F0F0F0"]
+      },
+      "nb-card-bg": {
+        "role": "neutral",
+        "displayName": "Papel Tarjeta",
+        "canonical": "#FAF4EE",
+        "tonalRamp": ["#2F2924", "#544A42", "#7C6F65", "#A6988D", "#CCBFAE", "#E5DDD5", "#FAF4EE", "#FDFBF9"]
+      },
+      "nb-mustard-bg": {
+        "role": "secondary",
+        "displayName": "Mostaza App Mobile",
+        "canonical": "#FFC700",
+        "tonalRamp": ["#3D2F00", "#6E5500", "#A37E00", "#D6A600", "#FFC700", "#FFD647", "#FFE68F", "#FFF5D1"]
+      },
+      "nb-yellow-btn": {
+        "role": "secondary",
+        "displayName": "Amarillo Botón Neo-Brutalista",
+        "canonical": "#FFE135",
+        "tonalRamp": ["#3D3402", "#6E5F06", "#A38D0B", "#D6BB15", "#FFE135", "#FFEA6E", "#FFF2A8", "#FFFAE0"]
+      },
+      "nb-cyan-btn": {
+        "role": "tertiary",
+        "displayName": "Cian Táctil",
+        "canonical": "#7AD4EB",
+        "tonalRamp": ["#0B2D36", "#165060", "#25778D", "#44A2BC", "#7AD4EB", "#9FE1F1", "#C6EEF7", "#E8F8FC"]
+      },
+      "nb-lime": {
+        "role": "tertiary",
+        "displayName": "Lima Estado / Ahorro",
+        "canonical": "#D2F065",
+        "tonalRamp": ["#263006", "#46580E", "#6B8619", "#98BC2E", "#D2F065", "#E0F58F", "#EEF9BF", "#F8FDE6"]
+      },
+      "nb-red-accent": {
+        "role": "primary",
+        "displayName": "Rojo Alerta",
+        "canonical": "#D93829",
+        "tonalRamp": ["#380A06", "#64150E", "#932217", "#BE2E20", "#D93829", "#E86C60", "#F4A49C", "#FCE0DD"]
+      },
+      "rolo-terracotta": {
+        "role": "tertiary",
+        "displayName": "Terracota Rolo 70s",
+        "canonical": "#8B2C1A",
+        "tonalRamp": ["#290B06", "#4B160C", "#6E2214", "#8B2C1A", "#B24934", "#D27966", "#E9B0A4", "#F8E0DB"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display Condensada", "purpose": "Titulares de portada, encabezado MENU y secciones principales." },
+      "retro": { "displayName": "Wordmark Retro 70s", "purpose": "Marca ROLO'S en header, cortina y footer." },
+      "script": { "displayName": "Acento Manuscrito", "purpose": "Separador editorial de la carta desktop." },
+      "body": { "displayName": "Cuerpo UI", "purpose": "Descripciones de ingredientes, pasos y campos de formulario." },
+      "label": { "displayName": "Etiquetas y Badges", "purpose": "Etiquetas de formulario, tramos de pack y dock móvil." }
+    },
+    "shadows": [
+      { "name": "shadow-nb-sm", "value": "3px 3px 0px #121212", "purpose": "Chips, inputs, steppers y botones secundarios." },
+      { "name": "shadow-nb", "value": "5px 5px 0px #121212", "purpose": "CTA principal, tarjetas informativas y tarjetas de afiches." },
+      { "name": "shadow-nb-lg", "value": "8px 8px 0px #121212", "purpose": "Hover de afiches, hoja de menú desktop y modal dialog." }
+    ],
+    "motion": [
+      { "name": "ease-out-expo", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Asentamiento de vistas, badges flotantes +1/-1 y transición de mascotas." },
+      { "name": "curtain-sweep", "value": "380ms cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Cortina roja full-screen ágil al navegar entre vistas SPA (desactivada en reduced-motion)." },
+      { "name": "press-snap", "value": "120ms ease", "purpose": "Respuesta mecánica de desplazamiento y sombra en botones." }
+    ],
+    "breakpoints": [
+      { "name": "desktop-flow", "value": "768px" },
+      { "name": "navbar-full", "value": "860px" },
+      { "name": "footer-3col", "value": "900px" },
+      { "name": "kiosk-stack", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Hero Primary CTA",
+      "kind": "button",
+      "refersTo": "button-hero",
+      "description": "Botón principal de portada que conduce al menú con etiqueta de precio mínimo.",
+      "html": "<button type=\"button\" class=\"ds-btn-hero\"><span>IR AL MENÚ Y PEDIR</span><span class=\"ds-btn-hero-tag\">DESDE $4.200 C/U</span><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button>",
+      "css": ".ds-btn-hero { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 56px; padding: 0.85rem 1.25rem; background: var(--nb-yellow-btn, #FFE135); color: var(--nb-black, #121212); border: 3px solid var(--nb-black, #121212); border-radius: 16px; box-shadow: 5px 5px 0 var(--nb-black, #121212); font-family: var(--font-body, sans-serif); font-weight: 900; font-size: 1rem; text-transform: uppercase; cursor: pointer; transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease; } .ds-btn-hero:hover { background: #FFD400; transform: translate(2.5px, 2.5px); box-shadow: 2.5px 2.5px 0 var(--nb-black, #121212); } .ds-btn-hero:focus-visible { outline: 3px solid var(--diner-red-text, #B82E10); outline-offset: 3px; } .ds-btn-hero-tag { background: var(--diner-red-text, #B82E10); color: var(--diner-cream-light, #FFFDF7); border: 2px solid var(--nb-black, #121212); border-radius: 999px; padding: 0.15rem 0.55rem; font-size: 0.78rem; font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Red Action Pill CTA",
+      "kind": "button",
+      "refersTo": "button-primary-red",
+      "description": "Botón rojo de alto contraste para envío de pedido por WhatsApp y CTA de navegación.",
+      "html": "<button type=\"button\" class=\"ds-btn-red\"><span>ENVIAR PEDIDO ($13.500)</span><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button>",
+      "css": ".ds-btn-red { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 46px; padding: 0.65rem 1.2rem; background: var(--diner-red-text, #B82E10); color: var(--diner-cream-light, #FFFDF7); border: 2.5px solid var(--nb-black, #121212); border-radius: 999px; box-shadow: 3.5px 3.5px 0 var(--nb-black, #121212); font-family: var(--font-body, sans-serif); font-weight: 900; font-size: 0.88rem; font-variant-numeric: tabular-nums; text-transform: uppercase; cursor: pointer; transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease; } .ds-btn-red:hover { background: var(--diner-red-dark, #9E260C); transform: translate(2px, 2px); box-shadow: 1.5px 1.5px 0 var(--nb-black, #121212); } .ds-btn-red:focus-visible { outline: 3px solid var(--nb-yellow-btn, #FFE135); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Cyan Action",
+      "kind": "button",
+      "refersTo": "button-secondary-cyan",
+      "description": "Botón secundario cian para abrir ficha de mascota (Ver Rolo) o galería de afiches.",
+      "html": "<button type=\"button\" class=\"ds-btn-cyan\">VER ROLO</button>",
+      "css": ".ds-btn-cyan { min-height: 44px; padding: 0.5rem 0.9rem; background: var(--nb-cyan-btn, #7AD4EB); color: var(--nb-black, #121212); border: 2px solid var(--nb-black, #121212); border-radius: 10px; box-shadow: 2.5px 2.5px 0 var(--nb-black, #121212); font-family: var(--font-body, sans-serif); font-size: 0.8rem; font-weight: 900; text-transform: uppercase; cursor: pointer; transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease; } .ds-btn-cyan:hover { background: #63CBE5; transform: translate(1.5px, 1.5px); box-shadow: 1px 1px 0 var(--nb-black, #121212); } .ds-btn-cyan:focus-visible { outline: 3px solid var(--diner-red-text, #B82E10); outline-offset: 2px; }"
+    },
+    {
+      "name": "Inline Flavor Stepper",
+      "kind": "custom",
+      "refersTo": "button-hero",
+      "description": "Selector compacto de cantidad por sabor con botones táctiles y cifras tabulares.",
+      "html": "<div class=\"ds-stepper\"><button type=\"button\" class=\"ds-step-btn\" aria-label=\"Quitar uno\">−</button><span class=\"ds-step-qty\">3</span><button type=\"button\" class=\"ds-step-btn ds-step-plus\" aria-label=\"Sumar uno\">+</button></div>",
+      "css": ".ds-stepper { display: inline-flex; align-items: center; gap: 0.45rem; background: #FFFDF9; border: 2px solid var(--nb-black, #121212); border-radius: 10px; box-shadow: 2.5px 2.5px 0 var(--nb-black, #121212); padding: 3px; } .ds-step-btn { width: 40px; height: 40px; border-radius: 8px; border: 1.5px solid var(--nb-black, #121212); background: #FFFFFF; color: var(--nb-black, #121212); font-size: 1.1rem; font-weight: 900; cursor: pointer; transition: transform 0.1s ease; } .ds-step-plus { background: var(--nb-yellow-btn, #FFE135); } .ds-step-btn:active { transform: scale(0.94); } .ds-step-btn:focus-visible { outline: 3px solid var(--diner-red-text, #B82E10); outline-offset: 1px; } .ds-step-qty { font-family: var(--font-condensed, sans-serif); font-size: 1.3rem; min-width: 26px; text-align: center; font-variant-numeric: tabular-nums; color: var(--nb-black, #121212); }"
+    },
+    {
+      "name": "Pack Discount Indicator",
+      "kind": "chip",
+      "refersTo": "chip-lime",
+      "description": "Indicador automático de tramo de ahorro iluminado según las unidades del carrito.",
+      "html": "<div class=\"ds-pack-pill ds-pack-active\"><span class=\"ds-pack-tag\">AHORRÁS 10%</span><strong class=\"ds-pack-title\">PACK X 3</strong><span class=\"ds-pack-price\">$13.500</span></div>",
+      "css": ".ds-pack-pill { display: inline-flex; flex-direction: column; align-items: center; gap: 0.15rem; padding: 0.65rem 0.9rem; background: var(--nb-yellow-btn, #FFE135); border: 2.5px solid var(--nb-black, #121212); border-radius: 14px; box-shadow: 3px 3px 0 var(--nb-black, #121212); text-align: center; } .ds-pack-tag { background: var(--nb-lime, #D2F065); border: 1.5px solid var(--nb-black, #121212); border-radius: 999px; padding: 0.1rem 0.5rem; font-size: 0.75rem; font-weight: 900; color: var(--nb-black, #121212); } .ds-pack-title { font-family: var(--font-condensed, sans-serif); font-size: 1.25rem; color: var(--nb-black, #121212); } .ds-pack-price { font-weight: 900; font-size: 0.95rem; color: var(--diner-red-text, #B82E10); font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Checkout Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Campo de texto accesible con foco de alto contraste y soporte sin zoom en iOS.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-label\">TU NOMBRE Y APELLIDO *</span><input type=\"text\" class=\"ds-input\" placeholder=\"Ej: Lucas Gómez\" /></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 0.25rem; font-family: var(--font-body, sans-serif); } .ds-label { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; color: var(--nb-black, #121212); } .ds-input { min-height: 48px; padding: 0.6rem 0.8rem; background: #FFFFFF; color: var(--nb-black, #121212); border: 2px solid var(--nb-black, #121212); border-radius: 10px; box-shadow: 2.5px 2.5px 0 var(--nb-black, #121212); font-size: 1rem; font-weight: 600; } .ds-input:focus-visible { outline: 3px solid var(--diner-red-text, #B82E10); outline-offset: 2px; }"
+    },
+    {
+      "name": "Mobile Sticky Dock",
+      "kind": "nav",
+      "refersTo": "card-sheet",
+      "description": "Barra inferior flotante exclusiva de móvil con pestañas táctiles y acceso directo al checkout.",
+      "html": "<nav class=\"ds-dock\" aria-label=\"Navegación móvil\"><button type=\"button\" class=\"ds-dock-tab ds-dock-tab-active\">Pedido</button><button type=\"button\" class=\"ds-dock-tab\">Ver Rolo</button><button type=\"button\" class=\"ds-dock-cta\">FINALIZAR (3) · $13.500</button></nav>",
+      "css": ".ds-dock { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.4rem 0.55rem; background: var(--nb-card-bg, #FAF4EE); border: 3px solid var(--nb-black, #121212); border-radius: 999px; box-shadow: 4px 4px 0 var(--nb-black, #121212); font-family: var(--font-body, sans-serif); } .ds-dock-tab { min-height: 44px; padding: 0.25rem 0.75rem; background: transparent; border: none; border-radius: 999px; font-size: 0.76rem; font-weight: 800; color: var(--nb-black, #121212); cursor: pointer; } .ds-dock-tab-active { background: var(--nb-lime, #D2F065); } .ds-dock-cta { min-height: 44px; padding: 0.5rem 0.9rem; background: var(--diner-red-text, #B82E10); color: var(--diner-cream-light, #FFFDF7); border: 2px solid var(--nb-black, #121212); border-radius: 999px; box-shadow: 2.5px 2.5px 0 var(--nb-black, #121212); font-size: 0.76rem; font-weight: 900; font-variant-numeric: tabular-nums; cursor: pointer; } .ds-dock-tab:focus-visible, .ds-dock-cta:focus-visible { outline: 3px solid var(--diner-red-text, #B82E10); outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Mostrador Diner 70s & App Táctil Neo-Brutalista",
+    "overview": "El sistema visual de Rolo's combina dos registros complementarios unidos por tinta negra sólida (#121212), bordes marcados y tipografía de afiche retro: en escritorio (>= 768px) despliega la calidez editorial de una carta diner inspirada en Bitesized —fondo crema cálido, rojo tomate vibrante, verde bosque y papel de carta con doble marco— mientras que en móvil (< 768px) pasa a una interfaz neo-brutalista directa, vibrante y táctil sobre mostaza punteada, amarillo eléctrico, cian y lima pensada para pedir en segundos con el pulgar.",
+    "keyCharacteristics": [
+      "Bordes negros sólidos (2px a 3.5px) y sombras desplazadas sin desenfoque (0px blur) como lenguaje estructural compartido entre desktop y mobile.",
+      "Doble escenario adaptativo: carta diner de 2 columnas sobre retícula roja en escritorio (#carta-diner) y shell neo-brutalista compacto sobre trama punteada mostaza en móvil (#app-neobrutalista).",
+      "Contraste AA verificado: el rojo brillante de marca se reserva a titulares grandes y fondos decorativos, mientras los botones y textos funcionales usan su variante profunda (diner-red-text).",
+      "Movimiento enérgico pero disciplinado: cortina roja de marca entre vistas y micro-pop de cifras con desaceleración exponencial, totalmente desactivables bajo prefers-reduced-motion."
+    ],
+    "rules": [
+      {
+        "name": "The Accessible Red Split Rule",
+        "body": "diner-red (#EA4925) nunca se usa para texto normal ni fondo de botones con texto blanco; esos contextos usan obligatoriamente diner-red-text (#B82E10) o diner-red-dark (#9E260C).",
+        "section": "colors"
+      },
+      {
+        "name": "The Hard Ink Anchor Rule",
+        "body": "Ningún contenedor interactivo ni tarjeta flota sin su borde en nb-black; el contorno negro unifica los colores saturados y evita vibración cromática.",
+        "section": "colors"
+      },
+      {
+        "name": "The 12px Functional Floor Rule",
+        "body": "Ningún texto interactivo, precio tachado, badge de pack o meta de lote baja de 0.75rem (12px).",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Numerals Rule",
+        "body": "Todos los precios, cantidades del stepper y dígitos del countdown aplican font-variant-numeric: tabular-nums para evitar saltos horizontales al actualizar el pedido.",
+        "section": "typography"
+      },
+      {
+        "name": "The Physical Press Rule",
+        "body": "En :hover y :active, los botones se trasladan hacia la sombra (translate(2px, 2px)) reduciendo el offset de box-shadow de forma proporcional para dar respuesta mecánica inmediata.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do usar diner-red-text (#B82E10) para cualquier texto normal o fondo de botón rojo con texto claro.",
+      "Do mantener objetivos táctiles de al menos 44px × 44px en botones de acción, pestañas del dock y utilidades móviles, con touch-action: manipulation.",
+      "Do usar font-variant-numeric: tabular-nums en precios, contadores y reloj countdown.",
+      "Do respetar prefers-reduced-motion manteniendo las vistas siempre en opacity: 1 sin cortina ni desplazamiento animado.",
+      "Do preservar la separación entre el flujo Desktop (>= 768px, #carta-diner) y Mobile (< 768px, #app-neobrutalista) junto con la lógica de precios y WhatsApp."
+    ],
+    "donts": [
+      "Don't usar diner-red (#EA4925) para texto pequeño ni como fondo de botones con texto blanco (no alcanza WCAG AA 4.5:1).",
+      "Don't agregar curvas bounce (cubic-bezier(0.34, 1.56, 0.64, 1)) ni animaciones que oculten secciones completas en opacity: 0 al cargar.",
+      "Don't introducir buscadores, ruido de red social ni pasos extra entre la selección de sabores y el envío por WhatsApp.",
+      "Don't dejar imágenes <img> estáticas con src=\"\" o sin src dentro de modales cerrados.",
+      "Don't romper la jerarquía de encabezados (h1 → h2 → h3) ni hacer clickeables elementos <article>/<div> sin <button> nativo."
+    ]
+  }
+}

@@ -155,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (viewName === 'menu') {
       activateMobileScreen('catalog');
+      setMobileOrderStep('select');
     }
 
     navViewLinks.forEach(link => {
@@ -181,7 +182,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewName = ['inicio', 'menu', 'afiches'].includes(targetView) ? targetView : 'inicio';
 
     if (viewName === activeView) {
-      if (viewName === 'menu') activateMobileScreen('catalog');
+      if (viewName === 'menu') {
+        activateMobileScreen('catalog');
+        setMobileOrderStep('select');
+      }
       const targetId = scrollTargetId || (viewName === 'menu' ? (window.innerWidth >= 768 ? 'carta-diner' : 'app-neobrutalista') : null);
       if (targetId) {
         document.getElementById(targetId)?.scrollIntoView({ behavior: getScrollBehavior(), block: 'start' });
@@ -241,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // =========================================================================
-  // 3. Motor de Precios Oficial de Octubre (1x $5000 | 3x $13500 | 5x $21000)
+  // 3. Motor de Precios Oficial (1x $6000 | 3x $16500 | 5x $25000)
   // =========================================================================
   function calculatePricing(totalUnits) {
     if (totalUnits <= 0) {
@@ -250,20 +254,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let rem = totalUnits;
     let finalPrice = 0;
-    let oldPrice = 0;
+    const oldPrice = totalUnits * 6000;
 
     const packs5 = Math.floor(rem / 5);
-    finalPrice += packs5 * 21000;
-    oldPrice += packs5 * 25000;
+    finalPrice += packs5 * 25000;
     rem %= 5;
 
     const packs3 = Math.floor(rem / 3);
-    finalPrice += packs3 * 13500;
-    oldPrice += packs3 * 16500;
+    finalPrice += packs3 * 16500;
     rem %= 3;
 
-    finalPrice += rem * 5000;
-    oldPrice += rem * 6000;
+    finalPrice += rem * 6000;
 
     let label = `${totalUnits} Rolo(s) Individual`;
     if (totalUnits >= 5 && totalUnits % 5 === 0) {
@@ -274,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
       label = `Combo x${totalUnits} Rolos`;
     }
 
-    return { finalPrice, oldPrice, label, savings: oldPrice - finalPrice };
+    return { finalPrice, oldPrice, label, savings: Math.max(0, oldPrice - finalPrice) };
   }
 
   function getTotalUnits() {
@@ -420,6 +421,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const mCartSummaryItems = document.getElementById('mCartSummaryItems');
   const mCartOldTotal = document.getElementById('mCartOldTotal');
   const mCartFinalTotal = document.getElementById('mCartFinalTotal');
+  const mSelectComboLabel = document.getElementById('mSelectComboLabel');
+  const mSelectSummaryItems = document.getElementById('mSelectSummaryItems');
+  const mSelectFinalTotal = document.getElementById('mSelectFinalTotal');
+  const mSelectStepStatus = document.getElementById('mSelectStepStatus');
+  const mNextStepLabel = document.getElementById('mNextStepLabel');
   const mSubmitLabel = document.getElementById('mSubmitLabel');
   const mStickyCheckoutText = document.getElementById('mStickyCheckoutText');
 
@@ -453,41 +459,59 @@ document.addEventListener('DOMContentLoaded', () => {
     if (desktopPromoNudge) {
       let nudgeHtml = '';
       if (totalUnits === 0) {
-        nudgeHtml = `<i class="fas fa-hand-point-up"></i><span>Sumá al menos 1 Rolo de Carne o Pollo arriba para preparar tu pedido.</span>`;
+        nudgeHtml = `<i class="fas fa-hand-point-up" aria-hidden="true"></i><span>Sumá al menos 1 Rolo de Carne o Pollo arriba para preparar tu pedido.</span>`;
       } else if (totalUnits === 1 || totalUnits === 2) {
         const missing = 3 - totalUnits;
-        nudgeHtml = `<i class="fas fa-tag"></i><span>¡Estás llevando ${totalUnits} Rolo(s)! Sumá <strong>${missing} más</strong> y activás el <strong>Pack x3 a $13.500</strong> ($4.500 c/u).</span>`;
+        nudgeHtml = `<i class="fas fa-tag" aria-hidden="true"></i><span>Llevás ${totalUnits} Rolo(s) a $6.000 c/u. Sumá <strong>${missing} más</strong> para activar el <strong>Pack x3 a $16.500</strong> ($5.500 c/u).</span>`;
       } else if (totalUnits === 3 || totalUnits === 4) {
         const missing = 5 - totalUnits;
-        nudgeHtml = `<i class="fas fa-fire"></i><span>¡Descuento Trío activado! Sumá <strong>${missing} Rolo(s) más</strong> para pasar al <strong>Pack x5 a $21.000</strong> ($4.200 c/u).</span>`;
+        nudgeHtml = `<i class="fas fa-fire" aria-hidden="true"></i><span>¡Pack x3 activado! Sumá <strong>${missing} Rolo(s) más</strong> para pasar al <strong>Pack x5 a $25.000</strong> ($5.000 c/u).</span>`;
       } else {
-        nudgeHtml = `<i class="fas fa-bolt"></i><span>¡${pricing.label} activado! Estás ahorrando <strong>$${pricing.savings.toLocaleString('es-AR')}</strong> con precios de lanzamiento.</span>`;
+        nudgeHtml = `<i class="fas fa-bolt" aria-hidden="true"></i><span>¡${pricing.label} activado! Estás ahorrando <strong>$${pricing.savings.toLocaleString('es-AR')}</strong> frente al precio por unidad.</span>`;
       }
       setTextAnimated(desktopPromoNudge, nudgeHtml, true);
     }
 
     setTextAnimated(desktopTicketTitle, pricing.label);
     setTextAnimated(desktopTicketItems, itemsText);
-    setTextAnimated(desktopTicketOld, `$${pricing.oldPrice.toLocaleString('es-AR')}`);
+    if (desktopTicketOld) {
+      desktopTicketOld.hidden = pricing.savings <= 0;
+      if (pricing.savings > 0) {
+        setTextAnimated(desktopTicketOld, `$${pricing.oldPrice.toLocaleString('es-AR')}`);
+      }
+    }
     setTextAnimated(desktopTicketFinal, `$${pricing.finalPrice.toLocaleString('es-AR')}`);
     setTextAnimated(dSubmitLabel, `ENVIAR PEDIDO ($${pricing.finalPrice.toLocaleString('es-AR')})`);
 
-    // 2) Mobile UI (Vista 1 combinada)
+    // 2) Mobile UI (Paso 1 Selector + Paso 2 Checkout)
     setTextAnimated(mCartBadgeHandle, `${totalUnits} Rolo(s) cargados`);
     setTextAnimated(mCardQtyClasico, cart.clasico || 0);
     setTextAnimated(mCardQtyPollo, cart.pollo || 0);
+    setTextAnimated(mSelectComboLabel, pricing.label.toUpperCase());
+    setTextAnimated(mSelectSummaryItems, itemsText);
+    setTextAnimated(mSelectFinalTotal, `$${pricing.finalPrice.toLocaleString('es-AR')}`);
     setTextAnimated(mCartComboLabel, pricing.label.toUpperCase());
     setTextAnimated(mCartSummaryItems, itemsText);
-    setTextAnimated(mCartOldTotal, `$${pricing.oldPrice.toLocaleString('es-AR')}`);
+    if (mCartOldTotal) {
+      mCartOldTotal.hidden = pricing.savings <= 0;
+      if (pricing.savings > 0) {
+        setTextAnimated(mCartOldTotal, `$${pricing.oldPrice.toLocaleString('es-AR')}`);
+      }
+    }
     setTextAnimated(mCartFinalTotal, `$${pricing.finalPrice.toLocaleString('es-AR')}`);
+    setTextAnimated(mNextStepLabel, totalUnits > 0 ? `SIGUIENTE · TUS DATOS ($${pricing.finalPrice.toLocaleString('es-AR')})` : 'SIGUIENTE · TUS DATOS');
     setTextAnimated(mSubmitLabel, `ENVIAR POR WHATSAPP ($${pricing.finalPrice.toLocaleString('es-AR')})`);
     setTextAnimated(mStickyCheckoutText, `FINALIZAR (${totalUnits}) · $${pricing.finalPrice.toLocaleString('es-AR')}`);
+
+    if (totalUnits > 0 && mSelectStepStatus) {
+      mSelectStepStatus.textContent = '';
+    }
 
     if (mPromoUpsellText && mBtnQuickUpsell) {
       const rem = totalUnits % 5;
       const targetFlavorName = FLAVORS[currentFlavor].shortName;
       if (totalUnits === 0) {
-        setTextAnimated(mPromoUpsellText, 'Sumá tu primer Rolo o armá un <strong>Pack x3 ($13.500)</strong>.', true);
+        setTextAnimated(mPromoUpsellText, 'Sumá tu primer Rolo ($6.000) o armá un <strong>Pack x3 ($16.500)</strong>.', true);
         mBtnQuickUpsell.hidden = false;
         mBtnQuickUpsell.textContent = '+1 ROLO';
         mBtnQuickUpsell.setAttribute('aria-label', `Sumar 1 Rolo de ${targetFlavorName}`);
@@ -497,7 +521,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (rem <= 2) {
         const missing = 3 - rem;
         const unitNoun = missing === 1 ? '1 Rolo' : `${missing} Rolos`;
-        const goalText = totalUnits < 3 ? 'el Pack x3 ($4.500 c/u)' : 'sumar otro Trío ($13.500)';
+        const goalText = totalUnits < 3 ? 'el Pack x3 ($5.500 c/u)' : 'sumar otro Trío ($16.500)';
         setTextAnimated(mPromoUpsellText, `¡Te falta${missing === 1 ? '' : 'n'} <strong>${unitNoun}</strong> para ${goalText}!`, true);
         mBtnQuickUpsell.hidden = false;
         mBtnQuickUpsell.textContent = '+1 ROLO';
@@ -506,7 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const missing = 5 - rem;
         const unitNoun = missing === 1 ? '1 Rolo' : `${missing} Rolos`;
         const nextPack = totalUnits + missing;
-        setTextAnimated(mPromoUpsellText, `¡Te falta${missing === 1 ? '' : 'n'} <strong>${unitNoun}</strong> para el <strong>Pack x${nextPack} ($4.200 c/u)</strong>!`, true);
+        setTextAnimated(mPromoUpsellText, `¡Te falta${missing === 1 ? '' : 'n'} <strong>${unitNoun}</strong> para el <strong>Pack x${nextPack} ($5.000 c/u)</strong>!`, true);
         mBtnQuickUpsell.hidden = false;
         mBtnQuickUpsell.textContent = '+1 ROLO';
         mBtnQuickUpsell.setAttribute('aria-label', `Sumar 1 Rolo de ${targetFlavorName} para Pack x${nextPack}`);
@@ -586,6 +610,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mBtnClearCart.addEventListener('click', () => {
       cart.clasico = 0;
       cart.pollo = 0;
+      setMobileOrderStep('select');
       renderAll();
     });
   }
@@ -597,15 +622,49 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // 6. Mobile Navegación Inferior + Botón Sticky Finalizar Pedido
+  // 6. Mobile Navegación Inferior + Slide Selector/Checkout
   // =========================================================================
   const mobileFrames = document.querySelectorAll('.sepidy-phone-frame');
   const mobileDockBtns = document.querySelectorAll('.mobile-sticky-dock [data-mobile-tab]');
   const mStickyGoCheckout = document.getElementById('mStickyGoCheckout');
-  const mobileCheckoutSection = document.getElementById('mobileCheckoutSection');
+  const mOrderStage = document.getElementById('mOrderStage');
+  const mStepSelect = document.getElementById('mStepSelect');
+  const mStepCheckout = document.getElementById('mStepCheckout');
+  const mBtnNextToCheckout = document.getElementById('mBtnNextToCheckout');
+  const mBtnBackToSelect = document.getElementById('mBtnBackToSelect');
 
   function getScrollBehavior() {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  }
+
+  function setMobileOrderStep(stepName) {
+    if (!mOrderStage) return;
+    const isCheckout = stepName === 'checkout';
+    mOrderStage.dataset.mobileStep = isCheckout ? 'checkout' : 'select';
+
+    if (mStepSelect) {
+      mStepSelect.inert = isCheckout;
+      mStepSelect.setAttribute('aria-hidden', String(isCheckout));
+    }
+    if (mStepCheckout) {
+      mStepCheckout.inert = !isCheckout;
+      mStepCheckout.setAttribute('aria-hidden', String(!isCheckout));
+    }
+  }
+
+  function goToMobileCheckout() {
+    if (getTotalUnits() <= 0) {
+      if (mSelectStepStatus) {
+        mSelectStepStatus.textContent = 'Sumá al menos 1 Rolo arriba para pasar a tus datos.';
+      }
+      document.querySelector('.m-inline-stepper .m-step-btn[data-m-step="inc"]')?.focus();
+      return;
+    }
+    if (mSelectStepStatus) mSelectStepStatus.textContent = '';
+    activateMobileScreen('catalog');
+    setMobileOrderStep('checkout');
+    const section = document.getElementById('app-neobrutalista');
+    if (section) section.scrollIntoView({ behavior: getScrollBehavior(), block: 'start' });
   }
 
   function activateMobileScreen(screenName) {
@@ -625,70 +684,190 @@ document.addEventListener('DOMContentLoaded', () => {
   mobileDockBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       activateMobileScreen(btn.dataset.mobileTab);
+      if (btn.dataset.mobileTab === 'catalog') {
+        setMobileOrderStep('select');
+      }
       const section = document.getElementById('app-neobrutalista');
       if (section) section.scrollIntoView({ behavior: getScrollBehavior() });
     });
   });
 
-  if (mStickyGoCheckout && mobileCheckoutSection) {
-    mStickyGoCheckout.addEventListener('click', () => {
-      activateMobileScreen('catalog');
-      mobileCheckoutSection.scrollIntoView({ behavior: getScrollBehavior(), block: 'start' });
+  if (mBtnNextToCheckout) {
+    mBtnNextToCheckout.addEventListener('click', goToMobileCheckout);
+  }
+
+  if (mBtnBackToSelect) {
+    mBtnBackToSelect.addEventListener('click', () => {
+      setMobileOrderStep('select');
+      const section = document.getElementById('app-neobrutalista');
+      if (section) section.scrollIntoView({ behavior: getScrollBehavior(), block: 'start' });
     });
+  }
+
+  if (mStickyGoCheckout) {
+    mStickyGoCheckout.addEventListener('click', goToMobileCheckout);
   }
 
   // =========================================================================
   // 8. Validación Accesible de Formularios y Envío por WhatsApp
   // =========================================================================
-  function bindCheckoutForm({ formId, nameId, errorId, zoneId, addrId, paymentName, statusId }) {
+  const formErrorAnnouncer = document.createElement('div');
+  formErrorAnnouncer.setAttribute('aria-live', 'polite');
+  formErrorAnnouncer.className = 'visually-hidden';
+  document.body.appendChild(formErrorAnnouncer);
+  let formAnnounceTimer;
+
+  function linkFieldError(inputEl, shown) {
+    const errorId = inputEl.dataset.error;
+    if (!errorId) return;
+    const ids = (inputEl.getAttribute('aria-describedby') || '')
+      .split(/\s+/)
+      .filter((id) => id && id !== errorId);
+    if (shown) ids.push(errorId);
+    if (ids.length) {
+      inputEl.setAttribute('aria-describedby', ids.join(' '));
+    } else {
+      inputEl.removeAttribute('aria-describedby');
+    }
+  }
+
+  function bindCheckoutForm({ formId, nameId, errorId, zoneId, addrFieldId, addrId, addrErrorId, paymentName, statusId }) {
     const form = document.getElementById(formId);
     const nameInput = document.getElementById(nameId);
     const errorEl = document.getElementById(errorId);
     const zoneEl = document.getElementById(zoneId);
+    const addrField = document.getElementById(addrFieldId);
     const addrEl = document.getElementById(addrId);
+    const addrErrorEl = document.getElementById(addrErrorId);
     const statusEl = document.getElementById(statusId);
 
     if (!form || !nameInput) return;
 
     let touched = false;
+    let addrTouched = false;
+    nameInput.setAttribute('aria-invalid', 'false');
+    if (addrEl) addrEl.setAttribute('aria-invalid', 'false');
 
-    function validateNameField() {
-      const val = nameInput.value.trim();
+    function isHomeDelivery() {
+      return Boolean(zoneEl && zoneEl.value.toLowerCase().includes('domicilio'));
+    }
+
+    function syncAddressField() {
+      if (!addrField || !addrEl) return;
+      const show = isHomeDelivery();
+      addrField.hidden = !show;
+      addrEl.required = show;
+      if (!show) {
+        addrTouched = false;
+        addrEl.value = '';
+        addrEl.setCustomValidity('');
+        addrEl.setAttribute('aria-invalid', 'false');
+        if (addrErrorEl) addrErrorEl.textContent = '';
+        linkFieldError(addrEl, false);
+      }
+    }
+
+    function validateRequiredField(inputEl, errNode, msg, fieldLabel, announce = false) {
+      if (!inputEl || !inputEl.required) return true;
+      const val = inputEl.value.trim();
       if (!val) {
-        nameInput.setCustomValidity('Ingresá tu nombre para identificar tu pedido.');
-        nameInput.setAttribute('aria-invalid', 'true');
-        if (errorEl) errorEl.textContent = 'Ingresá tu nombre para identificar tu pedido.';
+        inputEl.setCustomValidity(msg);
+        inputEl.setAttribute('aria-invalid', 'true');
+        if (errNode) errNode.textContent = msg;
+        linkFieldError(inputEl, true);
+        if (announce) {
+          clearTimeout(formAnnounceTimer);
+          formErrorAnnouncer.textContent = '';
+          formAnnounceTimer = setTimeout(() => {
+            formErrorAnnouncer.textContent = `${fieldLabel}: ${msg}`;
+          }, 300);
+        }
         return false;
       }
-      nameInput.setCustomValidity('');
-      nameInput.removeAttribute('aria-invalid');
-      if (errorEl) errorEl.textContent = '';
+      inputEl.setCustomValidity('');
+      inputEl.setAttribute('aria-invalid', 'false');
+      if (errNode) errNode.textContent = '';
+      linkFieldError(inputEl, false);
+      clearTimeout(formAnnounceTimer);
+      formErrorAnnouncer.textContent = '';
       return true;
+    }
+
+    function validateNameField(announce = false) {
+      return validateRequiredField(
+        nameInput,
+        errorEl,
+        'Ingresá tu nombre para identificar tu pedido.',
+        'Nombre',
+        announce
+      );
+    }
+
+    function validateAddrField(announce = false) {
+      return validateRequiredField(
+        addrEl,
+        addrErrorEl,
+        'Ingresá tu dirección para el envío a domicilio.',
+        'Dirección',
+        announce
+      );
     }
 
     nameInput.addEventListener('blur', () => {
       touched = true;
-      validateNameField();
+      validateNameField(true);
     });
 
     nameInput.addEventListener('input', () => {
-      if (touched || nameInput.hasAttribute('aria-invalid')) {
-        validateNameField();
+      if (touched || nameInput.getAttribute('aria-invalid') === 'true') {
+        validateNameField(false);
       }
     });
+
+    if (addrEl) {
+      addrEl.addEventListener('blur', () => {
+        addrTouched = true;
+        validateAddrField(true);
+      });
+
+      addrEl.addEventListener('input', () => {
+        if (addrTouched || addrEl.getAttribute('aria-invalid') === 'true') {
+          validateAddrField(false);
+        }
+      });
+    }
+
+    if (zoneEl) {
+      zoneEl.addEventListener('change', syncAddressField);
+      syncAddressField();
+    }
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       touched = true;
+      addrTouched = true;
 
       const totalUnits = getTotalUnits();
       if (totalUnits <= 0) {
         if (statusEl) statusEl.textContent = 'Sumá al menos 1 Rolo de Carne o Pollo antes de enviar.';
+        if (formId === 'mobileOrderForm') {
+          setMobileOrderStep('select');
+          if (mSelectStepStatus) mSelectStepStatus.textContent = 'Sumá al menos 1 Rolo de Carne o Pollo arriba para continuar.';
+        }
+        const firstStepper = formId === 'desktopOrderForm'
+          ? document.querySelector('.desktop-stepper .stepper-btn[data-step="inc"]')
+          : document.querySelector('.m-inline-stepper .m-step-btn[data-m-step="inc"]');
+        firstStepper?.focus();
         return;
       }
 
-      if (!validateNameField()) {
+      if (!validateNameField(false)) {
         nameInput.focus();
+        return;
+      }
+
+      if (!validateAddrField(false)) {
+        addrEl?.focus();
         return;
       }
 
@@ -696,15 +875,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const itemsList = getCartSummaryStrings().join(' + ');
       const name = nameInput.value.trim();
       const zone = zoneEl ? zoneEl.value : 'Santa Fe';
-      const addr = addrEl ? addrEl.value.trim() : '';
+      const delivery = isHomeDelivery();
+      const addr = delivery && addrEl ? addrEl.value.trim() : '';
       const paymentRadio = form.querySelector(`input[name="${paymentName}"]:checked`);
       const payment = paymentRadio ? paymentRadio.value : 'Transferencia / Alias';
 
       const phone = '5493425516258';
+      const priceNote = pricing.savings > 0
+        ? ` _(Antes $${pricing.oldPrice.toLocaleString('es-AR')})_`
+        : '';
       let msg = `¡Hola Rolo's! 🌯 Quiero reservar para el lote de esta semana:\n\n`;
       msg += `👑 *Modalidad:* ${pricing.label}\n`;
       msg += `🌯 *Sabores:* ${itemsList}\n`;
-      msg += `💰 *Total Promo Octubre:* $${pricing.finalPrice.toLocaleString('es-AR')} _(Antes $${pricing.oldPrice.toLocaleString('es-AR')})_\n\n`;
+      msg += `💰 *Total:* $${pricing.finalPrice.toLocaleString('es-AR')}${priceNote}\n\n`;
       msg += `👤 *Nombre:* ${name}\n`;
       msg += `📍 *Zona/Retiro:* ${zone}\n`;
       if (addr) msg += `🏠 *Dirección:* ${addr}\n`;
@@ -724,7 +907,9 @@ document.addEventListener('DOMContentLoaded', () => {
     nameId: 'dClientName',
     errorId: 'dNameError',
     zoneId: 'dClientZone',
+    addrFieldId: 'dAddressField',
     addrId: 'dClientAddress',
+    addrErrorId: 'dAddrError',
     paymentName: 'd_payment',
     statusId: 'dFormStatus'
   });
@@ -734,7 +919,9 @@ document.addEventListener('DOMContentLoaded', () => {
     nameId: 'mClientName',
     errorId: 'mNameError',
     zoneId: 'mClientZone',
+    addrFieldId: 'mAddressField',
     addrId: 'mClientAddress',
+    addrErrorId: 'mAddrError',
     paymentName: 'm_payment',
     statusId: 'mFormStatus'
   });
@@ -777,17 +964,30 @@ document.addEventListener('DOMContentLoaded', () => {
   // 10. Lightbox Nativo <dialog closedby="any"> para Flyers 70s
   // =========================================================================
   const flyerDialog = document.getElementById('flyerDialog');
-  const dialogImg = document.getElementById('dialogImg');
+  const dialogImgSlot = document.getElementById('dialogImgSlot');
   const dialogTitle = document.getElementById('dialogTitle');
 
-  document.querySelectorAll('.nb-flyer-card').forEach(card => {
-    card.addEventListener('click', () => {
+  document.querySelectorAll('.nb-flyer-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
       if (!flyerDialog) return;
-      if (dialogImg) dialogImg.src = card.dataset.flyerImg;
-      if (dialogTitle) dialogTitle.textContent = card.dataset.flyerTitle;
+      if (dialogImgSlot) {
+        const img = document.createElement('img');
+        img.id = 'dialogImg';
+        img.src = trigger.dataset.flyerImg;
+        img.alt = trigger.dataset.flyerTitle || "Flyer Rolo's Ampliado";
+        img.style.cssText = 'width: 100%; border-radius: 14px; border: 2.5px solid var(--nb-black); display: block;';
+        dialogImgSlot.replaceChildren(img);
+      }
+      if (dialogTitle) dialogTitle.textContent = trigger.dataset.flyerTitle;
       flyerDialog.showModal();
     });
   });
+
+  if (flyerDialog) {
+    flyerDialog.addEventListener('close', () => {
+      dialogImgSlot?.replaceChildren();
+    });
+  }
 
   if (flyerDialog && !('closedBy' in HTMLDialogElement.prototype)) {
     const outside = (e, dialog) => {

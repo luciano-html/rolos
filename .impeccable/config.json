@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-23T21:26:01.588Z",
+        "reason": "false positive: full-width header/ribbon dividers, not side-tab on a rounded box"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-23T21:26:01.658Z",
+        "reason": "false positive: sections use inner .container or clamp() horizontal padding"
+      }
+    ]
+  }
+}
